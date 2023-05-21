@@ -1,0 +1,17 @@
+<table>
+    <tr>
+        <td>Korisnicko ime</td>
+        <td><input type="text" name="korisnickoIme" [(ngModel)]="korisnickoIme"></td>
+    </tr>
+    <tr>
+        <td>Lozinka</td>
+        <td><input type="password" name="lozinka" [(ngModel)]="lozinka"></td>
+    </tr>
+    <tr>
+        <td colspan="2"><button (click)="prijava()">Prijava</button></td>
+    </tr>
+</table>
+
+<a [routerLink]="[ '/zaboravljenaLozinka']">Zaboravljena lozinka?</a>
+<br>
+{{greska}}
