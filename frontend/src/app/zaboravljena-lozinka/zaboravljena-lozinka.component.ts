@@ -14,10 +14,15 @@ export class ZaboravljenaLozinkaComponent implements OnInit {
 
   resetuj() {
     //TODO: proveriti da li mejl postoji u bazi
+    if (this.mejl != this.mejlPotvrda) {
+      this.greska = 'Mejl adrese se ne poklapaju!';
+      return;
+    }
     this.mejlServis.posaljiMejl(this.mejl).subscribe((res) => {});
     this.ruter.navigate(['/prijava']);
   }
 
   mejl: string;
+  mejlPotvrda: string;
   greska: string = '';
 }
