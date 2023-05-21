@@ -57,7 +57,10 @@ Ja sam
         <td><textarea [(ngModel)]="opis"></textarea></td>
     </tr>
     <tr>
+        <td>Profilna slika</td>
+        <td><input type="file" (change)="otpremanjeFajla($event)"></td>
+    </tr>
+    <tr>
         <td colspan="2"><button (click)="registracija()">Registruj se</button></td>
     </tr>
 </table>
-{{greska}}

@@ -14,13 +14,22 @@ export class RegistracijaComponent implements OnInit {
     //TODO: implementirati
   }
 
-  tip: string;
+  otpremanjeFajla(event) {
+    var fajl = event.target.files[0];
+    var citac = new FileReader();
+    citac.readAsDataURL(fajl);
+    citac.onload = () => {
+      this.slika = citac.result as string;
+    };
+  }
 
+  tip: string;
   korisnickoIme: string;
   lozinka: string;
   potvrdaLozinke: string;
   telefon: string;
   mejl: string;
+  slika: string;
 
   ime: string;
   prezime: string;
