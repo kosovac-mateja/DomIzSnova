@@ -12,15 +12,6 @@ let Korisnik = new Schema({
     tip: {
         type: String,
     },
-    telefon: {
-        type: String,
-    },
-    mejl: {
-        type: String,
-    },
-    slika: {
-        type: String,
-    },
 });
 
 export default mongoose.model('KorisnikModel', Korisnik, 'korisnici');

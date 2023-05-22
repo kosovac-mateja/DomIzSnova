@@ -13,7 +13,7 @@ class MejlController {
             const cifre = '0123456789';
             const specijalniKarakteri = '!"#$%&*_-+=/|:;,.<>?';
             const duzinaLozinke = Math.floor(Math.random() * 6) + 7; //izmedju 7 i 12 karaktera
-            let lozinka = this.nasumicanKarakter(malaSlova);
+            let lozinka = this.nasumicanKarakter(malaSlova + velikaSlova);
             while (lozinka.length < duzinaLozinke) {
                 const kategorija = Math.floor(Math.random() * 4);
                 switch (kategorija) {

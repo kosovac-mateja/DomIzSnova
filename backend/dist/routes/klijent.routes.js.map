@@ -1,0 +1,1 @@
+{"version":3,"file":"klijent.routes.js","sourceRoot":"","sources":["../../src/routes/klijent.routes.ts"],"names":[],"mappings":";;;;;AAAA,sDAA8B;AAC9B,0EAAsE;AAEtE,MAAM,aAAa,GAAG,iBAAO,CAAC,MAAM,EAAE,CAAC;AAEvC,aAAa;KACR,KAAK,CAAC,eAAe,CAAC;KACtB,IAAI,CAAC,CAAC,GAAG,EAAE,GAAG,EAAE,EAAE,CAAC,IAAI,sCAAiB,EAAE,CAAC,YAAY,CAAC,GAAG,EAAE,GAAG,CAAC,CAAC,CAAC;AAExE,kBAAe,aAAa,CAAC"}

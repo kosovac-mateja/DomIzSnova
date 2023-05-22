@@ -5,6 +5,8 @@ import { ZaboravljenaLozinkaComponent } from './zaboravljena-lozinka/zaboravljen
 import { RegistracijaComponent } from './registracija/registracija.component';
 import { PrijavaComponent } from './prijava/prijava.component';
 import { PrijavaAdminComponent } from './prijava-admin/prijava-admin.component';
+import { KlijentComponent } from './klijent/klijent.component';
+import { AgencijaComponent } from './agencija/agencija.component';
 
 const routes: Routes = [
   { path: '', component: PocetnaComponent },
@@ -12,6 +14,8 @@ const routes: Routes = [
   { path: 'zaboravljenaLozinka', component: ZaboravljenaLozinkaComponent },
   { path: 'registracija', component: RegistracijaComponent },
   { path: 'prijava/admin', component: PrijavaAdminComponent },
+  { path: 'klijent', component: KlijentComponent },
+  { path: 'agencija', component: AgencijaComponent },
 ];
 
 @NgModule({
