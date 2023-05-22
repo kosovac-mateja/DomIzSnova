@@ -36,12 +36,33 @@ class KorisnikController {
             else {
                 if (korisnik) {
                     res.json({ postoji: 'da' });
-                    console.log('korisnik postoji');
                 }
                 else {
                     res.json({ postoji: 'ne' });
-                    console.log('korisnik ne postoji');
                 }
+            }
+        });
+    }
+    azurirajStatus(req, res) {
+        let korisnickoIme = req.body.korisnickoIme;
+        let vrednost = req.body.vrednost;
+        korisnik_1.default.updateOne({ korisnickoIme: korisnickoIme }, { $set: { status: vrednost } }, (greska, korisnik) => {
+            if (greska) {
+                console.log(greska);
+            }
+            else {
+                res.json({ poruka: 'ok' });
+            }
+        });
+    }
+    obrisi(req, res) {
+        let korisnickoIme = req.body.korisnickoIme;
+        korisnik_1.default.deleteOne({ korisnickoIme: korisnickoIme }, (greska, korisnik) => {
+            if (greska) {
+                console.log(greska);
+            }
+            else {
+                res.json({ poruka: 'ok' });
             }
         });
     }

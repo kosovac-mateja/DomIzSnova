@@ -46,6 +46,22 @@ export class KlijentService {
   }
 
   registracija(klijent) {
-    return this.http.post(`${this.url}/klijent/registracija`, klijent);
+    const podaci = {
+      korisnickoIme: klijent.korisnickoIme,
+      telefon: klijent.telefon,
+      mejl: klijent.mejl,
+      slika: klijent.slika,
+      ime: klijent.ime,
+      prezime: klijent.prezime,
+    };
+    return this.http.post(`${this.url}/klijent/registracija`, podaci);
+  }
+
+  azurirajPodatak(korisnickoIme, podatak, vrednost) {
+    return this.http.post(`${this.url}/klijent/azurirajPodatak`, {
+      korisnickoIme: korisnickoIme,
+      podatak: podatak,
+      vrednost: vrednost,
+    });
   }
 }

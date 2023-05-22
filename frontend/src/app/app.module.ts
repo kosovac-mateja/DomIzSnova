@@ -12,6 +12,7 @@ import { PrijavaAdminComponent } from './prijava-admin/prijava-admin.component';
 import { HttpClientModule } from '@angular/common/http';
 import { KlijentComponent } from './klijent/klijent.component';
 import { AgencijaComponent } from './agencija/agencija.component';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { AgencijaComponent } from './agencija/agencija.component';
     PrijavaAdminComponent,
     KlijentComponent,
     AgencijaComponent,
+    AdminComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],

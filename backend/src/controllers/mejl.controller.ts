@@ -60,7 +60,7 @@ export class MejlController {
                 lozinka +
                 '.\n' +
                 'Imate 10 minuta da je promenite.\n\n' +
-                'Srdačan pozdrav,\nDom iz snova',
+                'Srdačan pozdrav,\nDom iz Snova',
         };
 
         transporter.sendMail(mailOptions, (error, info) => {

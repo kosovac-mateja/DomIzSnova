@@ -9,5 +9,8 @@ const agencijaRouter = express_1.default.Router();
 agencijaRouter
     .route('/registracija')
     .post((req, res) => new agencija_controller_1.AgencijaController().registracija(req, res));
+agencijaRouter.route('/azurirajPodatak').post((req, res) => {
+    new agencija_controller_1.AgencijaController().azurirajPodatak(req, res);
+});
 exports.default = agencijaRouter;
 //# sourceMappingURL=agencija.routes.js.map

@@ -15,5 +15,11 @@ korisnikRouter
 korisnikRouter
     .route('/korisnikPostoji')
     .post((req, res) => new korisnik_controller_1.KorisnikController().korisnikPostoji(req, res));
+korisnikRouter.route('/azurirajStatus').post((req, res) => {
+    new korisnik_controller_1.KorisnikController().azurirajStatus(req, res);
+});
+korisnikRouter.route('/obrisi').post((req, res) => {
+    new korisnik_controller_1.KorisnikController().obrisi(req, res);
+});
 exports.default = korisnikRouter;
 //# sourceMappingURL=korisnik.routes.js.map

@@ -14,6 +14,7 @@ export class KorisnikService {
       korisnickoIme: korisnickoIme,
       lozinka: lozinka,
       tip: tip,
+      status: 'na cekanju',
     };
 
     return this.http.post(`${this.url}/korisnik/ubaci`, korisnik);
@@ -55,5 +56,18 @@ export class KorisnikService {
     }
 
     return 'ok';
+  }
+
+  azurirajStatus(korisnickoIme, vrednost) {
+    return this.http.post(`${this.url}/korisnik/azurirajStatus`, {
+      korisnickoIme: korisnickoIme,
+      vrednost: vrednost,
+    });
+  }
+
+  obrisiKorisnika(korisnickoIme) {
+    return this.http.post(`${this.url}/korisnik/obrisi`, {
+      korisnickoIme: korisnickoIme,
+    });
   }
 }

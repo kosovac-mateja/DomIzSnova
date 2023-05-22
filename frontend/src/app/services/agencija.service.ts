@@ -13,11 +13,11 @@ export class AgencijaService {
 
   url = 'http://localhost:4000';
 
-  provera(agencija) {
+  async provera(agencija) {
     if (agencija.korisnickoIme == '') {
       return 'Korisnicko ime je obavezno polje';
     }
-    if (this.korisnikServis.korisnikPostoji(agencija.korisnickoIme)) {
+    if (await this.korisnikServis.korisnikPostoji(agencija.korisnickoIme)) {
       return 'Korisnicko ime vec postoji';
     }
     if (agencija.lozinka == '') {
@@ -56,6 +56,26 @@ export class AgencijaService {
   }
 
   registracija(agencija) {
-    return this.http.post(`${this.url}/agencija/registracija`, agencija);
+    const podaci = {
+      korisnickoIme: agencija.korisnickoIme,
+      telefon: agencija.telefon,
+      mejl: agencija.mejl,
+      slika: agencija.slika,
+      naziv: agencija.naziv,
+      ulica: agencija.ulica,
+      grad: agencija.grad,
+      drzava: agencija.drzava,
+      maticniBroj: agencija.maticniBroj,
+      opis: agencija.opis,
+    };
+    return this.http.post(`${this.url}/agencija/registracija`, podaci);
+  }
+
+  azurirajPodatak(korisnickoIme, podatak, vrednost) {
+    return this.http.post(`${this.url}/agencija/azurirajPodatak`, {
+      korisnickoIme: korisnickoIme,
+      podatak: podatak,
+      vrednost: vrednost,
+    });
   }
 }

@@ -12,6 +12,9 @@ let Korisnik = new Schema({
     tip: {
         type: String,
     },
+    status: {
+        type: String,
+    },
 });
 
 export default mongoose.model('KorisnikModel', Korisnik, 'korisnici');

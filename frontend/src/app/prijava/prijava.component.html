@@ -1,18 +1,27 @@
-<table>
-    <tr>
-        <td>Korisnicko ime</td>
-        <td><input type="text" name="korisnickoIme" [(ngModel)]="korisnickoIme"></td>
-    </tr>
-    <tr>
-        <td>Lozinka</td>
-        <td><input type="password" name="lozinka" [(ngModel)]="lozinka"></td>
-    </tr>
-    <tr>
-        <td colspan="2"><button (click)="prijava()">Prijava</button></td>
-    </tr>
-</table>
+<div class="telo">
+    <img src="../../assets/logo.png" alt="logotip kompanije" class="logo">
+    <h1>Prijava u DomIzSnova</h1>
+    <div class="forma">
+      <div class="red">
+        <label for="korisnickoIme">Korisničko ime</label>
+        <input type="text" name="korisnickoIme" id="korisnickoIme" [(ngModel)]="korisnickoIme">
+      </div>
+      <div class="red">
+        <label for="lozinka">Lozinka</label>
+        <input type="password" name="lozinka" id="lozinka" [(ngModel)]="lozinka">
+      </div>
+      <div class="zaboravljenaLozinka">
+        <a [routerLink]="['/zaboravljenaLozinka']">Zaboravljena lozinka?</a>
+      </div>
+      <div class="red">
+        <button (click)="prijava()">Prijava</button>
+      </div>
+    </div>
 
-<a [routerLink]="[ '/zaboravljenaLozinka']">Zaboravljena lozinka?</a>
-<br>
-Niste prijavljeni? <a [routerLink]="[ '/registracija']">Registruj se</a>
-{{greska}}
+    <div class="registracija">
+      Niste prijavljeni? <a [routerLink]="['/registracija']">Registruj se</a>
+    </div>
+  
+    <div class="greska">{{ greska }}</div>
+  </div>
+  

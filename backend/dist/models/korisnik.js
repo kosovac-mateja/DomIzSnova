@@ -15,6 +15,9 @@ let Korisnik = new Schema({
     tip: {
         type: String,
     },
+    status: {
+        type: String,
+    },
 });
 exports.default = mongoose_1.default.model('KorisnikModel', Korisnik, 'korisnici');
 //# sourceMappingURL=korisnik.js.map

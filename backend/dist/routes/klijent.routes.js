@@ -9,5 +9,8 @@ const klijentRouter = express_1.default.Router();
 klijentRouter
     .route('/registracija')
     .post((req, res) => new klijent_controller_1.KlijentController().registracija(req, res));
+klijentRouter.route('/azurirajPodatak').post((req, res) => {
+    new klijent_controller_1.KlijentController().azurirajPodatak(req, res);
+});
 exports.default = klijentRouter;
 //# sourceMappingURL=klijent.routes.js.map

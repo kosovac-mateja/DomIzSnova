@@ -7,4 +7,8 @@ agencijaRouter
     .route('/registracija')
     .post((req, res) => new AgencijaController().registracija(req, res));
 
+agencijaRouter.route('/azurirajPodatak').post((req, res) => {
+    new AgencijaController().azurirajPodatak(req, res);
+});
+
 export default agencijaRouter;

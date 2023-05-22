@@ -7,4 +7,7 @@ klijentRouter
     .route('/registracija')
     .post((req, res) => new KlijentController().registracija(req, res));
 
+klijentRouter.route('/azurirajPodatak').post((req, res) => {
+    new KlijentController().azurirajPodatak(req, res);
+});
 export default klijentRouter;

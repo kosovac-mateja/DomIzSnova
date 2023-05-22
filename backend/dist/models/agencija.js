@@ -9,9 +9,6 @@ let Agencija = new Schema({
     korisnickoIme: {
         type: String,
     },
-    lozinka: {
-        type: String,
-    },
     telefon: {
         type: String,
     },
@@ -19,9 +16,6 @@ let Agencija = new Schema({
         type: String,
     },
     slika: {
-        type: String,
-    },
-    status: {
         type: String,
     },
     naziv: {

@@ -9,8 +9,20 @@ class KlijentController {
     constructor() {
         this.registracija = (req, res) => {
             let klijent = new klijent_1.default(req.body);
-            //TODO: provera da li vec postoji korisnik sa tim korisnickim imenom
             klijent.save((greska, klijent) => {
+                if (greska) {
+                    console.log(greska);
+                }
+                else {
+                    res.json({ poruka: 'ok' });
+                }
+            });
+        };
+        this.azurirajPodatak = (req, res) => {
+            let korisnickoIme = req.body.korisnickoIme;
+            let podatak = req.body.podatak;
+            let vrednost = req.body.vrednost;
+            klijent_1.default.collection.updateOne({ korisnickoIme: korisnickoIme }, { $set: { [podatak]: vrednost } }, (greska, klijent) => {
                 if (greska) {
                     console.log(greska);
                 }

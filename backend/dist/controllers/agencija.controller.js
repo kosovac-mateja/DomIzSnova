@@ -9,8 +9,20 @@ class AgencijaController {
     constructor() {
         this.registracija = (req, res) => {
             let agencija = new agencija_1.default(req.body);
-            //TODO: provera da li vec postoji korisnik sa tim korisnickim imenom
             agencija.save((greska, agencija) => {
+                if (greska) {
+                    console.log(greska);
+                }
+                else {
+                    res.json({ poruka: 'ok' });
+                }
+            });
+        };
+        this.azurirajPodatak = (req, res) => {
+            let korisnickoIme = req.body.korisnickoIme;
+            let podatak = req.body.podatak;
+            let vrednost = req.body.vrednost;
+            agencija_1.default.collection.updateOne({ korisnickoIme: korisnickoIme }, { $set: { [podatak]: vrednost } }, (greska, agencija) => {
                 if (greska) {
                     console.log(greska);
                 }

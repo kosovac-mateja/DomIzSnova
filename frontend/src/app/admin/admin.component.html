@@ -1,0 +1,18 @@
+<h3>Admin</h3>
+
+<table>
+    <tr>
+        <th>Korisnicko ime</th>
+        <th>Tip</th>
+        <th colspan="2">Akcija</th>
+        <th colspan="2">Registracija</th>
+    </tr>
+    <tr *ngFor="let k of korisnici">
+        <td>{{k.korisnickoIme}}</td>
+        <td>{{k.tip}}</td>
+        <td><button (click)="azuriraj(k.korisnickoIme)">Azuriraj</button></td>
+        <td><button (click)="obrisi(k.korisnickoIme)">Obrisi</button></td>
+        <td *ngIf="k.status=='na cekanju'"><button (click)="prihvati(k.korisnickoIme)">Prihvati zahtev</button></td>
+        <td *ngIf="k.status=='na cekanju'"><button (click)="odbij(k.korisnickoIme)">Odbij zahtev</button></td>
+    </tr>
+</table>

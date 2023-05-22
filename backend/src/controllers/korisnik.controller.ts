@@ -42,4 +42,36 @@ export class KorisnikController {
             }
         );
     }
+
+    azurirajStatus(req: express.Request, res: express.Response) {
+        let korisnickoIme = req.body.korisnickoIme;
+        let vrednost = req.body.vrednost;
+
+        KorisnikModel.updateOne(
+            { korisnickoIme: korisnickoIme },
+            { $set: { status: vrednost } },
+            (greska, korisnik) => {
+                if (greska) {
+                    console.log(greska);
+                } else {
+                    res.json({ poruka: 'ok' });
+                }
+            }
+        );
+    }
+
+    obrisi(req: express.Request, res: express.Response) {
+        let korisnickoIme = req.body.korisnickoIme;
+
+        KorisnikModel.deleteOne(
+            { korisnickoIme: korisnickoIme },
+            (greska, korisnik) => {
+                if (greska) {
+                    console.log(greska);
+                } else {
+                    res.json({ poruka: 'ok' });
+                }
+            }
+        );
+    }
 }

@@ -15,4 +15,12 @@ korisnikRouter
     .route('/korisnikPostoji')
     .post((req, res) => new KorisnikController().korisnikPostoji(req, res));
 
+korisnikRouter.route('/azurirajStatus').post((req, res) => {
+    new KorisnikController().azurirajStatus(req, res);
+});
+
+korisnikRouter.route('/obrisi').post((req, res) => {
+    new KorisnikController().obrisi(req, res);
+});
+
 export default korisnikRouter;

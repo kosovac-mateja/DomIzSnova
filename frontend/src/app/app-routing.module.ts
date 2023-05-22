@@ -7,6 +7,7 @@ import { PrijavaComponent } from './prijava/prijava.component';
 import { PrijavaAdminComponent } from './prijava-admin/prijava-admin.component';
 import { KlijentComponent } from './klijent/klijent.component';
 import { AgencijaComponent } from './agencija/agencija.component';
+import { AdminComponent } from './admin/admin.component';
 
 const routes: Routes = [
   { path: '', component: PocetnaComponent },
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'prijava/admin', component: PrijavaAdminComponent },
   { path: 'klijent', component: KlijentComponent },
   { path: 'agencija', component: AgencijaComponent },
+  { path: 'admin', component: AdminComponent },
 ];
 
 @NgModule({

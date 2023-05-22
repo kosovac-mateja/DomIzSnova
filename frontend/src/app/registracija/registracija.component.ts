@@ -76,7 +76,7 @@ export class RegistracijaComponent implements OnInit {
         opis: this.opis,
       };
 
-      let provera = this.agencijaKlijent.provera(agencija);
+      let provera = await this.agencijaKlijent.provera(agencija);
       if (provera != 'ok') {
         this.greska = provera;
         return;
@@ -121,7 +121,7 @@ export class RegistracijaComponent implements OnInit {
   potvrdaLozinke: string = '';
   telefon: string = '';
   mejl: string = '';
-  slika: string = '';
+  slika: string = ''; //TODO: proveriti da li je dobra dimenzija
 
   ime: string = '';
   prezime: string = '';
