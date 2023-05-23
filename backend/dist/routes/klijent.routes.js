@@ -12,5 +12,11 @@ klijentRouter
 klijentRouter.route('/azurirajPodatak').post((req, res) => {
     new klijent_controller_1.KlijentController().azurirajPodatak(req, res);
 });
+klijentRouter.route('/azurirajKlijenta').post((req, res) => {
+    new klijent_controller_1.KlijentController().azurirajKlijenta(req, res);
+});
+klijentRouter.route('/dohvatiKlijenta').post((req, res) => {
+    new klijent_controller_1.KlijentController().dohvatiKlijenta(req, res);
+});
 exports.default = klijentRouter;
 //# sourceMappingURL=klijent.routes.js.map

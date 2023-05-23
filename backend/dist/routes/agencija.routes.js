@@ -12,5 +12,14 @@ agencijaRouter
 agencijaRouter.route('/azurirajPodatak').post((req, res) => {
     new agencija_controller_1.AgencijaController().azurirajPodatak(req, res);
 });
+agencijaRouter.route('/azurirajAgenciju').post((req, res) => {
+    new agencija_controller_1.AgencijaController().azurirajAgenciju(req, res);
+});
+agencijaRouter.route('/dohvatiAgenciju').post((req, res) => {
+    new agencija_controller_1.AgencijaController().dohvatiAgenciju(req, res);
+});
+agencijaRouter.route('/dohvatiAgencije').get((req, res) => {
+    new agencija_controller_1.AgencijaController().dohvatiAgencije(req, res);
+});
 exports.default = agencijaRouter;
 //# sourceMappingURL=agencija.routes.js.map

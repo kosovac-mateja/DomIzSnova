@@ -3,6 +3,7 @@ import { Korisnik } from '../models/korisnik';
 import { KorisnikService } from '../services/korisnik.service';
 import { KlijentService } from '../services/klijent.service';
 import { AgencijaService } from '../services/agencija.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
@@ -13,7 +14,8 @@ export class AdminComponent implements OnInit {
   constructor(
     private korisnikServis: KorisnikService,
     private klijentServis: KlijentService,
-    private agencijaServis: AgencijaService
+    private agencijaServis: AgencijaService,
+    private ruter: Router
   ) {}
 
   ngOnInit(): void {
@@ -52,8 +54,11 @@ export class AdminComponent implements OnInit {
       });
   }
 
-  azuriraj(korisnickoIme) {
-    //TODO: implementirati
+  azuriraj(korisnickoIme, tip) {
+    sessionStorage.setItem('korisnickoIme', korisnickoIme);
+    sessionStorage.setItem('tip', tip);
+
+    this.ruter.navigate(['/admin/azuriranje']);
   }
 
   obrisi(korisnickoIme) {

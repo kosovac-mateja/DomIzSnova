@@ -7,6 +7,6 @@ export class Agencija {
   ulica: string;
   grad: string;
   drzava: string;
-  mb: string;
+  maticniBroj: string;
   opis: string;
 }

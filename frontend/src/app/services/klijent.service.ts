@@ -64,4 +64,23 @@ export class KlijentService {
       vrednost: vrednost,
     });
   }
+
+  azurirajKlijenta(korisnickoIme, telefon, mejl, slika, ime, prezime) {
+    const klijent = {
+      korisnickoIme: korisnickoIme,
+      telefon: telefon,
+      mejl: mejl,
+      slika: slika,
+      ime: ime,
+      prezime: prezime,
+    };
+
+    return this.http.post(`${this.url}/klijent/azurirajKlijenta`, klijent);
+  }
+
+  dohvatiKlijenta(korisnickoIme) {
+    return this.http.post(`${this.url}/klijent/dohvatiKlijenta`, {
+      korisnickoIme: korisnickoIme,
+    });
+  }
 }

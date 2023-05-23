@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { KlijentComponent } from './klijent/klijent.component';
 import { AgencijaComponent } from './agencija/agencija.component';
 import { AdminComponent } from './admin/admin.component';
+import { AzuriranjeAdminComponent } from './azuriranje-admin/azuriranje-admin.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { AdminComponent } from './admin/admin.component';
     KlijentComponent,
     AgencijaComponent,
     AdminComponent,
+    AzuriranjeAdminComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AgencijaService } from '../services/agencija.service';
+import { Agencija } from '../models/agencija';
 
 @Component({
   selector: 'app-pocetna',
@@ -7,9 +9,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./pocetna.component.css'],
 })
 export class PocetnaComponent implements OnInit {
-  constructor(private router: Router) {}
+  constructor(
+    private agencijaServis: AgencijaService,
+    private router: Router
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.agencijaServis.dohvatiAgencije().subscribe((agencije: Agencija[]) => {
+      this.agencije = agencije;
+    });
+  }
 
   prijava() {
     this.router.navigate(['/prijava']);
@@ -18,4 +27,6 @@ export class PocetnaComponent implements OnInit {
   registracija() {
     this.router.navigate(['/registracija']);
   }
+
+  agencije: Agencija[] = [];
 }

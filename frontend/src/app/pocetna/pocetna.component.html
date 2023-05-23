@@ -1,4 +1,25 @@
-<div>
-    <button (click)="prijava()">Prijavi se</button>
-    <button (click)="registracija()">Registruj se</button>
+<div class="telo">
+    <div class="header-container">
+        <div class="header">Dom Iz Snova</div>
+        <div class="logo-firme">
+            <img src="../../assets/logo.png" alt="Logo">
+        </div>
+    </div>
+    <div class="button-container">
+        <button class="button-black" (click)="prijava()">Prijavi se</button>
+        <button class="button-black" (click)="registracija()">Registruj se</button>
+    </div>
+    <div class="agency-list">
+        <div *ngFor="let a of agencije" class="agency-item">
+            <div class="title">{{a.naziv}}</div>
+            <hr class="divider" />
+            <div class="content">
+                <div class="logo">
+                    <img *ngIf="a.slika !== ''" [src]="a.slika" alt="logoFirme">
+                    <img *ngIf="a.slika === ''" src="../../assets/agencijaLogo.png" alt="logoFirme" height="50px" width="50px">
+                </div>
+                <div class="description">{{a.opis}}</div>
+            </div>
+        </div>
+    </div>
 </div>

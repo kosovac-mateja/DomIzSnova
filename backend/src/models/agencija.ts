@@ -27,7 +27,7 @@ let Agencija = new Schema({
     drzava: {
         type: String,
     },
-    mb: {
+    maticniBroj: {
         type: String,
     },
     opis: {

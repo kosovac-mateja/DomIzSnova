@@ -1,0 +1,78 @@
+.telo {
+    margin: 20px;
+    position: relative;
+  }
+  
+  .header-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .header {
+    font-weight: bold;
+    font-size: 24px;
+    margin-left: 10px;
+    font-family: "Arial", sans-serif; /* Example font */
+  }
+  
+  .logo img {
+    height: 100px;
+    width: 100px;
+  }
+
+  .logo-firme img {
+    height: 75px;
+    width: 75px;
+    padding-left: 10px;
+  }
+  
+  .button-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  
+  .button-black {
+    padding: 10px 20px;
+    background-color: black;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-right: 10px;
+    font-family: "Arial", sans-serif; /* Example font */
+  }
+  
+  .agency-list {
+    border-top: 1px solid #ccc;
+  }
+  
+  .agency-item {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+  }
+  
+  .title {
+    font-weight: bold;
+    font-size: 18px;
+  }
+  
+  .divider {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .content {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo img {
+    vertical-align: middle;
+    margin-right: 10px;
+  }
+  
+  .description {
+    padding-top: 10px;
+  }
+  

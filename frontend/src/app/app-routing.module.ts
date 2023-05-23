@@ -8,6 +8,7 @@ import { PrijavaAdminComponent } from './prijava-admin/prijava-admin.component';
 import { KlijentComponent } from './klijent/klijent.component';
 import { AgencijaComponent } from './agencija/agencija.component';
 import { AdminComponent } from './admin/admin.component';
+import { AzuriranjeAdminComponent } from './azuriranje-admin/azuriranje-admin.component';
 
 const routes: Routes = [
   { path: '', component: PocetnaComponent },
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'klijent', component: KlijentComponent },
   { path: 'agencija', component: AgencijaComponent },
   { path: 'admin', component: AdminComponent },
+  { path: 'admin/azuriranje', component: AzuriranjeAdminComponent },
 ];
 
 @NgModule({

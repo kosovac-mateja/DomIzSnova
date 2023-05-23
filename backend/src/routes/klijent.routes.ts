@@ -10,4 +10,13 @@ klijentRouter
 klijentRouter.route('/azurirajPodatak').post((req, res) => {
     new KlijentController().azurirajPodatak(req, res);
 });
+
+klijentRouter.route('/azurirajKlijenta').post((req, res) => {
+    new KlijentController().azurirajKlijenta(req, res);
+});
+
+klijentRouter.route('/dohvatiKlijenta').post((req, res) => {
+    new KlijentController().dohvatiKlijenta(req, res);
+});
+
 export default klijentRouter;
