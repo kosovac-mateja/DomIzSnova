@@ -14,6 +14,14 @@ import { KlijentComponent } from './klijent/klijent.component';
 import { AgencijaComponent } from './agencija/agencija.component';
 import { AdminComponent } from './admin/admin.component';
 import { AzuriranjeAdminComponent } from './azuriranje-admin/azuriranje-admin.component';
+import { StranicaAgencijaComponent } from './stranica-agencija/stranica-agencija.component';
+import { ProfilKlijentComponent } from './profil-klijent/profil-klijent.component';
+import { ObjekatKlijentComponent } from './objekat-klijent/objekat-klijent.component';
+import { AgencijeKlijentComponent } from './agencije-klijent/agencije-klijent.component';
+import { PosloviKlijentComponent } from './poslovi-klijent/poslovi-klijent.component';
+import { ProfilAgencijaComponent } from './profil-agencija/profil-agencija.component';
+import { RadniciAgencijaComponent } from './radnici-agencija/radnici-agencija.component';
+import { PosloviAgencijaComponent } from './poslovi-agencija/poslovi-agencija.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +35,14 @@ import { AzuriranjeAdminComponent } from './azuriranje-admin/azuriranje-admin.co
     AgencijaComponent,
     AdminComponent,
     AzuriranjeAdminComponent,
+    StranicaAgencijaComponent,
+    ProfilKlijentComponent,
+    ObjekatKlijentComponent,
+    AgencijeKlijentComponent,
+    PosloviKlijentComponent,
+    ProfilAgencijaComponent,
+    RadniciAgencijaComponent,
+    PosloviAgencijaComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],

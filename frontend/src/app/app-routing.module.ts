@@ -9,6 +9,14 @@ import { KlijentComponent } from './klijent/klijent.component';
 import { AgencijaComponent } from './agencija/agencija.component';
 import { AdminComponent } from './admin/admin.component';
 import { AzuriranjeAdminComponent } from './azuriranje-admin/azuriranje-admin.component';
+import { StranicaAgencijaComponent } from './stranica-agencija/stranica-agencija.component';
+import { ProfilKlijentComponent } from './profil-klijent/profil-klijent.component';
+import { ObjekatKlijentComponent } from './objekat-klijent/objekat-klijent.component';
+import { PosloviKlijentComponent } from './poslovi-klijent/poslovi-klijent.component';
+import { AgencijeKlijentComponent } from './agencije-klijent/agencije-klijent.component';
+import { ProfilAgencijaComponent } from './profil-agencija/profil-agencija.component';
+import { PosloviAgencijaComponent } from './poslovi-agencija/poslovi-agencija.component';
+import { RadniciAgencijaComponent } from './radnici-agencija/radnici-agencija.component';
 
 const routes: Routes = [
   { path: '', component: PocetnaComponent },
@@ -20,6 +28,15 @@ const routes: Routes = [
   { path: 'agencija', component: AgencijaComponent },
   { path: 'admin', component: AdminComponent },
   { path: 'admin/azuriranje', component: AzuriranjeAdminComponent },
+  { path: 'agencija/stranica', component: StranicaAgencijaComponent },
+  { path: 'klijent/profil', component: ProfilKlijentComponent },
+  { path: 'klijent/objekat', component: ObjekatKlijentComponent },
+  { path: 'klijent/agencije', component: AgencijeKlijentComponent },
+  { path: 'klijent/agencije', component: AgencijeKlijentComponent },
+  { path: 'klijent/poslovi', component: PosloviKlijentComponent },
+  { path: 'agencija/profil', component: ProfilAgencijaComponent },
+  { path: 'agencija/radnici', component: RadniciAgencijaComponent },
+  { path: 'agencija/poslovi', component: PosloviAgencijaComponent },
 ];
 
 @NgModule({

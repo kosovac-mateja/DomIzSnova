@@ -3,6 +3,7 @@ import { KorisnikService } from '../services/korisnik.service';
 import { KlijentService } from '../services/klijent.service';
 import { AgencijaService } from '../services/agencija.service';
 import { Router } from '@angular/router';
+import { ProveraService } from '../services/provera.service';
 
 @Component({
   selector: 'app-registracija',
@@ -11,9 +12,10 @@ import { Router } from '@angular/router';
 })
 export class RegistracijaComponent implements OnInit {
   constructor(
+    private proveraServis: ProveraService,
     private korisnikServis: KorisnikService,
     private klijentServis: KlijentService,
-    private agencijaKlijent: AgencijaService,
+    private agencijaServis: AgencijaService,
     private ruter: Router
   ) {}
 
@@ -22,7 +24,13 @@ export class RegistracijaComponent implements OnInit {
   async registracija() {
     if (this.lozinka != this.potvrdaLozinke) {
       this.greska = 'Lozinke se ne poklapaju';
+      return;
     }
+
+    if (this.slikaIzabrana == false) {
+      return;
+    }
+
     if (this.tip == 'klijent') {
       const klijent = {
         korisnickoIme: this.korisnickoIme,
@@ -35,7 +43,7 @@ export class RegistracijaComponent implements OnInit {
         prezime: this.prezime,
       };
 
-      let provera = await this.klijentServis.provera(klijent);
+      let provera = await this.proveraServis.proveraKlijent(klijent);
       if (provera != 'ok') {
         this.greska = provera;
         return;
@@ -76,13 +84,13 @@ export class RegistracijaComponent implements OnInit {
         opis: this.opis,
       };
 
-      let provera = await this.agencijaKlijent.provera(agencija);
+      let provera = await this.proveraServis.proveraAgencija(agencija);
       if (provera != 'ok') {
         this.greska = provera;
         return;
       }
 
-      this.agencijaKlijent.registracija(agencija).subscribe((odgovor) => {
+      this.agencijaServis.registracija(agencija).subscribe((odgovor) => {
         if (odgovor['poruka'] == 'ok') {
           this.greska = '';
         } else {
@@ -106,13 +114,42 @@ export class RegistracijaComponent implements OnInit {
     }
   }
 
-  otpremanjeFajla(event) {
-    var fajl = event.target.files[0];
-    var citac = new FileReader();
-    citac.readAsDataURL(fajl);
-    citac.onload = () => {
-      this.slika = citac.result as string;
-    };
+  otpremanjeSlike(fajl) {
+    if (fajl.target.files[0]) {
+      if (
+        fajl.target.files[0].type == 'image/jpeg' ||
+        fajl.target.files[0].type == 'image/png'
+      ) {
+        const citac = new FileReader();
+        citac.onload = (e: any) => {
+          const slika = new Image();
+          slika.src = e.target.result;
+          slika.onload = (res) => {
+            const visina = res.currentTarget['height'];
+            const sirina = res.currentTarget['width'];
+
+            if (visina == sirina) {
+              if (visina > 300 || visina < 100) {
+                this.greska =
+                  'Slika mora biti dimenzija izmedju 100x100px i 300x300px';
+                this.slikaIzabrana = false;
+              } else {
+                this.greska = '';
+                this.slika = e.target.result;
+                this.slikaIzabrana = true;
+              }
+            } else {
+              this.greska = 'Slika mora biti kvadratnog oblika';
+              this.slikaIzabrana = false;
+            }
+          };
+        };
+        citac.readAsDataURL(fajl.target.files[0]);
+      } else {
+        this.greska = 'Slika mora biti u PNG/JPG formatu';
+        this.slikaIzabrana = false;
+      }
+    }
   }
 
   tip: string = '';
@@ -121,7 +158,8 @@ export class RegistracijaComponent implements OnInit {
   potvrdaLozinke: string = '';
   telefon: string = '';
   mejl: string = '';
-  slika: string = ''; //TODO: proveriti da li je dobra dimenzija
+  slika: string = '';
+  fajl: File = null;
 
   ime: string = '';
   prezime: string = '';
@@ -134,4 +172,5 @@ export class RegistracijaComponent implements OnInit {
   opis: string = '';
 
   greska: string = '';
+  slikaIzabrana: boolean = true;
 }

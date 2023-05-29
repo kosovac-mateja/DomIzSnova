@@ -23,4 +23,16 @@ agencijaRouter.route('/dohvatiAgencije').get((req, res) => {
     new AgencijaController().dohvatiAgencije(req, res);
 });
 
+agencijaRouter.route('/dohvatiAgencijePoNazivu').post((req, res) => {
+    new AgencijaController().dohvatiAgencijePoNazivu(req, res);
+});
+
+agencijaRouter.route('/dohvatiAgencijePoAdresi').post((req, res) => {
+    new AgencijaController().dohvatiAgencijePoAdresi(req, res);
+});
+
+agencijaRouter.route('/dohvatiAgencijePoNazivuIAdresi').post((req, res) => {
+    new AgencijaController().dohvatiAgencijePoNazivuIAdresi(req, res);
+});
+
 export default agencijaRouter;

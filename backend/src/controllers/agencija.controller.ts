@@ -85,4 +85,56 @@ export class AgencijaController {
             }
         });
     };
+
+    dohvatiAgencijePoNazivu = (req: express.Request, res: express.Response) => {
+        let naziv = req.body.naziv;
+
+        AgencijaModel.find(
+            { naziv: { $regex: naziv, $options: 'i' } },
+            (greska, agencije) => {
+                if (greska) {
+                    console.log(greska);
+                } else {
+                    res.json(agencije);
+                }
+            }
+        );
+    };
+
+    dohvatiAgencijePoAdresi = (req: express.Request, res: express.Response) => {
+        let adresa = req.body.adresa;
+
+        AgencijaModel.find(
+            { ulica: { $regex: adresa, $options: 'i' } },
+            (greska, agencije) => {
+                if (greska) {
+                    console.log(greska);
+                } else {
+                    res.json(agencije);
+                }
+            }
+        );
+    };
+
+    dohvatiAgencijePoNazivuIAdresi = (
+        req: express.Request,
+        res: express.Response
+    ) => {
+        let naziv = req.body.naziv;
+        let adresa = req.body.adresa;
+
+        AgencijaModel.find(
+            {
+                naziv: { $regex: naziv, $options: 'i' },
+                ulica: { $regex: adresa, $options: 'i' },
+            },
+            (greska, agencije) => {
+                if (greska) {
+                    console.log(greska);
+                } else {
+                    res.json(agencije);
+                }
+            }
+        );
+    };
 }

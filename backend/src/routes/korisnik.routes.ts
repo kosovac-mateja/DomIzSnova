@@ -11,6 +11,10 @@ korisnikRouter
     .route('/dohvatiKorisnike')
     .get((req, res) => new KorisnikController().dohvatiSve(req, res));
 
+korisnikRouter.route('/dohvatiKorisnika').post((req, res) => {
+    new KorisnikController().dohvatiKorisnika(req, res);
+});
+
 korisnikRouter
     .route('/korisnikPostoji')
     .post((req, res) => new KorisnikController().korisnikPostoji(req, res));

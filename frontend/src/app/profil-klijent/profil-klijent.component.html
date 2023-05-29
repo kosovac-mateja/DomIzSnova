@@ -1,0 +1,30 @@
+<table>
+    <tr>
+        <td>Korisnicko ime</td>
+        <td><input type="text" [(ngModel)]="korisnickoIme" disabled="true"></td>
+    </tr>
+    <tr>
+        <td>Ime</td>
+        <td><input type="text" [(ngModel)]="ime"></td>
+    </tr>
+    <tr>
+        <td>Prezime</td>
+        <td><input type="text" [(ngModel)]="prezime"></td>
+    </tr>
+    <tr>
+        <td>Kontakt telefon</td>
+        <td><input type="text" [(ngModel)]="telefon"></td>
+    </tr>
+    <tr>
+        <td>Mejl</td>
+        <td><input type="text" [(ngModel)]="mejl"></td>
+    </tr>
+    <tr>
+        <td>Profilna slika</td>
+        <td><input type="file" (change)="otpremanjeFajla($event)"></td>
+    </tr>
+    <tr>
+        <td><button (click)="azuriraj()">Azuriraj</button></td>
+        <td><button (click)="odustani()">Odustani</button></td>
+    </tr>
+</table>

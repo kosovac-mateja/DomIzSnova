@@ -24,6 +24,12 @@ export class KorisnikService {
     return this.http.get(`${this.url}/korisnik/dohvatiKorisnike`);
   }
 
+  dohvatiKorisnika(korisnickoIme) {
+    return this.http.post(`${this.url}/korisnik/dohvatiKorisnika`, {
+      korisnickoIme: korisnickoIme,
+    });
+  }
+
   async korisnikPostoji(korisnickoIme): Promise<boolean> {
     return new Promise((resolve) => {
       this.http
@@ -38,24 +44,6 @@ export class KorisnikService {
           }
         });
     });
-  }
-
-  proveraLozinke(lozinka: string) {
-    if (lozinka.length < 7 || lozinka.length > 12) {
-      return 'Lozinka mora imati izmedju 7 i 12 karaktera';
-    }
-
-    const prviKarakter = lozinka.charAt(0);
-    if (!/[a-zA-Z]/.test(prviKarakter)) {
-      return 'Lozinka mora pocinjati slovom';
-    }
-
-    const regex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!"#$%&*_\-+=/|:;,.<>?]).*$/;
-    if (!regex.test(lozinka)) {
-      return 'Lozinka mora sadrzati bar jedno veliko slovo, jedan broj i jedan specijalni karakter';
-    }
-
-    return 'ok';
   }
 
   azurirajStatus(korisnickoIme, vrednost) {

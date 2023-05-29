@@ -76,6 +76,43 @@ class AgencijaController {
                 }
             });
         };
+        this.dohvatiAgencijePoNazivu = (req, res) => {
+            let naziv = req.body.naziv;
+            agencija_1.default.find({ naziv: { $regex: naziv, $options: 'i' } }, (greska, agencije) => {
+                if (greska) {
+                    console.log(greska);
+                }
+                else {
+                    res.json(agencije);
+                }
+            });
+        };
+        this.dohvatiAgencijePoAdresi = (req, res) => {
+            let adresa = req.body.adresa;
+            agencija_1.default.find({ ulica: { $regex: adresa, $options: 'i' } }, (greska, agencije) => {
+                if (greska) {
+                    console.log(greska);
+                }
+                else {
+                    res.json(agencije);
+                }
+            });
+        };
+        this.dohvatiAgencijePoNazivuIAdresi = (req, res) => {
+            let naziv = req.body.naziv;
+            let adresa = req.body.adresa;
+            agencija_1.default.find({
+                naziv: { $regex: naziv, $options: 'i' },
+                ulica: { $regex: adresa, $options: 'i' },
+            }, (greska, agencije) => {
+                if (greska) {
+                    console.log(greska);
+                }
+                else {
+                    res.json(agencije);
+                }
+            });
+        };
     }
 }
 exports.AgencijaController = AgencijaController;

@@ -11,13 +11,7 @@ import { Router } from '@angular/router';
 export class PrijavaComponent implements OnInit {
   constructor(private korisnikServis: KorisnikService, private ruter: Router) {}
 
-  ngOnInit(): void {
-    this.korisnikServis
-      .dohvatiKorisnike()
-      .subscribe((korisnici: Korisnik[]) => {
-        this.korisnici = korisnici;
-      });
-  }
+  ngOnInit(): void {}
 
   prijava() {
     if (this.korisnickoIme == '' || this.lozinka == '') {
@@ -25,31 +19,38 @@ export class PrijavaComponent implements OnInit {
       return;
     }
 
-    let korisnik = this.korisnici.find(
-      (korisnik) => korisnik.korisnickoIme == this.korisnickoIme
-    );
+    this.korisnikServis
+      .dohvatiKorisnika(this.korisnickoIme)
+      .subscribe((korisnik: Korisnik) => {
+        this.korisnik = korisnik;
+        if (this.korisnik == undefined) {
+          this.greska = 'Ne postoji korisnik sa unetim korisnickim imenom';
+          return;
+        }
 
-    if (korisnik == undefined) {
-      this.greska = 'Ne postoji korisnik sa unetim korisnickim imenom';
-      return;
-    }
+        if (this.korisnik.lozinka != this.lozinka) {
+          this.greska = 'Pogresna lozinka';
+          return;
+        }
 
-    if (korisnik.lozinka != this.lozinka) {
-      this.greska = 'Pogresna lozinka';
-      return;
-    }
+        if (korisnik.status != 'prihvacen') {
+          this.greska = 'Vas zahtev za registraciju jos uvek nije prihvacen';
+          return;
+        }
 
-    if (korisnik.tip == 'klijent') {
-      this.ruter.navigate(['/klijent']);
-    } else if (korisnik.tip == 'agencija') {
-      this.ruter.navigate(['/agencija']);
-    }
+        if (this.korisnik.tip == 'klijent') {
+          sessionStorage.setItem('korisnik', this.korisnik.korisnickoIme);
+          this.ruter.navigate(['/klijent']);
+        } else if (this.korisnik.tip == 'agencija') {
+          sessionStorage.setItem('korisnik', this.korisnik.korisnickoIme);
+          this.ruter.navigate(['/agencija']);
+        }
+      });
   }
 
-  korisnickoIme: string;
-  lozinka: string;
-
-  korisnici: Korisnik[] = [];
+  korisnickoIme: string = '';
+  lozinka: string = '';
+  korisnik: Korisnik;
 
   greska: string = '';
 }

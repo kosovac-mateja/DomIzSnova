@@ -24,6 +24,21 @@ export class KorisnikController {
         });
     }
 
+    dohvatiKorisnika(req: express.Request, res: express.Response) {
+        let korisnickoIme = req.body.korisnickoIme;
+
+        KorisnikModel.findOne(
+            { korisnickoIme: korisnickoIme },
+            (greska, korisnik) => {
+                if (greska) {
+                    console.log(greska);
+                } else {
+                    res.json(korisnik);
+                }
+            }
+        );
+    }
+
     korisnikPostoji(req: express.Request, res: express.Response) {
         let korisnickoIme = req.body.korisnickoIme;
 

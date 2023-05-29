@@ -27,6 +27,17 @@ class KorisnikController {
             }
         });
     }
+    dohvatiKorisnika(req, res) {
+        let korisnickoIme = req.body.korisnickoIme;
+        korisnik_1.default.findOne({ korisnickoIme: korisnickoIme }, (greska, korisnik) => {
+            if (greska) {
+                console.log(greska);
+            }
+            else {
+                res.json(korisnik);
+            }
+        });
+    }
     korisnikPostoji(req, res) {
         let korisnickoIme = req.body.korisnickoIme;
         korisnik_1.default.findOne({ korisnickoIme: korisnickoIme }, (greska, korisnik) => {
