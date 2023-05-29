@@ -137,4 +137,32 @@ export class AgencijaController {
             }
         );
     };
+
+    mejlPostoji = (req: express.Request, res: express.Response) => {
+        let mejl = req.body.mejl;
+
+        AgencijaModel.findOne({ mejl: mejl }, (greska, agencija) => {
+            if (greska) {
+                console.log(greska);
+            } else {
+                if (agencija) {
+                    res.json({ postoji: 'da' });
+                } else {
+                    res.json({ postoji: 'ne' });
+                }
+            }
+        });
+    };
+
+    dohvatiAgencijuPoMejlu = (req: express.Request, res: express.Response) => {
+        let mejl = req.body.mejl;
+
+        AgencijaModel.findOne({ mejl: mejl }, (greska, agencija) => {
+            if (greska) {
+                console.log(greska);
+            } else {
+                res.json(agencija);
+            }
+        });
+    };
 }

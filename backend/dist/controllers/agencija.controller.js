@@ -113,6 +113,33 @@ class AgencijaController {
                 }
             });
         };
+        this.mejlPostoji = (req, res) => {
+            let mejl = req.body.mejl;
+            agencija_1.default.findOne({ mejl: mejl }, (greska, agencija) => {
+                if (greska) {
+                    console.log(greska);
+                }
+                else {
+                    if (agencija) {
+                        res.json({ postoji: 'da' });
+                    }
+                    else {
+                        res.json({ postoji: 'ne' });
+                    }
+                }
+            });
+        };
+        this.dohvatiAgencijuPoMejlu = (req, res) => {
+            let mejl = req.body.mejl;
+            agencija_1.default.findOne({ mejl: mejl }, (greska, agencija) => {
+                if (greska) {
+                    console.log(greska);
+                }
+                else {
+                    res.json(agencija);
+                }
+            });
+        };
     }
 }
 exports.AgencijaController = AgencijaController;

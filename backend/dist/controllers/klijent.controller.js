@@ -63,6 +63,33 @@ class KlijentController {
                 }
             });
         };
+        this.dohvatiKlijentaPoMejlu = (req, res) => {
+            let mejl = req.body.mejl;
+            klijent_1.default.findOne({ mejl: mejl }, (greska, klijent) => {
+                if (greska) {
+                    console.log(greska);
+                }
+                else {
+                    res.json(klijent);
+                }
+            });
+        };
+        this.mejlPostoji = (req, res) => {
+            let mejl = req.body.mejl;
+            klijent_1.default.findOne({ mejl: mejl }, (greska, klijent) => {
+                if (greska) {
+                    console.log(greska);
+                }
+                else {
+                    if (klijent) {
+                        res.json({ postoji: 'da' });
+                    }
+                    else {
+                        res.json({ postoji: 'ne' });
+                    }
+                }
+            });
+        };
     }
 }
 exports.KlijentController = KlijentController;

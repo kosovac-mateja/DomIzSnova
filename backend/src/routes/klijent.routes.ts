@@ -19,4 +19,12 @@ klijentRouter.route('/dohvatiKlijenta').post((req, res) => {
     new KlijentController().dohvatiKlijenta(req, res);
 });
 
+klijentRouter.route('/mejlPostoji').post((req, res) => {
+    new KlijentController().mejlPostoji(req, res);
+});
+
+klijentRouter.route('/dohvatiKlijentaPoMejlu').post((req, res) => {
+    new KlijentController().dohvatiKlijentaPoMejlu(req, res);
+});
+
 export default klijentRouter;

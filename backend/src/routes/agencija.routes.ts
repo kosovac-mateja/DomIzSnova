@@ -35,4 +35,12 @@ agencijaRouter.route('/dohvatiAgencijePoNazivuIAdresi').post((req, res) => {
     new AgencijaController().dohvatiAgencijePoNazivuIAdresi(req, res);
 });
 
+agencijaRouter.route('/mejlPostoji').post((req, res) => {
+    new AgencijaController().mejlPostoji(req, res);
+});
+
+agencijaRouter.route('/dohvatiAgencijuPoMejlu').post((req, res) => {
+    new AgencijaController().dohvatiAgencijuPoMejlu(req, res);
+});
+
 export default agencijaRouter;

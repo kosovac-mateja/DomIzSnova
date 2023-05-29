@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { KorisnikService } from './korisnik.service';
+import { Korisnik } from '../models/korisnik';
+import { Klijent } from '../models/klijent';
 
 @Injectable({
   providedIn: 'root',
@@ -49,6 +51,34 @@ export class KlijentService {
   dohvatiKlijenta(korisnickoIme) {
     return this.http.post(`${this.url}/klijent/dohvatiKlijenta`, {
       korisnickoIme: korisnickoIme,
+    });
+  }
+
+  async mejlPostoji(mejl): Promise<boolean> {
+    return new Promise((resolve) => {
+      this.http
+        .post(`${this.url}/klijent/mejlPostoji`, {
+          mejl: mejl,
+        })
+        .subscribe((res) => {
+          if (res['postoji'] == 'da') {
+            resolve(true);
+          } else {
+            resolve(false);
+          }
+        });
+    });
+  }
+
+  async dohvatiKlijentaPoMejlu(mejl): Promise<Klijent> {
+    return new Promise((resolve) => {
+      this.http
+        .post(`${this.url}/klijent/dohvatiKlijentaPoMejlu`, {
+          mejl: mejl,
+        })
+        .subscribe((res: Klijent) => {
+          resolve(res);
+        });
     });
   }
 }

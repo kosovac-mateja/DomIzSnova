@@ -18,5 +18,11 @@ klijentRouter.route('/azurirajKlijenta').post((req, res) => {
 klijentRouter.route('/dohvatiKlijenta').post((req, res) => {
     new klijent_controller_1.KlijentController().dohvatiKlijenta(req, res);
 });
+klijentRouter.route('/mejlPostoji').post((req, res) => {
+    new klijent_controller_1.KlijentController().mejlPostoji(req, res);
+});
+klijentRouter.route('/dohvatiKlijentaPoMejlu').post((req, res) => {
+    new klijent_controller_1.KlijentController().dohvatiKlijentaPoMejlu(req, res);
+});
 exports.default = klijentRouter;
 //# sourceMappingURL=klijent.routes.js.map

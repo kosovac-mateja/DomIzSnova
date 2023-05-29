@@ -30,5 +30,11 @@ agencijaRouter.route('/dohvatiAgencijePoAdresi').post((req, res) => {
 agencijaRouter.route('/dohvatiAgencijePoNazivuIAdresi').post((req, res) => {
     new agencija_controller_1.AgencijaController().dohvatiAgencijePoNazivuIAdresi(req, res);
 });
+agencijaRouter.route('/mejlPostoji').post((req, res) => {
+    new agencija_controller_1.AgencijaController().mejlPostoji(req, res);
+});
+agencijaRouter.route('/dohvatiAgencijuPoMejlu').post((req, res) => {
+    new agencija_controller_1.AgencijaController().dohvatiAgencijuPoMejlu(req, res);
+});
 exports.default = agencijaRouter;
 //# sourceMappingURL=agencija.routes.js.map

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { KorisnikService } from './korisnik.service';
+import { Agencija } from '../models/agencija';
 
 @Injectable({
   providedIn: 'root',
@@ -95,5 +96,33 @@ export class AgencijaService {
         adresa: adresa,
       }
     );
+  }
+
+  async mejlPostoji(mejl): Promise<boolean> {
+    return new Promise((resolve) => {
+      this.http
+        .post(`${this.url}/agencija/mejlPostoji`, {
+          mejl: mejl,
+        })
+        .subscribe((res) => {
+          if (res['postoji'] == 'da') {
+            resolve(true);
+          } else {
+            resolve(false);
+          }
+        });
+    });
+  }
+
+  async dohvatiAgencijuPoMejlu(mejl): Promise<Agencija> {
+    return new Promise((resolve) => {
+      this.http
+        .post(`${this.url}/agencija/dohvatiAgencijuPoMejlu`, {
+          mejl: mejl,
+        })
+        .subscribe((res: Agencija) => {
+          resolve(res);
+        });
+    });
   }
 }

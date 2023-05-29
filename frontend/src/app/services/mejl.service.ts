@@ -12,4 +12,11 @@ export class MejlService {
   posaljiMejl(mejl: string) {
     return this.http.post(`${this.url}/mejl/posaljiMejl`, { mejl });
   }
+
+  ubaciPrivremenuLozinku(korisnickoIme: string, lozinka: string) {
+    return this.http.post(`${this.url}/mejl/ubaciPrivremenuLozinku`, {
+      korisnickoIme,
+      lozinka,
+    });
+  }
 }

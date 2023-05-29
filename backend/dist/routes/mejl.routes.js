@@ -9,5 +9,8 @@ const mejlRuter = express_1.default.Router();
 mejlRuter.route('/posaljiMejl').post((req, res) => {
     new mejl_controller_1.MejlController().posaljiMejl(req, res);
 });
+mejlRuter.route('/ubaciPrivremenuLozinku').post((req, res) => {
+    new mejl_controller_1.MejlController().ubaciPrivremenuLozinku(req, res);
+});
 exports.default = mejlRuter;
 //# sourceMappingURL=mejl.routes.js.map

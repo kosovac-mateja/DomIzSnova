@@ -57,5 +57,5 @@ export class PocetnaComponent implements OnInit {
   agencije: Agencija[] = [];
   pretragaNaziv: string;
   pretragaAdresa: string;
-  parametarPretrage: string;
+  parametarPretrage: string = 'naziv';
 }

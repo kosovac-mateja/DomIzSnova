@@ -72,4 +72,32 @@ export class KlijentController {
             }
         );
     };
+
+    dohvatiKlijentaPoMejlu = (req: express.Request, res: express.Response) => {
+        let mejl = req.body.mejl;
+
+        KlijentModel.findOne({ mejl: mejl }, (greska, klijent) => {
+            if (greska) {
+                console.log(greska);
+            } else {
+                res.json(klijent);
+            }
+        });
+    };
+
+    mejlPostoji = (req: express.Request, res: express.Response) => {
+        let mejl = req.body.mejl;
+
+        KlijentModel.findOne({ mejl: mejl }, (greska, klijent) => {
+            if (greska) {
+                console.log(greska);
+            } else {
+                if (klijent) {
+                    res.json({ postoji: 'da' });
+                } else {
+                    res.json({ postoji: 'ne' });
+                }
+            }
+        });
+    };
 }
