@@ -1,1 +1,26 @@
-<p>objekat-klijent works!</p>
+<table>
+    <tr>
+        <th>Tip</th>
+        <th>Adresa</th>
+        <th>Broj prostorija</th>
+        <th>Kvadratura</th>
+        <th colspan="2"></th>
+    </tr>
+    <tr *ngFor="let o of objekti">
+        <td><input type="text" [(ngModel)]="o.tip" [disabled]="!rezimIzmene"></td>
+        <td><input type="text" [(ngModel)]="o.adresa" [disabled]="!rezimIzmene"></td>
+        <td><input type="number" [(ngModel)]="o.brProstorija" [disabled]="!rezimIzmene"></td>
+        <td><input type="number" [(ngModel)]="o.kvadratura" [disabled]="!rezimIzmene"></td>
+        <td><button (click)="prikazSkice()" *ngIf="!rezimIzmene">Pogledaj skicu</button></td>
+        <td><button (click)="obrisiObjekat(o)" *ngIf="!rezimIzmene">Obrisi</button></td>
+        <td><button (click)="izmeniObjekat(o)" *ngIf="rezimIzmene">Potvrdi izmene</button></td>
+        <td><button (click)="izmeniSkicu(o)" *ngIf="rezimIzmene">Izmeni skicu</button></td>
+    </tr>
+</table>
+
+<input type="checkbox" id="cbox1" [(ngModel)]="rezimIzmene">
+<label for="cbox1">Rezim izmene</label>
+
+<button (click)="dodajObjekat()">Dodaj novi objekat</button>
+
+

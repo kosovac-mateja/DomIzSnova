@@ -12,5 +12,8 @@ mejlRuter.route('/posaljiMejl').post((req, res) => {
 mejlRuter.route('/ubaciPrivremenuLozinku').post((req, res) => {
     new mejl_controller_1.MejlController().ubaciPrivremenuLozinku(req, res);
 });
+mejlRuter.route('/dohvatiPrivremenuLozinku').post((req, res) => {
+    new mejl_controller_1.MejlController().dohvatiPrivremenuLozinku(req, res);
+});
 exports.default = mejlRuter;
 //# sourceMappingURL=mejl.routes.js.map

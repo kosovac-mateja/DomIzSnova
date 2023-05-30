@@ -22,6 +22,8 @@ import { PosloviKlijentComponent } from './poslovi-klijent/poslovi-klijent.compo
 import { ProfilAgencijaComponent } from './profil-agencija/profil-agencija.component';
 import { RadniciAgencijaComponent } from './radnici-agencija/radnici-agencija.component';
 import { PosloviAgencijaComponent } from './poslovi-agencija/poslovi-agencija.component';
+import { ObjekatDodavanjeComponent } from './objekat-dodavanje/objekat-dodavanje.component';
+import { SkicaKreiranjeComponent } from './skica-kreiranje/skica-kreiranje.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +45,8 @@ import { PosloviAgencijaComponent } from './poslovi-agencija/poslovi-agencija.co
     ProfilAgencijaComponent,
     RadniciAgencijaComponent,
     PosloviAgencijaComponent,
+    ObjekatDodavanjeComponent,
+    SkicaKreiranjeComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],

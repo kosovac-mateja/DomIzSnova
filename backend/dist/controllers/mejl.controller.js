@@ -55,7 +55,7 @@ class MejlController {
                 subject: 'Resetovanje lozinke',
                 text: 'Postovani, vasa nova lozinka je: ' +
                     this.privremenaLozinka +
-                    '.\n' +
+                    '\n' +
                     'Imate 10 minuta da je promenite.\n\n' +
                     'Srdačan pozdrav,\nDom iz Snova',
             };
@@ -71,10 +71,11 @@ class MejlController {
             });
         };
         this.ubaciPrivremenuLozinku = (req, res) => {
+            const currentDate = new Date();
             let privremenaLozinka = new privremenaLozinka_1.default({
                 korisnickoIme: req.body.korisnickoIme,
                 lozinka: req.body.lozinka,
-                vremeIsteka: new Date(Date.now() + 10 * 60000), //10 minuta
+                vremeIsteka: new Date(currentDate.getTime() + 10 * 60000), //10 minuta
             });
             privremenaLozinka.save((greska, privremenaLozinka) => {
                 if (greska) {
@@ -82,6 +83,17 @@ class MejlController {
                 }
                 else {
                     res.json({ poruka: 'ok' });
+                }
+            });
+        };
+        this.dohvatiPrivremenuLozinku = (req, res) => {
+            let korisnickoIme = req.body.korisnickoIme;
+            privremenaLozinka_1.default.findOne({ korisnickoIme: korisnickoIme }, (greska, privremenaLozinka) => {
+                if (greska) {
+                    console.log(greska);
+                }
+                else {
+                    res.json(privremenaLozinka);
                 }
             });
         };

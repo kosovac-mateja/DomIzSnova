@@ -1,0 +1,30 @@
+<table>
+    <tr>
+        <td>Tip objekta</td>
+        <select [(ngModel)]="tip">
+            <option value="stan">stan</option>
+            <option value="kuca">kuca</option>
+        </select>
+    </tr>
+    <tr>
+        <td>Adresa</td>
+        <td><input type="text" [(ngModel)]="adresa"></td>
+    </tr>
+    <tr>
+        <td>Broj prostorija</td>
+        <td><select [(ngModel)]="brProstorija">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+        </select></td>
+    </tr>
+    <tr>
+        <td>Broj kvadrata</td>
+        <td><input type="number" [(ngModel)]="kvadratura"></td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <button (click)="dalje()">Dalje</button>
+        </td>
+    </tr>
+</table>

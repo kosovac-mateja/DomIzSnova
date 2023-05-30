@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { PrivremenaLozinka } from '../models/privremenaLozinka';
 
 @Injectable({
   providedIn: 'root',
@@ -17,6 +18,18 @@ export class MejlService {
     return this.http.post(`${this.url}/mejl/ubaciPrivremenuLozinku`, {
       korisnickoIme,
       lozinka,
+    });
+  }
+
+  async dohvatiPrivremenuLozinku(
+    korisnickoIme: string
+  ): Promise<PrivremenaLozinka> {
+    return new Promise((resolve) => {
+      this.http
+        .post(`${this.url}/mejl/dohvatiPrivremenuLozinku`, { korisnickoIme })
+        .subscribe((res: PrivremenaLozinka) => {
+          resolve(res);
+        });
     });
   }
 }

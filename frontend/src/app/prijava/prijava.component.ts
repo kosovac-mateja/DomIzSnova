@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Korisnik } from '../models/korisnik';
 import { KorisnikService } from '../services/korisnik.service';
 import { Router } from '@angular/router';
+import { MejlService } from '../services/mejl.service';
+import { PrivremenaLozinka } from '../models/privremenaLozinka';
 
 @Component({
   selector: 'app-prijava',
@@ -9,15 +11,23 @@ import { Router } from '@angular/router';
   styleUrls: ['./prijava.component.css'],
 })
 export class PrijavaComponent implements OnInit {
-  constructor(private korisnikServis: KorisnikService, private ruter: Router) {}
+  constructor(
+    private korisnikServis: KorisnikService,
+    private ruter: Router,
+    private mejlServis: MejlService
+  ) {}
 
   ngOnInit(): void {}
 
-  prijava() {
+  async prijava() {
     if (this.korisnickoIme == '' || this.lozinka == '') {
       this.greska = 'Niste uneli sve podatke';
       return;
     }
+
+    this.privLozinka = await this.mejlServis.dohvatiPrivremenuLozinku(
+      this.korisnickoIme
+    );
 
     this.korisnikServis
       .dohvatiKorisnika(this.korisnickoIme)
@@ -28,14 +38,20 @@ export class PrijavaComponent implements OnInit {
           return;
         }
 
-        if (this.korisnik.lozinka != this.lozinka) {
-          this.greska = 'Pogresna lozinka';
-          return;
-        }
-
         if (korisnik.status != 'prihvacen') {
           this.greska = 'Vas zahtev za registraciju jos uvek nije prihvacen';
           return;
+        }
+
+        if (this.korisnik.lozinka != this.lozinka) {
+          if (
+            this.privLozinka == undefined ||
+            this.privLozinka.lozinka != this.lozinka ||
+            new Date(this.privLozinka.vremeIsteka) < new Date()
+          ) {
+            this.greska = 'Pogresna lozinka';
+            return;
+          }
         }
 
         if (this.korisnik.tip == 'klijent') {
@@ -51,6 +67,8 @@ export class PrijavaComponent implements OnInit {
   korisnickoIme: string = '';
   lozinka: string = '';
   korisnik: Korisnik;
+
+  privLozinka: PrivremenaLozinka;
 
   greska: string = '';
 }

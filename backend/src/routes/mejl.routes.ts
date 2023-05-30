@@ -11,4 +11,8 @@ mejlRuter.route('/ubaciPrivremenuLozinku').post((req, res) => {
     new MejlController().ubaciPrivremenuLozinku(req, res);
 });
 
+mejlRuter.route('/dohvatiPrivremenuLozinku').post((req, res) => {
+    new MejlController().dohvatiPrivremenuLozinku(req, res);
+});
+
 export default mejlRuter;
