@@ -12,13 +12,13 @@ export class ObjekatDodavanjeComponent implements OnInit {
   ngOnInit(): void {}
 
   dalje() {
-    localStorage.setItem('dodavanjeObjektaTip', this.tip);
-    localStorage.setItem('dodavanjeObjektaAdresa', this.adresa);
-    localStorage.setItem(
+    sessionStorage.setItem('dodavanjeObjektaTip', this.tip);
+    sessionStorage.setItem('dodavanjeObjektaAdresa', this.adresa);
+    sessionStorage.setItem(
       'dodavanjeObjektaBrProstorija',
       this.brProstorija.toString()
     );
-    localStorage.setItem(
+    sessionStorage.setItem(
       'dodavanjeObjektaKvadratura',
       this.kvadratura.toString()
     );

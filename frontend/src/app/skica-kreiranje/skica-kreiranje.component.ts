@@ -1,4 +1,16 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import { SkicaService } from '../services/skica.service';
+import { ObjekatService } from '../services/objekat.service';
+import { Dimenzije } from '../models/dimenzije';
+import { Koordinata } from '../models/koordinata';
+import { Router } from '@angular/router';
+import { Skica } from '../models/skica';
 
 @Component({
   selector: 'app-skica-kreiranje',
@@ -6,147 +18,202 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
   styleUrls: ['./skica-kreiranje.component.css'],
 })
 export class SkicaKreiranjeComponent implements OnInit {
-  constructor() {}
+  constructor(
+    private skicaServis: SkicaService,
+    private objekatServis: ObjekatService,
+    private ruter: Router
+  ) {}
 
   ngOnInit(): void {
-    this.tip = localStorage.getItem('dodavanjeObjektaTip');
-    this.adresa = localStorage.getItem('dodavanjeObjektaAdresa');
+    this.tip = sessionStorage.getItem('dodavanjeObjektaTip');
+    this.adresa = sessionStorage.getItem('dodavanjeObjektaAdresa');
     this.brProstorija = parseInt(
-      localStorage.getItem('dodavanjeObjektaBrProstorija')
+      sessionStorage.getItem('dodavanjeObjektaBrProstorija')
     );
     this.kvadratura = parseInt(
-      localStorage.getItem('dodavanjeObjektaKvadratura')
+      sessionStorage.getItem('dodavanjeObjektaKvadratura')
     );
-    this.context = this.canvas.nativeElement.getContext('2d');
+    this.vlasnik = sessionStorage.getItem('korisnik');
 
-    this.rectangles = [
-      { x: 50, y: 50, width: 100, height: 50 },
-      { x: 150, y: 150, width: 100, height: 50 },
-      { x: 250, y: 250, width: 100, height: 50 },
-    ];
-
-    // Draw the rectangles
-    this.drawRectangles();
+    this.kontekst = this.platno.nativeElement.getContext('2d');
   }
 
-  drawRectangles() {
-    this.context.clearRect(
+  dodajProstorije() {
+    this.prostorije = [];
+    for (let i = 0; i < this.brProstorija; i++) {
+      this.prostorije.push({
+        x: i == 0 ? 50 : 50 + this.sumaNiza(this.sirine, i),
+        y: i == 0 ? 50 : 50 + this.sumaNiza(this.visine, i),
+        sirina: this.sirine[i],
+        visina: this.visine[i],
+      });
+    }
+
+    this.skiciraj();
+  }
+
+  skiciraj() {
+    this.kontekst.clearRect(
       0,
       0,
-      this.canvas.nativeElement.width,
-      this.canvas.nativeElement.height
+      this.platno.nativeElement.width,
+      this.platno.nativeElement.height
     );
-    this.rectangles.forEach((rectangle, index) => {
-      this.context.strokeRect(
-        rectangle.x,
-        rectangle.y,
-        rectangle.width,
-        rectangle.height
+
+    this.prostorije.forEach((prostorija, indeks) => {
+      this.kontekst.strokeRect(
+        prostorija.x,
+        prostorija.y,
+        prostorija.sirina,
+        prostorija.visina
       );
-      // Draw a red border around the selected rectangle
-      if (index === this.selectedRectangleIndex) {
-        this.context.strokeRect(
-          rectangle.x - 2,
-          rectangle.y - 2,
-          rectangle.width + 4,
-          rectangle.height + 4
-        );
-      }
     });
   }
 
-  startDragging(event: MouseEvent) {
-    const rect = this.canvas.nativeElement.getBoundingClientRect();
-    this.offsetX = event.clientX - rect.left;
-    this.offsetY = event.clientY - rect.top;
+  pocetakPrevlacenja(dogadjaj: MouseEvent) {
+    const prostorija = this.platno.nativeElement.getBoundingClientRect();
+    this.pomerajX = dogadjaj.clientX - prostorija.left;
+    this.pomerajY = dogadjaj.clientY - prostorija.top;
 
-    // Check if the click is inside any of the rectangles
-    for (let i = 0; i < this.rectangles.length; i++) {
-      const rectangle = this.rectangles[i];
+    // Provera da li je klik unutar neke prostorije
+    for (let i = 0; i < this.prostorije.length; i++) {
+      const prostorija = this.prostorije[i];
       if (
-        this.offsetX >= rectangle.x &&
-        this.offsetX <= rectangle.x + rectangle.width &&
-        this.offsetY >= rectangle.y &&
-        this.offsetY <= rectangle.y + rectangle.height
+        this.pomerajX >= prostorija.x &&
+        this.pomerajX <= prostorija.x + prostorija.sirina &&
+        this.pomerajY >= prostorija.y &&
+        this.pomerajY <= prostorija.y + prostorija.visina
       ) {
-        this.isDragging = true;
-        this.selectedRectangleIndex = i;
+        this.prevlacenje = true;
+        this.izabranaProstorija = i;
         break;
       }
     }
   }
 
-  dragRectangle(event: MouseEvent) {
-    if (this.isDragging) {
-      const rect = this.canvas.nativeElement.getBoundingClientRect();
-      const currentX = event.clientX - rect.left;
-      const currentY = event.clientY - rect.top;
+  prevuci(dogadjaj: MouseEvent) {
+    if (this.prevlacenje) {
+      const prostorija = this.platno.nativeElement.getBoundingClientRect();
+      const trenutnoX = dogadjaj.clientX - prostorija.left;
+      const trenutnoY = dogadjaj.clientY - prostorija.top;
 
-      const deltaX = currentX - this.offsetX;
-      const deltaY = currentY - this.offsetY;
+      const razlikaX = trenutnoX - this.pomerajX;
+      const razlikaY = trenutnoY - this.pomerajY;
 
-      const selectedRectangle = this.rectangles[this.selectedRectangleIndex];
-      selectedRectangle.x += deltaX;
-      selectedRectangle.y += deltaY;
+      const izabranaProstorija = this.prostorije[this.izabranaProstorija];
+      const novaPozicijaX = izabranaProstorija.x + razlikaX;
+      const novaPozicijaY = izabranaProstorija.y + razlikaY;
 
-      this.offsetX = currentX;
-      this.offsetY = currentY;
-
-      // Check for collision with other rectangles
-      const collidingIndex = this.checkCollision(selectedRectangle);
-      if (collidingIndex !== -1) {
-        // If collision occurs, revert the position of the selected rectangle
-        selectedRectangle.x -= deltaX;
-        selectedRectangle.y -= deltaY;
+      // Provera granica canvasa
+      if (
+        novaPozicijaX >= 0 &&
+        novaPozicijaY >= 0 &&
+        novaPozicijaX + izabranaProstorija.sirina <=
+          this.platno.nativeElement.width &&
+        novaPozicijaY + izabranaProstorija.visina <=
+          this.platno.nativeElement.height
+      ) {
+        izabranaProstorija.x = novaPozicijaX;
+        izabranaProstorija.y = novaPozicijaY;
       }
 
-      this.drawRectangles();
+      this.pomerajX = trenutnoX;
+      this.pomerajY = trenutnoY;
+
+      //Provera da li se preklapa sa nekom drugom prostorijom
+      const preklapanje = this.proveraPreklapanja(izabranaProstorija);
+      if (preklapanje !== -1) {
+        // Ako se preklapa sa nekom drugom prostorijom, vrati je na staru poziciju
+        izabranaProstorija.x -= razlikaX;
+        izabranaProstorija.y -= razlikaY;
+      }
+
+      this.skiciraj();
     }
   }
 
-  stopDragging() {
-    this.isDragging = false;
-    this.selectedRectangleIndex = null;
+  krajPrevlacenja() {
+    this.prevlacenje = false;
+    this.izabranaProstorija = null;
   }
 
-  checkCollision(rectangle: any): number {
-    for (let i = 0; i < this.rectangles.length; i++) {
-      if (i !== this.selectedRectangleIndex) {
-        const otherRectangle = this.rectangles[i];
+  proveraPreklapanja(prostorija: any): number {
+    for (let i = 0; i < this.prostorije.length; i++) {
+      if (i !== this.izabranaProstorija) {
+        const ostaleProstorije = this.prostorije[i];
         if (
-          rectangle.x < otherRectangle.x + otherRectangle.width &&
-          rectangle.x + rectangle.width > otherRectangle.x &&
-          rectangle.y < otherRectangle.y + otherRectangle.height &&
-          rectangle.y + rectangle.height > otherRectangle.y
+          prostorija.x < ostaleProstorije.x + ostaleProstorije.sirina &&
+          prostorija.x + prostorija.sirina > ostaleProstorije.x &&
+          prostorija.y < ostaleProstorije.y + ostaleProstorije.visina &&
+          prostorija.y + prostorija.visina > ostaleProstorije.y
         ) {
-          return i; // Collision occurred with the rectangle at index i
+          return i; // Ima kolizije sa i-tom prostorijom
         }
       }
     }
-    return -1; // No collision
+    return -1; //Nema kolizije
+  }
+
+  sumaNiza(niz: number[], n: number): number {
+    let sum = 0;
+
+    for (let i = 0; i < n; i++) {
+      sum += niz[i];
+    }
+
+    return sum;
+  }
+
+  zavrsi() {
+    let koord: Koordinata[] = [];
+    let dim: Dimenzije[] = [];
+
+    this.prostorije.forEach((prostorija, indeks) => {
+      koord.push({
+        x: prostorija.x,
+        y: prostorija.y,
+      });
+      dim.push({
+        sirina: prostorija.sirina,
+        visina: prostorija.visina,
+      });
+    });
+
+    this.skicaServis.ubaciSkicu(koord, dim).subscribe((skica: Skica) => {
+      let id = skica._id;
+      this.objekatServis
+        .dodajObjekat(
+          this.tip,
+          this.adresa,
+          this.brProstorija,
+          this.kvadratura,
+          id,
+          this.vlasnik
+        )
+        .subscribe((objekatId) => {
+          alert('Uspešno ste dodali objekat!');
+          this.ruter.navigate(['/klijent/objekat']);
+        });
+    });
   }
 
   @ViewChild('canvas', { static: true })
-  canvas: ElementRef<HTMLCanvasElement>;
-  private context: CanvasRenderingContext2D;
+  platno: ElementRef<HTMLCanvasElement>;
+  kontekst: CanvasRenderingContext2D;
 
-  rectangles: any[] = [];
-  isDragging: boolean = false;
-  offsetX: number;
-  offsetY: number;
-  selectedRectangleIndex: number;
+  prostorije: any[] = [];
+  //vrata: any[] = [];
+  prevlacenje: boolean = false;
+  pomerajX: number;
+  pomerajY: number;
+  izabranaProstorija: number;
 
   tip: string;
   adresa: string;
   brProstorija: number;
   kvadratura: number;
+  vlasnik: string;
 
-  sirina1: number;
-  visina1: number;
-
-  sirina2: number;
-  visina2: number;
-
-  sirina3: number;
-  visina3: number;
+  sirine: number[] = [];
+  visine: number[] = [];
 }

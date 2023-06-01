@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ObjekatController = void 0;
+const mongoose_1 = __importDefault(require("mongoose"));
 const objekat_1 = __importDefault(require("../models/objekat"));
 class ObjekatController {
     constructor() {
@@ -26,6 +27,7 @@ class ObjekatController {
             });
         };
         this.dodajObjekat = (req, res) => {
+            req.body._id = new mongoose_1.default.Types.ObjectId();
             let objekat = new objekat_1.default(req.body);
             objekat
                 .save()

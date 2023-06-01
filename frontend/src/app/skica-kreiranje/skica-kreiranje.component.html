@@ -1,27 +1,34 @@
 <canvas #canvas 
-width="600" height="300" 
+width="1000" height="500" 
 style="border: 1px solid black;"
-(mousedown)="startDragging($event)"
-(mousemove)="dragRectangle($event)"
-(mouseup)="stopDragging()">
+(mousedown)="pocetakPrevlacenja($event)"
+(mousemove)="prevuci($event)"
+(mouseup)="krajPrevlacenja()">
 </canvas>
 <table>
     <tr>
-        <td>Dimenzije 1</td>
-        <td><input type="number" [(ngModel)]="sirina1"></td>
-        <td><input type="number" [(ngModel)]="visina1"></td>
-        <!-- <td><button (click)="dodaj1()">Dodaj</button></td> -->
+        <td>Prostorija 1</td>
+        <td><input type="number" [(ngModel)]="sirine[0]" placeholder="Sirina"></td>
+        <td><input type="number" [(ngModel)]="visine[0]" placeholder="Visina"></td>
+    </tr>
+    <tr *ngIf="brProstorija > 1">
+        <td>Prostorija 2</td>
+        <td><input type="number" [(ngModel)]="sirine[1]" placeholder="Sirina"></td>
+        <td><input type="number" [(ngModel)]="visine[1]" placeholder="Visina"></td>
+    </tr>
+    <tr *ngIf="brProstorija > 2">
+        <td>Prostorija 3</td>
+        <td><input type="number" [(ngModel)]="sirine[2]" placeholder="Sirina"></td>
+        <td><input type="number" [(ngModel)]="visine[2]" placeholder="Visina"></td>
     </tr>
     <tr>
-        <td>Dimenzije 2</td>
-        <td><input type="number" [(ngModel)]="sirina2"></td>
-        <td><input type="number" [(ngModel)]="visina2"></td>
-        <!-- <td><button (click)="dodaj2()">Dodaj</button></td> -->
+        <td colspan="3">
+            <button (click)="dodajProstorije()">Dodaj prostorije</button>
+        </td>
     </tr>
     <tr>
-        <td>Dimenzije 3</td>
-        <td><input type="number" [(ngModel)]="sirina3"></td>
-        <td><input type="number" [(ngModel)]="visina3"></td>
-        <!-- <td><button (click)="dodaj3()">Dodaj</button></td> -->
+        <td colspan="3">
+            <button (click)="zavrsi()">Zavrsi uredjivanje i dodaj novi objekat</button>
+        </td>
     </tr>
 </table>

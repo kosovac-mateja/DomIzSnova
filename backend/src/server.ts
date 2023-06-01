@@ -7,6 +7,7 @@ import klijentRouter from './routes/klijent.routes';
 import agencijaRouter from './routes/agencija.routes';
 import adminRuter from './routes/admin.routes';
 import objekatRuter from './routes/objekat.routes';
+import skicaRuter from './routes/skica.routes';
 
 const app = express();
 app.use(cors());
@@ -25,6 +26,7 @@ router.use('/klijent', klijentRouter);
 router.use('/agencija', agencijaRouter);
 router.use('/admin', adminRuter);
 router.use('/objekat', objekatRuter);
+router.use('/skica', skicaRuter);
 
 app.use('/', router);
 app.listen(4000, () => console.log(`Express server running on port 4000`));

@@ -12,6 +12,7 @@ const klijent_routes_1 = __importDefault(require("./routes/klijent.routes"));
 const agencija_routes_1 = __importDefault(require("./routes/agencija.routes"));
 const admin_routes_1 = __importDefault(require("./routes/admin.routes"));
 const objekat_routes_1 = __importDefault(require("./routes/objekat.routes"));
+const skica_routes_1 = __importDefault(require("./routes/skica.routes"));
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)());
 app.use(express_1.default.json());
@@ -27,6 +28,7 @@ router.use('/klijent', klijent_routes_1.default);
 router.use('/agencija', agencija_routes_1.default);
 router.use('/admin', admin_routes_1.default);
 router.use('/objekat', objekat_routes_1.default);
+router.use('/skica', skica_routes_1.default);
 app.use('/', router);
 app.listen(4000, () => console.log(`Express server running on port 4000`));
 //# sourceMappingURL=server.js.map

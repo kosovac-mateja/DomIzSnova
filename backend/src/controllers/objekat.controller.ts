@@ -1,4 +1,5 @@
 import express from 'express';
+import mongoose from 'mongoose';
 import ObjekatModel from '../models/objekat';
 
 export class ObjekatController {
@@ -21,6 +22,7 @@ export class ObjekatController {
     };
 
     dodajObjekat = (req: express.Request, res: express.Response) => {
+        req.body._id = new mongoose.Types.ObjectId();
         let objekat = new ObjekatModel(req.body);
 
         objekat
