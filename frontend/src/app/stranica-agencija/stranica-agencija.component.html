@@ -1,1 +1,22 @@
-{{agencija.naziv}}
+<!-- {{agencija.naziv}} -->
+<div *ngIf="agencija">
+    {{agencija.naziv}}
+</div>
+
+<h2>Recenzije klijenata</h2>
+<table>
+    <tr *ngFor="let r of recenzije">
+        <td *ngIf="registrovan==true">{{r.klijent}}</td>
+        <td *ngIf="registrovan!=true">Registrovan korisnik</td>
+        <td>{{r.ocena}}</td>
+        <td>{{r.komentar}}</td>
+    </tr>
+</table>
+<div  *ngIf="registrovan==true" >
+    <h2>Saradnja sa agencijom</h2>
+    <select [(ngModel)]="objekat">
+        <option *ngFor="let o of objekti" [value]="o._id">{{o.tip}}, {{o.adresa}}</option>
+    </select>
+    <input type="text" [(ngModel)]="vremenskiPeriod">
+    <button (click)="zatraziSaradnju()">Zatrazi saradnju</button>
+</div>

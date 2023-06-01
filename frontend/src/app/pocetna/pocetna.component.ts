@@ -29,6 +29,7 @@ export class PocetnaComponent implements OnInit {
   }
 
   agencijaIzbor(korisnickoIme) {
+    sessionStorage.setItem('registrovan', 'false');
     sessionStorage.setItem('agencijaIzbor', korisnickoIme);
   }
 

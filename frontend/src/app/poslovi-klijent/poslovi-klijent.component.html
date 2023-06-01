@@ -1,1 +1,20 @@
-<p>poslovi-klijent works!</p>
+<h2>Moji poslovi</h2>
+
+<table>
+    <tr>
+        <th>Agencija</th>
+        <th>Objekat</th>
+        <th>Status</th>
+        <th>Vremenski period</th>
+        <th>Akcija</th>
+    </tr>
+    <tr *ngFor="let p of poslovi">
+        <td>{{p.agencija}}</td>
+        <td>{{dohvatiObjekat(p.idObjekat)}}</td>
+        <td>{{p.status}}</td>
+        <td>{{p.vremenskiPeriod}}</td>
+        <td *ngIf="p.status=='aktivan'"><button (click)="otkaziPosao(p)">Otkazi posao</button></td>
+    </tr>
+</table>
+
+
