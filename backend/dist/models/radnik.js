@@ -5,28 +5,31 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
 const Schema = mongoose_1.default.Schema;
-let Posao = new Schema({
+let Radnik = new Schema({
     _id: {
         type: mongoose_1.default.Schema.Types.ObjectId,
     },
-    klijent: {
+    ime: {
+        type: String,
+    },
+    prezime: {
+        type: String,
+    },
+    mejl: {
+        type: String,
+    },
+    telefon: {
+        type: String,
+    },
+    specijalizacija: {
         type: String,
     },
     agencija: {
         type: String,
     },
-    idObjekat: {
-        type: mongoose_1.default.Schema.Types.ObjectId,
-    },
-    status: {
-        type: String,
-    },
-    prekid: {
-        Boolean,
-    },
-    vremenskiPeriod: {
-        type: Date,
+    zauzet: {
+        type: Boolean,
     },
 });
-exports.default = mongoose_1.default.model('PosaoModel', Posao, 'poslovi');
-//# sourceMappingURL=posao.js.map
+exports.default = mongoose_1.default.model('RadnikModel', Radnik, 'radnici');
+//# sourceMappingURL=radnik.js.map

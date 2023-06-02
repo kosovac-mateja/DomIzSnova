@@ -61,6 +61,8 @@ export class SkicaKreiranjeComponent implements OnInit {
     );
 
     this.prostorije.forEach((prostorija, indeks) => {
+      this.kontekst.strokeStyle = 'black';
+      this.kontekst.lineWidth = 2;
       this.kontekst.strokeRect(
         prostorija.x,
         prostorija.y,
@@ -167,6 +169,7 @@ export class SkicaKreiranjeComponent implements OnInit {
   zavrsi() {
     let koord: Koordinata[] = [];
     let dim: Dimenzije[] = [];
+    let boje: string[] = [];
 
     this.prostorije.forEach((prostorija, indeks) => {
       koord.push({
@@ -177,9 +180,10 @@ export class SkicaKreiranjeComponent implements OnInit {
         sirina: prostorija.sirina,
         visina: prostorija.visina,
       });
+      boje.push('white');
     });
 
-    this.skicaServis.ubaciSkicu(koord, dim).subscribe((skica: Skica) => {
+    this.skicaServis.ubaciSkicu(koord, dim, boje).subscribe((skica: Skica) => {
       let id = skica._id;
       this.objekatServis
         .dodajObjekat(

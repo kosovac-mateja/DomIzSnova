@@ -58,7 +58,7 @@ export class StranicaAgencijaComponent implements OnInit {
       .subscribe((posao) => {
         alert('Uspesno poslat zahtev za saradnju!');
         this.objekat = '';
-        this.vremenskiPeriod = '';
+        this.vremenskiPeriod = new Date();
       });
   }
 
@@ -69,5 +69,5 @@ export class StranicaAgencijaComponent implements OnInit {
 
   objekat: string = '';
   objekti: Objekat[] = [];
-  vremenskiPeriod: string = '';
+  vremenskiPeriod: Date = new Date();
 }

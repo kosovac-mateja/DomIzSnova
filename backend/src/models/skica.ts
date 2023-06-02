@@ -13,6 +13,9 @@ let Skica = new Schema({
     dimenzije: {
         type: Array,
     },
+    boje: {
+        type: Array,
+    },
 });
 
 export default mongoose.model('SkicaModel', Skica, 'skice');

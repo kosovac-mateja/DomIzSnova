@@ -16,6 +16,9 @@ let Skica = new Schema({
     dimenzije: {
         type: Array,
     },
+    boje: {
+        type: Array,
+    },
 });
 exports.default = mongoose_1.default.model('SkicaModel', Skica, 'skice');
 //# sourceMappingURL=skica.js.map

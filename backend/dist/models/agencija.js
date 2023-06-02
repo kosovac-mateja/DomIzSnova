@@ -36,6 +36,9 @@ let Agencija = new Schema({
     opis: {
         type: String,
     },
+    kapacitetRadnika: {
+        type: Number,
+    },
 });
 exports.default = mongoose_1.default.model('AgencijaModel', Agencija, 'agencije');
 //# sourceMappingURL=agencija.js.map

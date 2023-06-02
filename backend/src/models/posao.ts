@@ -22,7 +22,7 @@ let Posao = new Schema({
         Boolean,
     },
     vremenskiPeriod: {
-        type: String,
+        type: Date,
     },
 });
 

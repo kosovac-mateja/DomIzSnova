@@ -15,7 +15,7 @@ export class PosaoService {
     idObjekat: string,
     status: string,
     prekid: boolean,
-    vremenskiPeriod: string
+    vremenskiPeriod: Date
   ) {
     const posao = {
       klijent: klijent,

@@ -5,4 +5,5 @@ export class Skica {
   _id: string;
   koordinate: Koordinata[];
   dimenzije: Dimenzije[];
+  boje: string[];
 }

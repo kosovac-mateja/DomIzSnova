@@ -26,6 +26,7 @@ export class AgencijaService {
       drzava: agencija.drzava,
       maticniBroj: agencija.maticniBroj,
       opis: agencija.opis,
+      kapacitetRadnika: 0,
     };
     return this.http.post(`${this.url}/agencija/registracija`, podaci);
   }

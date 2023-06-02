@@ -5,5 +5,5 @@ export class Posao {
   idObjekat: string;
   status: string;
   prekid: boolean;
-  vremenskiPeriod: string;
+  vremenskiPeriod: Date;
 }

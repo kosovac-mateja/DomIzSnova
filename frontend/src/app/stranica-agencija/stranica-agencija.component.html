@@ -17,6 +17,6 @@
     <select [(ngModel)]="objekat">
         <option *ngFor="let o of objekti" [value]="o._id">{{o.tip}}, {{o.adresa}}</option>
     </select>
-    <input type="text" [(ngModel)]="vremenskiPeriod">
+    <input type="date" [(ngModel)]="vremenskiPeriod">
     <button (click)="zatraziSaradnju()">Zatrazi saradnju</button>
 </div>
