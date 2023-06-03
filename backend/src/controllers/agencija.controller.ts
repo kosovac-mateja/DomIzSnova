@@ -23,7 +23,7 @@ export class AgencijaController {
         AgencijaModel.collection.updateOne(
             { korisnickoIme: korisnickoIme },
             { $set: { [podatak]: vrednost } },
-            (greska, agencija) => {
+            (greska) => {
                 if (greska) {
                     console.log(greska);
                 } else {

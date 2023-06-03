@@ -49,4 +49,8 @@ export class ObjekatService {
       vlasnik: objekat.vlasnik,
     });
   }
+
+  dohvatiObjekat(id: string) {
+    return this.http.post(`${this.url}/objekat/dohvatiObjekat`, { id: id });
+  }
 }

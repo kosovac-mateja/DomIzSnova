@@ -24,6 +24,9 @@ let Posao = new Schema({
     vremenskiPeriod: {
         type: Date,
     },
+    ponuda: {
+        type: Number,
+    },
 });
 
 export default mongoose.model('PosaoModel', Posao, 'poslovi');

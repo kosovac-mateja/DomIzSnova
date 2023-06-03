@@ -24,6 +24,7 @@ import { RadniciAgencijaComponent } from './radnici-agencija/radnici-agencija.co
 import { PosloviAgencijaComponent } from './poslovi-agencija/poslovi-agencija.component';
 import { ObjekatDodavanjeComponent } from './objekat-dodavanje/objekat-dodavanje.component';
 import { SkicaKreiranjeComponent } from './skica-kreiranje/skica-kreiranje.component';
+import { RadniciAdminComponent } from './radnici-admin/radnici-admin.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { SkicaKreiranjeComponent } from './skica-kreiranje/skica-kreiranje.compo
     PosloviAgencijaComponent,
     ObjekatDodavanjeComponent,
     SkicaKreiranjeComponent,
+    RadniciAdminComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],

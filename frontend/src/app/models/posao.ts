@@ -6,4 +6,5 @@ export class Posao {
   status: string;
   prekid: boolean;
   vremenskiPeriod: Date;
+  ponuda: number;
 }

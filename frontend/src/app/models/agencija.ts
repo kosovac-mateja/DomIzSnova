@@ -10,4 +10,5 @@ export class Agencija {
   maticniBroj: string;
   opis: string;
   kapacitetRadnika: number;
+  zahtev: number;
 }

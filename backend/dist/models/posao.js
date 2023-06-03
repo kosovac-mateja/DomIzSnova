@@ -27,6 +27,9 @@ let Posao = new Schema({
     vremenskiPeriod: {
         type: Date,
     },
+    ponuda: {
+        type: Number,
+    },
 });
 exports.default = mongoose_1.default.model('PosaoModel', Posao, 'poslovi');
 //# sourceMappingURL=posao.js.map

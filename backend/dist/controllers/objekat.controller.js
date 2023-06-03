@@ -58,6 +58,15 @@ class ObjekatController {
                 }
             });
         };
+        this.dohvatiObjekat = (req, res) => {
+            let id = req.body.id;
+            objekat_1.default.findOne({ _id: id }, (err, objekat) => {
+                if (err)
+                    console.log(err);
+                else
+                    res.json(objekat);
+            });
+        };
     }
 }
 exports.ObjekatController = ObjekatController;

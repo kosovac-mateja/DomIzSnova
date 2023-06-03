@@ -29,6 +29,29 @@ class PossaoController {
                     res.json(poslovi);
             });
         };
+        this.dohvatiPosloveAgencije = (req, res) => {
+            let agencija = req.body.agencija;
+            posao_1.default.find({ agencija: agencija }, (err, poslovi) => {
+                if (err)
+                    console.log(err);
+                else
+                    res.json(poslovi);
+            });
+        };
+        this.azurirajPodatak = (req, res) => {
+            let id = req.body.id;
+            let podatak = req.body.podatak;
+            let vrednost = req.body.vrednost;
+            console.log(id, podatak, vrednost);
+            posao_1.default.updateOne({ _id: id }, { $set: { [podatak]: vrednost } }, (greska) => {
+                if (greska) {
+                    console.log(greska);
+                }
+                else {
+                    res.json({ poruka: 'ok' });
+                }
+            });
+        };
     }
 }
 exports.PossaoController = PossaoController;

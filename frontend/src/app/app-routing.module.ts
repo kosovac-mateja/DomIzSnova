@@ -19,6 +19,7 @@ import { PosloviAgencijaComponent } from './poslovi-agencija/poslovi-agencija.co
 import { RadniciAgencijaComponent } from './radnici-agencija/radnici-agencija.component';
 import { ObjekatDodavanjeComponent } from './objekat-dodavanje/objekat-dodavanje.component';
 import { SkicaKreiranjeComponent } from './skica-kreiranje/skica-kreiranje.component';
+import { RadniciAdminComponent } from './radnici-admin/radnici-admin.component';
 
 const routes: Routes = [
   { path: '', component: PocetnaComponent },
@@ -30,6 +31,7 @@ const routes: Routes = [
   { path: 'agencija', component: AgencijaComponent },
   { path: 'admin', component: AdminComponent },
   { path: 'admin/azuriranje', component: AzuriranjeAdminComponent },
+  { path: 'admin/radnici', component: RadniciAdminComponent },
   { path: 'agencija/stranica', component: StranicaAgencijaComponent },
   { path: 'klijent/profil', component: ProfilKlijentComponent },
   { path: 'klijent/objekat', component: ObjekatKlijentComponent },

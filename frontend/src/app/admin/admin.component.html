@@ -14,5 +14,7 @@
         <td><button (click)="obrisi(k.korisnickoIme)">Obrisi</button></td>
         <td *ngIf="k.status=='na cekanju'"><button (click)="prihvati(k.korisnickoIme)">Prihvati zahtev</button></td>
         <td *ngIf="k.status=='na cekanju'"><button (click)="odbij(k.korisnickoIme)">Odbij zahtev</button></td>
+        <td><button (click)="agencijaRadnici(k.korisnickoIme)" *ngIf="k.tip=='agencija' && k.status=='prihvacen'">Radnici agencije</button></td>
     </tr>
 </table>
+

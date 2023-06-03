@@ -1,1 +1,60 @@
-<p>radnici-agencija works!</p>
+Broj radnika: {{radnici.length}}
+Kapacitet radnika: {{agencija.kapacitetRadnika}}
+
+<table>
+    <tr>
+        <th>Ime</th>
+        <th>Prezime</th>
+        <th>Broj telefona</th>
+        <th>Mejl</th>
+        <th>Specijalizacija</th>
+        <th colspan="2">Akcije</th>
+    </tr>
+    <tr *ngFor="let r of radnici">
+        <td><input type="text" [(ngModel)]="r.ime" [disabled]="!rezimIzmene"></td>
+        <td><input type="text" [(ngModel)]="r.prezime" [disabled]="!rezimIzmene"></td>
+        <td><input type="text" [(ngModel)]="r.telefon" [disabled]="!rezimIzmene"></td>
+        <td><input type="text" [(ngModel)]="r.mejl" [disabled]="!rezimIzmene"></td>
+        <td><input type="text" [(ngModel)]="r.specijalizacija" [disabled]="!rezimIzmene"></td>
+        <td><button (click)="obrisiRadnika(r)" *ngIf="!rezimIzmene">Obrisi</button></td>
+        <td><button (click)="izmeniRadnika(r)" *ngIf="rezimIzmene">Potvrdi izmene</button></td>
+    </tr>
+</table>
+
+<input type="checkbox" id="cbox1" [(ngModel)]="rezimIzmene">
+<label for="cbox1">Rezim izmene</label>
+
+<div *ngIf="agencija.kapacitetRadnika > radnici.length">
+    <h2>Dodaj radnika</h2>
+    <table>
+        <tr>
+            <td>Ime</td>
+            <td><input type="text" [(ngModel)]="ime"></td>
+        </tr>
+        <tr>
+            <td>Prezime</td>
+            <td><input type="text" [(ngModel)]="prezime"></td>
+        </tr>
+        <tr>
+            <td>Broj telefona</td>
+            <td><input type="text" [(ngModel)]="telefon"></td>
+        </tr>
+        <tr>
+            <td>Mejl</td>
+            <td><input type="text" [(ngModel)]="mejl"></td>
+        </tr>
+        <tr>
+            <td>Specijalizacija</td>
+            <td><input type="text" [(ngModel)]="specijalizacija"></td>
+        </tr>
+        <tr>
+            <td colspan="2"><button (click)="dodajRadnika()">Dodaj radnika</button></td>
+        </tr>
+    </table>
+</div>
+
+<div>
+    <h2>Zahtevaj prosirenje kapaciteta radnika</h2>
+    Zahtevaj jos <input type="number" [(ngModel)]="prosirenje"> radnika
+    <button (click)="posaljiZahtev()">Posalji zahtev</button>
+</div>

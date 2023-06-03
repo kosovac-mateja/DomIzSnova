@@ -1,5 +1,6 @@
 import express from 'express';
 import PosaoModel from '../models/posao';
+import Posao from '../models/posao';
 import mongoose from 'mongoose';
 
 export class PossaoController {
@@ -23,5 +24,32 @@ export class PossaoController {
             if (err) console.log(err);
             else res.json(poslovi);
         });
+    };
+
+    dohvatiPosloveAgencije = (req: express.Request, res: express.Response) => {
+        let agencija = req.body.agencija;
+
+        PosaoModel.find({ agencija: agencija }, (err, poslovi) => {
+            if (err) console.log(err);
+            else res.json(poslovi);
+        });
+    };
+
+    azurirajPodatak = (req: express.Request, res: express.Response) => {
+        let id = req.body.id;
+        let podatak = req.body.podatak;
+        let vrednost = req.body.vrednost;
+
+        PosaoModel.updateOne(
+            { _id: id },
+            { $set: { [podatak]: vrednost } },
+            (greska) => {
+                if (greska) {
+                    console.log(greska);
+                } else {
+                    res.json({ poruka: 'ok' });
+                }
+            }
+        );
     };
 }

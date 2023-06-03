@@ -18,5 +18,8 @@ objekatRuter
 objekatRuter
     .route('/azurirajObjekat')
     .post((req, res) => new objekat_controller_1.ObjekatController().azurirajObjekat(req, res));
+objekatRuter.route('/dohvatiObjekat').post((req, res) => {
+    new objekat_controller_1.ObjekatController().dohvatiObjekat(req, res);
+});
 exports.default = objekatRuter;
 //# sourceMappingURL=objekat.routes.js.map

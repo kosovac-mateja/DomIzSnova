@@ -24,6 +24,7 @@ export class PosaoService {
       status: status,
       prekid: prekid,
       vremenskiPeriod: vremenskiPeriod,
+      ponuda: 0,
     };
 
     return this.http.post(`${this.url}/posao/ubaciPosao`, posao);
@@ -32,6 +33,20 @@ export class PosaoService {
   dohvatiPosloveKlijenta(klijent: string) {
     return this.http.post(`${this.url}/posao/dohvatiPosloveKlijenta`, {
       klijent: klijent,
+    });
+  }
+
+  dohvatiPosloveAgencije(agencija: string) {
+    return this.http.post(`${this.url}/posao/dohvatiPosloveAgencije`, {
+      agencija: agencija,
+    });
+  }
+
+  azurirajPodatak(id, podatak, vrednost) {
+    return this.http.post(`${this.url}/posao/azurirajPodatak`, {
+      id: id,
+      podatak: podatak,
+      vrednost: vrednost,
     });
   }
 }

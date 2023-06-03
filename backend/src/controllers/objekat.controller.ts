@@ -59,4 +59,13 @@ export class ObjekatController {
             }
         );
     };
+
+    dohvatiObjekat = (req: express.Request, res: express.Response) => {
+        let id = req.body.id;
+
+        ObjekatModel.findOne({ _id: id }, (err, objekat) => {
+            if (err) console.log(err);
+            else res.json(objekat);
+        });
+    };
 }

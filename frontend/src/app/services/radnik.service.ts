@@ -11,13 +11,13 @@ export class RadnikService {
   url = 'http://localhost:4000';
 
   dohvatiRadnikeAgencije(agencija: string) {
-    return this.http.post(`${this.url}/dohvatiRadnikeAgencije`, {
+    return this.http.post(`${this.url}/radnik/dohvatiRadnikeAgencije`, {
       agencija: agencija,
     });
   }
 
   azurirajRadnika(radnik: Radnik) {
-    return this.http.post(`${this.url}/azurirajRadnika`, radnik);
+    return this.http.post(`${this.url}/radnik/azurirajRadnika`, radnik);
   }
 
   dodajRadnika(
@@ -28,7 +28,7 @@ export class RadnikService {
     specijalizacija: string,
     agencija: string
   ) {
-    return this.http.post(`${this.url}/dodajRadnika`, {
+    return this.http.post(`${this.url}/radnik/dodajRadnika`, {
       ime: ime,
       prezime: prezime,
       mejl: mejl,
@@ -37,5 +37,9 @@ export class RadnikService {
       agencija: agencija,
       zauzet: false,
     });
+  }
+
+  obrisiRadnika(id: string) {
+    return this.http.post(`${this.url}/radnik/obrisiRadnika`, { id: id });
   }
 }

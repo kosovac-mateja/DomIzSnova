@@ -73,5 +73,10 @@ export class AdminComponent implements OnInit {
     });
   }
 
+  agencijaRadnici(korisnickoIme: string) {
+    sessionStorage.setItem('agencijaRadnici', korisnickoIme);
+    this.ruter.navigate(['/admin/radnici']);
+  }
+
   korisnici: Korisnik[] = [];
 }

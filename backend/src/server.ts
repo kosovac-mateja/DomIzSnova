@@ -10,6 +10,7 @@ import objekatRuter from './routes/objekat.routes';
 import skicaRuter from './routes/skica.routes';
 import recenzijaRuter from './routes/recenzija.routes';
 import posaoRuter from './routes/posao.routes';
+import radnikRuter from './routes/radnik.routes';
 
 const app = express();
 app.use(cors());
@@ -30,6 +31,7 @@ router.use('/admin', adminRuter);
 router.use('/objekat', objekatRuter);
 router.use('/skica', skicaRuter);
 router.use('/recenzije', recenzijaRuter);
+router.use('/radnik', radnikRuter);
 router.use('/posao', posaoRuter);
 
 app.use('/', router);
