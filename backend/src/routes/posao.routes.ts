@@ -19,4 +19,8 @@ posaoRuter.route('/azurirajPodatak').post((req, res) => {
     new PossaoController().azurirajPodatak(req, res);
 });
 
+posaoRuter.route('/obrisiPosao').post((req, res) => {
+    new PossaoController().obrisiPosao(req, res);
+});
+
 export default posaoRuter;

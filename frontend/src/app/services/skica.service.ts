@@ -18,4 +18,15 @@ export class SkicaService {
       boje: boje,
     });
   }
+
+  dohvatiSkicu(id) {
+    return this.http.post(`${this.url}/skica/dohvatiSkicu`, { id: id });
+  }
+
+  promeniBoju(id, boje) {
+    return this.http.post(`${this.url}/skica/promeniBoju`, {
+      id: id,
+      boje: boje,
+    });
+  }
 }

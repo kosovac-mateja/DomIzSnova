@@ -7,4 +7,12 @@ skicaRuter.route('/ubaciSkicu').post((req, res) => {
     new SkicaController().ubaciSkicu(req, res);
 });
 
+skicaRuter.route('/dohvatiSkicu').post((req, res) => {
+    new SkicaController().dohvatiSkicu(req, res);
+});
+
+skicaRuter.route('/promeniBoju').post((req, res) => {
+    new SkicaController().promeniBoju(req, res);
+});
+
 export default skicaRuter;

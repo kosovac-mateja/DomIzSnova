@@ -18,5 +18,8 @@ posaoRuter.route('/dohvatiPosloveAgencije').post((req, res) => {
 posaoRuter.route('/azurirajPodatak').post((req, res) => {
     new posao_controller_1.PossaoController().azurirajPodatak(req, res);
 });
+posaoRuter.route('/obrisiPosao').post((req, res) => {
+    new posao_controller_1.PossaoController().obrisiPosao(req, res);
+});
 exports.default = posaoRuter;
 //# sourceMappingURL=posao.routes.js.map

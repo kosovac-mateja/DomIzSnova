@@ -1,4 +1,5 @@
 import express from 'express';
+import { ObjectId } from 'mongodb';
 import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
@@ -25,8 +26,8 @@ let Radnik = new Schema({
     agencija: {
         type: String,
     },
-    zauzet: {
-        type: Boolean,
+    idPosao: {
+        type: ObjectId,
     },
 });
 

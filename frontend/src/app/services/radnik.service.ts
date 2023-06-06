@@ -35,11 +35,30 @@ export class RadnikService {
       telefon: telefon,
       specijalizacija: specijalizacija,
       agencija: agencija,
-      zauzet: false,
+      idPosao: null,
     });
   }
 
   obrisiRadnika(id: string) {
     return this.http.post(`${this.url}/radnik/obrisiRadnika`, { id: id });
+  }
+
+  dohvatiDostupneRadnike(agencija: string) {
+    return this.http.post(`${this.url}/radnik/dohvatiDostupneRadnike`, {
+      agencija: agencija,
+    });
+  }
+
+  dohvatiRadnikeNaPoslu(idPosao: string) {
+    return this.http.post(`${this.url}/radnik/dohvatiRadnikeNaPoslu`, {
+      idPosao: idPosao,
+    });
+  }
+
+  azurirajPosaoRadnika(idRadnik: string, idPosao: string) {
+    return this.http.post(`${this.url}/radnik/azurirajPosaoRadnika`, {
+      idRadnik: idRadnik,
+      idPosao: idPosao,
+    });
   }
 }

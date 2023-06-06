@@ -15,4 +15,23 @@ export class SkicaController {
                 console.log(err);
             });
     };
+
+    dohvatiSkicu = (req: express.Request, res: express.Response) => {
+        let id = req.body.id;
+
+        SkicaModel.findOne({ _id: id }, (err, skica) => {
+            if (err) console.log(err);
+            else res.json(skica);
+        });
+    };
+
+    promeniBoju = (req: express.Request, res: express.Response) => {
+        let id = req.body.id;
+        let boje = req.body.boje;
+
+        SkicaModel.updateOne({ _id: id }, { boje: boje }, (err, skica) => {
+            if (err) console.log(err);
+            else res.json(skica);
+        });
+    };
 }

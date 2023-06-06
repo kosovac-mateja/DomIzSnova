@@ -18,5 +18,14 @@ radnikRuter.route('/dodajRadnika').post((req, res) => {
 radnikRuter.route('/obrisiRadnika').post((req, res) => {
     new radnik_controller_1.RadnikController().obrisiRadnika(req, res);
 });
+radnikRuter.route('/dohvatiDostupneRadnike').post((req, res) => {
+    new radnik_controller_1.RadnikController().dohvatiDostupneRadnike(req, res);
+});
+radnikRuter.route('/dohvatiRadnikeNaPoslu').post((req, res) => {
+    new radnik_controller_1.RadnikController().dohvatiRadnikeNaPoslu(req, res);
+});
+radnikRuter.route('/azurirajPosaoRadnika').post((req, res) => {
+    new radnik_controller_1.RadnikController().azurirajPosaoRadnika(req, res);
+});
 exports.default = radnikRuter;
 //# sourceMappingURL=radnik.routes.js.map

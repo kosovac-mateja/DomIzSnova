@@ -42,8 +42,18 @@ class PossaoController {
             let id = req.body.id;
             let podatak = req.body.podatak;
             let vrednost = req.body.vrednost;
-            console.log(id, podatak, vrednost);
             posao_1.default.updateOne({ _id: id }, { $set: { [podatak]: vrednost } }, (greska) => {
+                if (greska) {
+                    console.log(greska);
+                }
+                else {
+                    res.json({ poruka: 'ok' });
+                }
+            });
+        };
+        this.obrisiPosao = (req, res) => {
+            let id = req.body.id;
+            posao_1.default.deleteOne({ _id: id }, (greska) => {
                 if (greska) {
                     console.log(greska);
                 }

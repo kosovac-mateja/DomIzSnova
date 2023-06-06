@@ -65,4 +65,48 @@ export class RadnikController {
             }
         });
     };
+
+    dohvatiDostupneRadnike = (req: express.Request, res: express.Response) => {
+        let agencija = req.body.agencija;
+
+        RadnikModel.find(
+            { agencija: agencija, idPosao: null },
+            (err, radnici) => {
+                if (err) {
+                    console.log(err);
+                } else {
+                    res.json(radnici);
+                }
+            }
+        );
+    };
+
+    dohvatiRadnikeNaPoslu = (req: express.Request, res: express.Response) => {
+        let idPosao = req.body.idPosao;
+
+        RadnikModel.find({ idPosao: idPosao }, (err, radnici) => {
+            if (err) {
+                console.log(err);
+            } else {
+                res.json(radnici);
+            }
+        });
+    };
+
+    azurirajPosaoRadnika = (req: express.Request, res: express.Response) => {
+        let idRadnik = req.body.idRadnik;
+        let idPosao = req.body.idPosao;
+
+        RadnikModel.updateOne(
+            { _id: idRadnik },
+            { $set: { idPosao: idPosao } },
+            (err) => {
+                if (err) {
+                    console.log(err);
+                } else {
+                    res.json({ poruka: 'ok' });
+                }
+            }
+        );
+    };
 }

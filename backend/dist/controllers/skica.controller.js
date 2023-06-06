@@ -20,6 +20,25 @@ class SkicaController {
                 console.log(err);
             });
         };
+        this.dohvatiSkicu = (req, res) => {
+            let id = req.body.id;
+            skica_1.default.findOne({ _id: id }, (err, skica) => {
+                if (err)
+                    console.log(err);
+                else
+                    res.json(skica);
+            });
+        };
+        this.promeniBoju = (req, res) => {
+            let id = req.body.id;
+            let boje = req.body.boje;
+            skica_1.default.updateOne({ _id: id }, { boje: boje }, (err, skica) => {
+                if (err)
+                    console.log(err);
+                else
+                    res.json(skica);
+            });
+        };
     }
 }
 exports.SkicaController = SkicaController;

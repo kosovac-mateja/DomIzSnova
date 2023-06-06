@@ -52,4 +52,16 @@ export class PossaoController {
             }
         );
     };
+
+    obrisiPosao = (req: express.Request, res: express.Response) => {
+        let id = req.body.id;
+
+        PosaoModel.deleteOne({ _id: id }, (greska) => {
+            if (greska) {
+                console.log(greska);
+            } else {
+                res.json({ poruka: 'ok' });
+            }
+        });
+    };
 }

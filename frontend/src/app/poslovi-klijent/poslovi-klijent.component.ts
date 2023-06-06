@@ -37,7 +37,23 @@ export class PosloviKlijentComponent implements OnInit {
     return null;
   }
 
-  otkaziPosao(posao: Posao) {}
+  prihvatiPonudu(posao: Posao) {
+    this.posaoServis
+      .azurirajPodatak(posao._id, 'status', 'aktivan')
+      .subscribe((res) => {
+        posao.status = 'aktivan';
+      });
+  }
+
+  odbijPonudu(posao: Posao) {
+    this.posaoServis.obrisiPosao(posao._id).subscribe((res) => {
+      this.poslovi = this.poslovi.filter((p) => p._id != posao._id);
+    });
+  }
+
+  otkaziPosao(posao: Posao) {
+    //TODO: otkazivanje posla
+  }
 
   poslovi: Posao[] = [];
   objekti: Object[] = [];

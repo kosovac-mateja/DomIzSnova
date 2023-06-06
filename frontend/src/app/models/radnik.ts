@@ -6,5 +6,5 @@ export class Radnik {
   telefon: string;
   specijalizacija: string;
   agencija: string;
-  zauzet: boolean;
+  idPosao: string;
 }

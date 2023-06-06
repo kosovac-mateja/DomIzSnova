@@ -49,4 +49,8 @@ export class PosaoService {
       vrednost: vrednost,
     });
   }
+
+  obrisiPosao(id) {
+    return this.http.post(`${this.url}/posao/obrisiPosao`, { id: id });
+  }
 }

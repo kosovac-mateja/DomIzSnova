@@ -61,6 +61,40 @@ class RadnikController {
                 }
             });
         };
+        this.dohvatiDostupneRadnike = (req, res) => {
+            let agencija = req.body.agencija;
+            radnik_1.default.find({ agencija: agencija, idPosao: null }, (err, radnici) => {
+                if (err) {
+                    console.log(err);
+                }
+                else {
+                    res.json(radnici);
+                }
+            });
+        };
+        this.dohvatiRadnikeNaPoslu = (req, res) => {
+            let idPosao = req.body.idPosao;
+            radnik_1.default.find({ idPosao: idPosao }, (err, radnici) => {
+                if (err) {
+                    console.log(err);
+                }
+                else {
+                    res.json(radnici);
+                }
+            });
+        };
+        this.azurirajPosaoRadnika = (req, res) => {
+            let idRadnik = req.body.idRadnik;
+            let idPosao = req.body.idPosao;
+            radnik_1.default.updateOne({ _id: idRadnik }, { $set: { idPosao: idPosao } }, (err) => {
+                if (err) {
+                    console.log(err);
+                }
+                else {
+                    res.json({ poruka: 'ok' });
+                }
+            });
+        };
     }
 }
 exports.RadnikController = RadnikController;

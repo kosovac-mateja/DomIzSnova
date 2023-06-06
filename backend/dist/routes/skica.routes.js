@@ -9,5 +9,11 @@ const skicaRuter = express_1.default.Router();
 skicaRuter.route('/ubaciSkicu').post((req, res) => {
     new skica_controller_1.SkicaController().ubaciSkicu(req, res);
 });
+skicaRuter.route('/dohvatiSkicu').post((req, res) => {
+    new skica_controller_1.SkicaController().dohvatiSkicu(req, res);
+});
+skicaRuter.route('/promeniBoju').post((req, res) => {
+    new skica_controller_1.SkicaController().promeniBoju(req, res);
+});
 exports.default = skicaRuter;
 //# sourceMappingURL=skica.routes.js.map

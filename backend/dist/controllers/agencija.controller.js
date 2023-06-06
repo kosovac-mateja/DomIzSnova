@@ -23,7 +23,6 @@ class AgencijaController {
             let korisnickoIme = req.body.korisnickoIme;
             let podatak = req.body.podatak;
             let vrednost = req.body.vrednost;
-            console.log(korisnickoIme, podatak, vrednost);
             agencija_1.default.collection.updateOne({ korisnickoIme: korisnickoIme }, { $set: { [podatak]: vrednost } }, (greska) => {
                 if (greska) {
                     console.log(greska);
