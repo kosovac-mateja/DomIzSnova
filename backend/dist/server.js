@@ -16,6 +16,7 @@ const skica_routes_1 = __importDefault(require("./routes/skica.routes"));
 const recenzija_routes_1 = __importDefault(require("./routes/recenzija.routes"));
 const posao_routes_1 = __importDefault(require("./routes/posao.routes"));
 const radnik_routes_1 = __importDefault(require("./routes/radnik.routes"));
+const otkazivanje_routes_1 = __importDefault(require("./routes/otkazivanje.routes"));
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)());
 app.use(express_1.default.json());
@@ -35,6 +36,7 @@ router.use('/skica', skica_routes_1.default);
 router.use('/recenzije', recenzija_routes_1.default);
 router.use('/radnik', radnik_routes_1.default);
 router.use('/posao', posao_routes_1.default);
+router.use('/otkazivanjePosla', otkazivanje_routes_1.default);
 app.use('/', router);
 app.listen(4000, () => console.log(`Express server running on port 4000`));
 //# sourceMappingURL=server.js.map

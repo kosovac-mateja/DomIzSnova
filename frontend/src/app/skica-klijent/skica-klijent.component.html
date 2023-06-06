@@ -1,0 +1,13 @@
+<canvas #canvas 
+width="1000" height="500" 
+style="border: 1px solid black;"></canvas>
+
+<div *ngIf="sveZavrseno">
+    <button (click)="zavrsiPosao()">Zavrsi posao i plati</button>
+</div>
+
+<div *ngIf="!sveZavrseno && !otkazan">
+    <h3>Otkazivanje posla</h3>
+    <textarea name="razlog" [(ngModel)]="razlog"></textarea>
+    <button (click)="otkaziPosao()">Posalji zahtev za otkazivanjem posla</button>
+</div>

@@ -16,7 +16,7 @@
         <td *ngIf="p.status=='ponuda'">{{p.ponuda}}</td>
         <td *ngIf="p.status=='ponuda'"><button (click)="prihvatiPonudu(p)">Prihvati ponudu</button></td>
         <td *ngIf="p.status=='ponuda'"><button (click)="odbijPonudu(p)">Odbij ponudu</button></td>
-        <td *ngIf="p.status=='aktivan'"><button (click)="otkaziPosao(p)">Otkazi posao</button></td>
+        <td *ngIf="p.status=='aktivan'"><button (click)="skica(p)">Prikazi napredak</button></td>
     </tr>
 </table>
 

@@ -53,4 +53,29 @@ export class PosaoService {
   obrisiPosao(id) {
     return this.http.post(`${this.url}/posao/obrisiPosao`, { id: id });
   }
+
+  otkaziPosao(idPosao, razlog) {
+    return this.http.post(`${this.url}/otkazivanjePosla/ubaci`, {
+      idPosao: idPosao,
+      razlog: razlog,
+      status: 'na cekanju',
+    });
+  }
+
+  dohvatiOtkazivanja() {
+    return this.http.get(`${this.url}/otkazivanjePosla/dohvatiOtkazivanja`);
+  }
+
+  promeniStatus(idPosao, status) {
+    return this.http.post(`${this.url}/otkazivanjePosla/promeniStatus`, {
+      idPosao: idPosao,
+      status: status,
+    });
+  }
+
+  zahtevPostoji(idPosao) {
+    return this.http.post(`${this.url}/otkazivanjePosla/zahtevPostoji`, {
+      idPosao: idPosao,
+    });
+  }
 }

@@ -3,6 +3,7 @@ import { PosaoService } from '../services/posao.service';
 import { Posao } from '../models/posao';
 import { ObjekatService } from '../services/objekat.service';
 import { Objekat } from '../models/objekat';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-poslovi-klijent',
@@ -12,7 +13,8 @@ import { Objekat } from '../models/objekat';
 export class PosloviKlijentComponent implements OnInit {
   constructor(
     private posaoServis: PosaoService,
-    private objekatServis: ObjekatService
+    private objekatServis: ObjekatService,
+    private ruter: Router
   ) {}
 
   ngOnInit(): void {
@@ -51,8 +53,14 @@ export class PosloviKlijentComponent implements OnInit {
     });
   }
 
-  otkaziPosao(posao: Posao) {
-    //TODO: otkazivanje posla
+  skica(posao: Posao) {
+    this.objekti.find((objekat: Objekat) => {
+      if (objekat._id == posao.idObjekat) {
+        sessionStorage.setItem('idSkica', objekat.idSkica);
+        sessionStorage.setItem('idPosao', posao._id);
+        this.ruter.navigate(['/klijent/skica']);
+      }
+    });
   }
 
   poslovi: Posao[] = [];

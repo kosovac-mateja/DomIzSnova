@@ -11,6 +11,7 @@ import skicaRuter from './routes/skica.routes';
 import recenzijaRuter from './routes/recenzija.routes';
 import posaoRuter from './routes/posao.routes';
 import radnikRuter from './routes/radnik.routes';
+import otkazivanjeRuter from './routes/otkazivanje.routes';
 
 const app = express();
 app.use(cors());
@@ -33,6 +34,7 @@ router.use('/skica', skicaRuter);
 router.use('/recenzije', recenzijaRuter);
 router.use('/radnik', radnikRuter);
 router.use('/posao', posaoRuter);
+router.use('/otkazivanjePosla', otkazivanjeRuter);
 
 app.use('/', router);
 app.listen(4000, () => console.log(`Express server running on port 4000`));

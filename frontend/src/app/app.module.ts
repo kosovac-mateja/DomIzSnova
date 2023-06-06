@@ -26,6 +26,7 @@ import { ObjekatDodavanjeComponent } from './objekat-dodavanje/objekat-dodavanje
 import { SkicaKreiranjeComponent } from './skica-kreiranje/skica-kreiranje.component';
 import { RadniciAdminComponent } from './radnici-admin/radnici-admin.component';
 import { SkicaAgencijaComponent } from './skica-agencija/skica-agencija.component';
+import { SkicaKlijentComponent } from './skica-klijent/skica-klijent.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { SkicaAgencijaComponent } from './skica-agencija/skica-agencija.componen
     SkicaKreiranjeComponent,
     RadniciAdminComponent,
     SkicaAgencijaComponent,
+    SkicaKlijentComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],

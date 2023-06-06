@@ -21,6 +21,7 @@ import { ObjekatDodavanjeComponent } from './objekat-dodavanje/objekat-dodavanje
 import { SkicaKreiranjeComponent } from './skica-kreiranje/skica-kreiranje.component';
 import { RadniciAdminComponent } from './radnici-admin/radnici-admin.component';
 import { SkicaAgencijaComponent } from './skica-agencija/skica-agencija.component';
+import { SkicaKlijentComponent } from './skica-klijent/skica-klijent.component';
 
 const routes: Routes = [
   { path: '', component: PocetnaComponent },
@@ -41,6 +42,7 @@ const routes: Routes = [
   { path: 'klijent/poslovi', component: PosloviKlijentComponent },
   { path: 'klijent/dodajObjekat/podaci', component: ObjekatDodavanjeComponent },
   { path: 'klijent/dodajObjekat/skica', component: SkicaKreiranjeComponent },
+  { path: 'klijent/skica', component: SkicaKlijentComponent },
   { path: 'agencija/profil', component: ProfilAgencijaComponent },
   { path: 'agencija/radnici', component: RadniciAgencijaComponent },
   { path: 'agencija/poslovi', component: PosloviAgencijaComponent },

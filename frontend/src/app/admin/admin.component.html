@@ -12,9 +12,22 @@
         <td>{{k.tip}}</td>
         <td><button (click)="azuriraj(k.korisnickoIme, k.tip)">Azuriraj</button></td>
         <td><button (click)="obrisi(k.korisnickoIme)">Obrisi</button></td>
-        <td *ngIf="k.status=='na cekanju'"><button (click)="prihvati(k.korisnickoIme)">Prihvati zahtev</button></td>
-        <td *ngIf="k.status=='na cekanju'"><button (click)="odbij(k.korisnickoIme)">Odbij zahtev</button></td>
+        <td *ngIf="k.status=='na cekanju'"><button (click)="prihvatiRegistraciju(k.korisnickoIme)">Prihvati zahtev</button></td>
+        <td *ngIf="k.status=='na cekanju'"><button (click)="odbijRegistraciju(k.korisnickoIme)">Odbij zahtev</button></td>
         <td><button (click)="agencijaRadnici(k.korisnickoIme)" *ngIf="k.tip=='agencija' && k.status=='prihvacen'">Radnici agencije</button></td>
+    </tr>
+</table>
+
+<h3>Zahtevi za otkazivanjem</h3>
+<table *ngIf="otkazivanja.length > 0">
+    <tr>
+        <th>Razlog otkazivanja</th>
+        <th colspan="2">Akcija</th>
+    </tr>
+    <tr *ngFor="let o of otkazivanja">
+        <td>{{o.razlog}}</td>
+        <td><button (click)="prihvatiOtkazivanje(o.idPosao)">Prihvati</button></td>
+        <td><button (click)="odbijOtkazivanje(o.idPosao)">Odbij</button></td>
     </tr>
 </table>
 

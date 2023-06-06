@@ -11,7 +11,7 @@
         <td><input type="text" [(ngModel)]="o.adresa" [disabled]="!rezimIzmene"></td>
         <td><input type="number" [(ngModel)]="o.brProstorija" [disabled]="!rezimIzmene"></td>
         <td><input type="number" [(ngModel)]="o.kvadratura" [disabled]="!rezimIzmene"></td>
-        <td><button (click)="prikazSkice()" *ngIf="!rezimIzmene">Pogledaj skicu</button></td>
+        <td><button (click)="prikazSkice(o)" *ngIf="!rezimIzmene">Pogledaj skicu</button></td>
         <td><button (click)="obrisiObjekat(o)" *ngIf="!rezimIzmene">Obrisi</button></td>
         <td><button (click)="izmeniObjekat(o)" *ngIf="rezimIzmene">Potvrdi izmene</button></td>
         <td><button (click)="izmeniSkicu(o)" *ngIf="rezimIzmene">Izmeni skicu</button></td>

@@ -20,7 +20,10 @@ export class ObjekatKlijentComponent implements OnInit {
       });
   }
 
-  prikazSkice() {}
+  prikazSkice(objekat: Objekat) {
+    sessionStorage.setItem('idSkica', objekat.idSkica);
+    this.ruter.navigate(['/klijent/skica']);
+  }
 
   obrisiObjekat(objekat: Objekat) {
     this.objekatServis.obrisiObjekat(objekat._id).subscribe((res) => {
