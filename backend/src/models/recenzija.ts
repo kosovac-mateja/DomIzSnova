@@ -1,11 +1,10 @@
-import express from 'express';
 import { ObjectId } from 'mongodb';
 import mongoose from 'mongoose';
 
-const schema = new mongoose.Schema();
+const Schema = mongoose.Schema;
 
-const recenzijaSchema = new mongoose.Schema({
-    _id: {
+const Recenzija = new Schema({
+    idPosao: {
         type: ObjectId,
     },
     klijent: {
@@ -22,4 +21,4 @@ const recenzijaSchema = new mongoose.Schema({
     },
 });
 
-export default mongoose.model('RecenzijaModel', recenzijaSchema, 'recenzije');
+export default mongoose.model('RecenzijaModel', Recenzija, 'recenzije');

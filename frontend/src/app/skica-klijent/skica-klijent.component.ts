@@ -36,6 +36,10 @@ export class SkicaKlijentComponent implements OnInit {
             visina: skica.dimenzije[i].visina,
             boja: skica.boje[i],
           });
+          this.vrata.push({
+            x: skica.koordinateVrata[i].x,
+            y: skica.koordinateVrata[i].y,
+          });
           if (skica.boje[i] != 'green') this.sveZavrseno = false;
         }
         this.skiciraj();
@@ -67,6 +71,11 @@ export class SkicaKlijentComponent implements OnInit {
         prostorija.visina - this.kontekst.lineWidth
       );
     });
+
+    this.vrata.forEach((vrata, indeks) => {
+      this.kontekst.fillStyle = 'brown';
+      this.kontekst.fillRect(vrata.x, vrata.y, 10, 20);
+    });
   }
 
   otkaziPosao() {
@@ -90,6 +99,7 @@ export class SkicaKlijentComponent implements OnInit {
 
   skica: Skica = new Skica();
   prostorije: any[] = [];
+  vrata: any[] = [];
   sveZavrseno: boolean = true;
   otkazan: boolean = false;
   idPosao: string = '';

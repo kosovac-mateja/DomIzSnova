@@ -41,6 +41,10 @@ export class SkicaAgencijaComponent implements OnInit {
                     visina: skica.dimenzije[i].visina,
                     boja: dovoljnoRadnika ? skica.boje[i] : 'yellow',
                   });
+                  this.vrata.push({
+                    x: skica.koordinateVrata[i].x,
+                    y: skica.koordinateVrata[i].y,
+                  });
                 }
                 this.skiciraj();
               });
@@ -94,6 +98,11 @@ export class SkicaAgencijaComponent implements OnInit {
         izabrana.visina - this.kontekst.lineWidth
       );
     }
+
+    this.vrata.forEach((vrata, indeks) => {
+      this.kontekst.fillStyle = 'brown';
+      this.kontekst.fillRect(vrata.x, vrata.y, 10, 20);
+    });
   }
 
   izaberiProstoriju(dogadjaj: MouseEvent) {
@@ -131,10 +140,23 @@ export class SkicaAgencijaComponent implements OnInit {
     this.prostorije[this.izabranaProstorija].boja =
       trenutnaBoja == 'white' ? 'red' : 'green';
     let noveBoje = [];
+
+    let zavrsenoProstorija = 0;
     this.prostorije.forEach((prostorija, indeks) => {
       noveBoje.push(prostorija.boja);
+      if (prostorija.boja == 'green') {
+        zavrsenoProstorija++;
+      }
     });
-    console.log(noveBoje);
+
+    if (zavrsenoProstorija == this.prostorije.length) {
+      this.radniciPosao.forEach((radnik) => {
+        this.radnikServis
+          .azurirajPosaoRadnika(radnik._id, null)
+          .subscribe((res) => {});
+      });
+    }
+
     this.skicaServis
       .promeniBoju(this.skica._id, noveBoje)
       .subscribe((skica: Skica) => {
@@ -149,6 +171,7 @@ export class SkicaAgencijaComponent implements OnInit {
 
   skica: Skica = new Skica();
   prostorije: any[] = [];
+  vrata: any[] = [];
   izabranaProstorija: number = null;
   pomerajX: number;
   pomerajY: number;

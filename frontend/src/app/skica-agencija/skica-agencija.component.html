@@ -33,6 +33,6 @@ style="border: 1px solid black;"
 (mousedown)="izaberiProstoriju($event)"></canvas>
 
 <div *ngIf="izabranaProstorija != null">
-    <button *ngIf="prostorije[izabranaProstorija].boja=='white'" (click)="napredak()">Opremi prostoriju</button>
-    <button *ngIf="prostorije[izabranaProstorija].boja=='red'" (click)="napredak()">Zavrsi posao</button>
+    <button *ngIf="prostorije[izabranaProstorija].boja=='white'" (click)="napredak()" [disabled]="radniciPosao.length<prostorije.length">Opremi prostoriju</button>
+    <button *ngIf="prostorije[izabranaProstorija].boja=='red'" (click)="napredak()" [disabled]="radniciPosao.length<prostorije.length">Zavrsi posao</button>
 </div>

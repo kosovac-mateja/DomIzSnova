@@ -11,11 +11,17 @@ export class SkicaService {
 
   url = 'http://localhost:4000';
 
-  ubaciSkicu(koord: Koordinata[], dim: Dimenzije[], boje: string[]) {
+  ubaciSkicu(
+    koord: Koordinata[],
+    dim: Dimenzije[],
+    boje: string[],
+    vrata: Koordinata[]
+  ) {
     return this.http.post(`${this.url}/skica/ubaciSkicu`, {
       koordinate: koord,
       dimenzije: dim,
       boje: boje,
+      koordinateVrata: vrata,
     });
   }
 

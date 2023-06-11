@@ -48,6 +48,7 @@ export class ObjekatDodavanjeComponent implements OnInit {
           this.kvadratura = jsonFormat.kvadratura;
           this.koordinate = jsonFormat.koordinate;
           this.dimenzije = jsonFormat.dimenzije;
+          this.koordinateVrata = jsonFormat.koordinateVrata;
           console.log(
             this.tip,
             this.adresa,
@@ -70,7 +71,7 @@ export class ObjekatDodavanjeComponent implements OnInit {
       boje.push('white');
     }
     this.skicaServis
-      .ubaciSkicu(this.koordinate, this.dimenzije, boje)
+      .ubaciSkicu(this.koordinate, this.dimenzije, boje, this.koordinateVrata)
       .subscribe((skica: Skica) => {
         let id = skica._id;
         this.objekatServis
@@ -97,4 +98,5 @@ export class ObjekatDodavanjeComponent implements OnInit {
 
   koordinate: Koordinata[] = [];
   dimenzije: Dimenzije[] = [];
+  koordinateVrata: Koordinata[] = [];
 }

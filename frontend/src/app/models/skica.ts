@@ -6,4 +6,5 @@ export class Skica {
   koordinate: Koordinata[];
   dimenzije: Dimenzije[];
   boje: string[];
+  koordinateVrata: Koordinata[];
 }

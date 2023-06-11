@@ -1,5 +1,5 @@
 export class Recenzija {
-  _id: string;
+  idPosao: string;
   klijent: string;
   agencija: string;
   ocena: number;

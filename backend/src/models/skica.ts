@@ -16,6 +16,9 @@ let Skica = new Schema({
     boje: {
         type: Array,
     },
+    koordinateVrata: {
+        type: Array,
+    },
 });
 
 export default mongoose.model('SkicaModel', Skica, 'skice');

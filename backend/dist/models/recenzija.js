@@ -5,9 +5,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongodb_1 = require("mongodb");
 const mongoose_1 = __importDefault(require("mongoose"));
-const schema = new mongoose_1.default.Schema();
-const recenzijaSchema = new mongoose_1.default.Schema({
-    _id: {
+const Schema = mongoose_1.default.Schema;
+const Recenzija = new Schema({
+    idPosao: {
         type: mongodb_1.ObjectId,
     },
     klijent: {
@@ -23,5 +23,5 @@ const recenzijaSchema = new mongoose_1.default.Schema({
         type: String,
     },
 });
-exports.default = mongoose_1.default.model('RecenzijaModel', recenzijaSchema, 'recenzije');
+exports.default = mongoose_1.default.model('RecenzijaModel', Recenzija, 'recenzije');
 //# sourceMappingURL=recenzija.js.map
