@@ -4,6 +4,7 @@ import { AgencijaService } from '../services/agencija.service';
 import { Klijent } from '../models/klijent';
 import { Agencija } from '../models/agencija';
 import { Router } from '@angular/router';
+import { ProveraService } from '../services/provera.service';
 
 @Component({
   selector: 'app-azuriranje-admin',
@@ -14,6 +15,7 @@ export class AzuriranjeAdminComponent implements OnInit {
   constructor(
     private klijentServis: KlijentService,
     private agencijaService: AgencijaService,
+    private proveraServis: ProveraService,
     private ruter: Router
   ) {}
 
@@ -56,8 +58,24 @@ export class AzuriranjeAdminComponent implements OnInit {
     };
   }
 
-  azuriraj() {
+  async azuriraj() {
     if (this.tip == 'klijent') {
+      const klijent = {
+        korisnickoIme: this.korisnickoIme,
+        lozinka: '',
+        telefon: this.telefon,
+        mejl: this.mejl,
+        slika: this.slika,
+        ime: this.ime,
+        prezime: this.prezime,
+      };
+
+      let provera = await this.proveraServis.proveraKlijent(klijent, true);
+      if (provera != 'ok') {
+        this.greska = provera;
+        return;
+      }
+
       this.klijentServis
         .azurirajKlijenta(
           this.korisnickoIme,
@@ -77,6 +95,25 @@ export class AzuriranjeAdminComponent implements OnInit {
           }
         });
     } else {
+      const agencija = {
+        korisnickoIme: this.korisnickoIme,
+        lozinka: '',
+        telefon: this.telefon,
+        mejl: this.mejl,
+        slika: this.slika,
+        naziv: this.naziv,
+        ulica: this.ulica,
+        grad: this.grad,
+        drzava: this.drzava,
+        maticniBroj: this.maticniBroj,
+        opis: this.opis,
+      };
+
+      let provera = await this.proveraServis.proveraAgencija(agencija, true);
+      if (provera != 'ok') {
+        this.greska = provera;
+        return;
+      }
       this.agencijaService
         .azurirajAgenciju(
           this.korisnickoIme,
@@ -121,4 +158,6 @@ export class AzuriranjeAdminComponent implements OnInit {
   drzava: string = '';
   maticniBroj: string = '';
   opis: string = '';
+
+  greska: string = '';
 }

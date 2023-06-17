@@ -79,11 +79,11 @@ export class MejlController {
     };
 
     ubaciPrivremenuLozinku = (req: express.Request, res: express.Response) => {
-        const currentDate = new Date();
+        const datum = new Date();
         let privremenaLozinka = new PrivremenaLozinkaModel({
             korisnickoIme: req.body.korisnickoIme,
             lozinka: req.body.lozinka,
-            vremeIsteka: new Date(currentDate.getTime() + 10 * 60000), //10 minuta
+            vremeIsteka: new Date(datum.getTime() + 10 * 60000), //10 minuta
         });
 
         privremenaLozinka.save((greska, privremenaLozinka) => {
@@ -95,18 +95,18 @@ export class MejlController {
         });
     };
 
-    dohvatiPrivremenuLozinku = (
+    dohvatiPrivremeneLozinke = (
         req: express.Request,
         res: express.Response
     ) => {
         let korisnickoIme = req.body.korisnickoIme;
-        PrivremenaLozinkaModel.findOne(
+        PrivremenaLozinkaModel.find(
             { korisnickoIme: korisnickoIme },
-            (greska, privremenaLozinka) => {
+            (greska, privremeneLozinke) => {
                 if (greska) {
                     console.log(greska);
                 } else {
-                    res.json(privremenaLozinka);
+                    res.json(privremeneLozinke);
                 }
             }
         );

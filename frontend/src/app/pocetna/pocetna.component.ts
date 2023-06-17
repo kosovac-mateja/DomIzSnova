@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AgencijaService } from '../services/agencija.service';
 import { Agencija } from '../models/agencija';
+import { KorisnikService } from '../services/korisnik.service';
+import { Korisnik } from '../models/korisnik';
 
 @Component({
   selector: 'app-pocetna',
@@ -11,13 +13,29 @@ import { Agencija } from '../models/agencija';
 export class PocetnaComponent implements OnInit {
   constructor(
     private agencijaServis: AgencijaService,
+    private korisnikServis: KorisnikService,
     private router: Router
   ) {}
 
+  //dohvata sve agencije koje su prihvacene
   ngOnInit(): void {
-    this.agencijaServis.dohvatiAgencije().subscribe((agencije: Agencija[]) => {
-      this.agencije = agencije;
-    });
+    this.korisnikServis
+      .dohvatiKorisnike()
+      .subscribe((korisnici: Korisnik[]) => {
+        this.agencijaServis
+          .dohvatiAgencije()
+          .subscribe((agencije: Agencija[]) => {
+            agencije.forEach((agencija) => {
+              if (
+                korisnici.find(
+                  (korisnik) => korisnik.korisnickoIme == agencija.korisnickoIme
+                ).status == 'prihvacen'
+              ) {
+                this.agencije.push(agencija);
+              }
+            });
+          });
+      });
   }
 
   prijava() {

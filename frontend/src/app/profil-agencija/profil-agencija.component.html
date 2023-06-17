@@ -1,3 +1,8 @@
+<a [routerLink]="['/agencija/profil']">Profil</a>
+<a [routerLink]="['/agencija/radnici']">Radnici</a>
+<a [routerLink]="['/agencija/poslovi']">Poslovi</a>
+<button (click)="odjava()">Odjavi se</button>
+<hr>
 <table>
     <tr>
         <td>Korisnicko ime</td>
@@ -9,7 +14,7 @@
     </tr>
     <tr>
         <td>Opis</td>
-        <td><input type="text" [(ngModel)]="opis"></td>
+        <td><textarea cols="30" rows="10" [(ngModel)]="opis"></textarea></td>
     </tr>
     <tr>
         <td>Ulica</td>
@@ -40,3 +45,5 @@
         <td><button (click)="odustani()">Odustani</button></td>
     </tr>
 </table>
+{{greska}}
+```

@@ -3,6 +3,7 @@ import { Skica } from '../models/skica';
 import { SkicaService } from '../services/skica.service';
 import { PosaoService } from '../services/posao.service';
 import { Router } from '@angular/router';
+import { Posao } from '../models/posao';
 
 @Component({
   selector: 'app-skica-klijent',
@@ -19,15 +20,27 @@ export class SkicaKlijentComponent implements OnInit {
   ngOnInit(): void {
     this.kontekst = this.platno.nativeElement.getContext('2d');
     this.idPosao = sessionStorage.getItem('idPosao');
-    this.posaoServis.zahtevPostoji(this.idPosao).subscribe((res) => {
-      if (res['poruka'] == 'postoji') {
-        this.otkazan = true;
-      }
-    });
+    if (this.idPosao != '') {
+      this.posaoServis.zahtevPostoji(this.idPosao).subscribe((res) => {
+        if (res['poruka'] == 'postoji') {
+          this.otkazan = true;
+        }
+      });
+    }
+
     this.skicaServis
       .dohvatiSkicu(sessionStorage.getItem('idSkica'))
       .subscribe((skica: Skica) => {
         this.skica = skica;
+        this.posaoServis
+          .dohvatiPosloveKlijenta(sessionStorage.getItem('korisnik'))
+          .subscribe((poslovi: Posao[]) => {
+            poslovi.forEach((posao) => {
+              if (this.idPosao == posao._id) {
+                this.status = posao.status;
+              }
+            });
+          });
         for (let i = 0; i < skica.koordinate.length; i++) {
           this.prostorije.push({
             x: skica.koordinate[i].x,
@@ -81,6 +94,7 @@ export class SkicaKlijentComponent implements OnInit {
   otkaziPosao() {
     this.posaoServis.otkaziPosao(this.idPosao, this.razlog).subscribe((res) => {
       alert('Zahtev za otkazivanja posla je poslat.');
+      this.ruter.navigate(['/klijent/poslovi']);
     });
   }
 
@@ -91,6 +105,11 @@ export class SkicaKlijentComponent implements OnInit {
         alert('Posao je uspesno zavrsen.');
         this.ruter.navigate(['/klijent/poslovi']);
       });
+  }
+
+  odjava() {
+    sessionStorage.clear();
+    this.ruter.navigate(['/']);
   }
 
   @ViewChild('canvas', { static: true })
@@ -104,4 +123,6 @@ export class SkicaKlijentComponent implements OnInit {
   otkazan: boolean = false;
   idPosao: string = '';
   razlog = '';
+
+  status: string = '';
 }

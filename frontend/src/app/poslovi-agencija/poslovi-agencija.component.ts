@@ -29,6 +29,9 @@ export class PosloviAgencijaComponent implements OnInit {
       .subscribe((poslovi: Posao[]) => {
         this.poslovi = poslovi;
         poslovi.forEach((posao) => {
+          if (posao.status == 'na cekanju' || posao.status == 'ponuda')
+            this.brojZahteva++;
+          if (posao.status == 'aktivan') this.brojAktivnih++;
           this.objekatServis
             .dohvatiObjekat(posao.idObjekat)
             .subscribe((objekat: Objekat) => {
@@ -66,6 +69,10 @@ export class PosloviAgencijaComponent implements OnInit {
   }
 
   posaljiPonudu(id: string) {
+    if (this.ponuda <= 0) {
+      this.greska = 'Ponuda mora biti veca od 0 dinara';
+      return;
+    }
     this.posaoServis
       .azurirajPodatak(id, 'ponuda', this.ponuda)
       .subscribe((odgovor) => {
@@ -86,11 +93,21 @@ export class PosloviAgencijaComponent implements OnInit {
     this.ruter.navigate(['/agencija/skica']);
   }
 
+  odjava() {
+    sessionStorage.clear();
+    this.ruter.navigate(['/']);
+  }
+
   agencija: string = '';
   poslovi: Posao[] = [];
   klijenti: Klijent[] = [];
   objekti: Objekat[] = [];
 
+  brojZahteva: number = 0;
+  brojAktivnih: number = 0;
+
   prihvacenaPonuda: boolean = false;
   ponuda: number = 0;
+
+  greska: string = '';
 }

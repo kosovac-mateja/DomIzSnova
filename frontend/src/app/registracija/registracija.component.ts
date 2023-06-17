@@ -152,7 +152,7 @@ export class RegistracijaComponent implements OnInit {
     }
   }
 
-  tip: string = '';
+  tip: string = 'klijent';
   korisnickoIme: string = '';
   lozinka: string = '';
   potvrdaLozinke: string = '';

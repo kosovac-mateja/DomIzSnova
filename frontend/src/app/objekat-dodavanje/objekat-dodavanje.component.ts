@@ -5,6 +5,7 @@ import { Dimenzije } from '../models/dimenzije';
 import { SkicaService } from '../services/skica.service';
 import { ObjekatService } from '../services/objekat.service';
 import { Skica } from '../models/skica';
+import { ProveraService } from '../services/provera.service';
 
 @Component({
   selector: 'app-objekat-dodavanje',
@@ -15,12 +16,22 @@ export class ObjekatDodavanjeComponent implements OnInit {
   constructor(
     private objekatServis: ObjekatService,
     private skicaServis: SkicaService,
+    private proveraServis: ProveraService,
     private ruter: Router
   ) {}
 
   ngOnInit(): void {}
 
-  dalje() {
+  async dalje() {
+    let proveraAdresa = await this.proveraServis.proveraUlica(this.adresa);
+    if (proveraAdresa != 'ok') {
+      this.greska = proveraAdresa;
+      return;
+    }
+    if (this.kvadratura <= 0) {
+      this.greska = 'Broj kvadrata mora biti pozitivan broj';
+      return;
+    }
     sessionStorage.setItem('dodavanjeObjektaTip', this.tip);
     sessionStorage.setItem('dodavanjeObjektaAdresa', this.adresa);
     sessionStorage.setItem(
@@ -49,14 +60,6 @@ export class ObjekatDodavanjeComponent implements OnInit {
           this.koordinate = jsonFormat.koordinate;
           this.dimenzije = jsonFormat.dimenzije;
           this.koordinateVrata = jsonFormat.koordinateVrata;
-          console.log(
-            this.tip,
-            this.adresa,
-            this.brProstorija,
-            this.kvadratura,
-            this.koordinate,
-            this.dimenzije
-          );
         };
         citac.readAsText(fajl.target.files[0]);
       } else {
@@ -65,7 +68,20 @@ export class ObjekatDodavanjeComponent implements OnInit {
     }
   }
 
-  dodajObjekat() {
+  async dodajObjekat() {
+    let provera = await this.proveraServis.proveraObjekatJSON(
+      this.tip,
+      this.adresa,
+      this.brProstorija,
+      this.kvadratura,
+      this.koordinate,
+      this.dimenzije,
+      this.koordinateVrata
+    );
+    if (provera != 'ok') {
+      this.greska = provera;
+      return;
+    }
     let boje = [];
     for (let i = 0; i < this.koordinate.length; i++) {
       boje.push('white');
@@ -88,6 +104,11 @@ export class ObjekatDodavanjeComponent implements OnInit {
             this.ruter.navigate(['/klijent/objekat']);
           });
       });
+  }
+
+  odjava() {
+    sessionStorage.clear();
+    this.ruter.navigate(['/']);
   }
 
   tip: string = 'stan';

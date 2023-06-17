@@ -26,10 +26,15 @@ export class PosloviKlijentComponent implements OnInit {
       .dohvatiPosloveKlijenta(klijent)
       .subscribe((poslovi: Posao[]) => {
         this.poslovi = poslovi;
+        poslovi.forEach((p) => {
+          if (p.status == 'zavrsen') {
+            this.brojZavrsenihPoslova++;
+          }
+        });
       });
     this.objekatServis
       .dohvatiObjekteVlasnika(klijent)
-      .subscribe((objekti: Object[]) => {
+      .subscribe((objekti: Objekat[]) => {
         this.objekti = objekti;
       });
     this.recenzijaServis
@@ -128,6 +133,11 @@ export class PosloviKlijentComponent implements OnInit {
     });
   }
 
+  odjava() {
+    sessionStorage.clear();
+    this.ruter.navigate(['/']);
+  }
+
   poslovi: Posao[] = [];
   objekti: Object[] = [];
   recenzije: Recenzija[] = [];
@@ -135,6 +145,8 @@ export class PosloviKlijentComponent implements OnInit {
   idPosao: string = '';
   komentar: string = '';
   ocena: number = 3;
+
+  brojZavrsenihPoslova: number = 0;
 
   rezimIzmene: boolean = false;
 }

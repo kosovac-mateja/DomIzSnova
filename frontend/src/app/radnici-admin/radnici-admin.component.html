@@ -1,15 +1,21 @@
+<a [routerLink]="[ '/admin' ]">Pocetna stranica</a>
+<button (click)="odjava()">Odjava</button>
+<hr>
 Naziv agencije: {{agencija.naziv}}
+<br>
 Kapacitet radnika: {{agencija.kapacitetRadnika}}
 Trenutni broj radnika: {{radnici.length}}
-
+<hr>
 <div *ngIf="agencija.zahtev != 0">
     <h3>Zahtev za prosirenjem broja radnih mesta</h3>
     Zahtevano je jos {{agencija.zahtev}} broja radnih mesta
     <button (click)="odobriZahtev()">Odobri</button>
     <button (click)="odbijZahtev()">Odbij</button>
+    <hr>
 </div>
 
-<table>
+<h2>Radnici</h2>
+<table *ngIf="radnici.length>0">
     <tr>
         <th>Ime</th>
         <th>Prezime</th>
@@ -28,11 +34,13 @@ Trenutni broj radnika: {{radnici.length}}
         <td><button (click)="izmeniRadnika(r)" *ngIf="rezimIzmene">Potvrdi izmene</button></td>
     </tr>
 </table>
+<p *ngIf="radnici.length==0">Nema radnika</p>
 
 <input type="checkbox" id="cbox1" [(ngModel)]="rezimIzmene">
 <label for="cbox1">Rezim izmene</label>
 
 <div *ngIf="agencija.kapacitetRadnika > radnici.length">
+    <hr>
     <h2>Dodaj radnika</h2>
     <table>
         <tr>
@@ -60,3 +68,4 @@ Trenutni broj radnika: {{radnici.length}}
         </tr>
     </table>
 </div>
+{{greska}}

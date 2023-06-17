@@ -1,10 +1,21 @@
-<!-- {{agencija.naziv}} -->
+<ng-container *ngIf="registrovan==true">
+    <a [routerLink]="['/klijent/profil']">Profil</a> 
+    <a [routerLink]="['/klijent/objekat']">Objekat</a> 
+    <a [routerLink]="['/klijent/agencije']">Agencije</a> 
+    <a [routerLink]="['/klijent/poslovi']">Poslovi</a> 
+</ng-container>
+
 <div *ngIf="agencija">
     {{agencija.naziv}}
 </div>
 
 <h2>Recenzije klijenata</h2>
-<table>
+<table *ngIf="recenzije.length>0">
+    <tr>
+        <th>Korisnicko ime</th>
+        <th>Ocena</th>
+        <th>Komentar</th>
+    </tr>
     <tr *ngFor="let r of recenzije">
         <td *ngIf="registrovan==true">{{r.klijent}}</td>
         <td *ngIf="registrovan!=true">Registrovan korisnik</td>
@@ -12,6 +23,7 @@
         <td>{{r.komentar}}</td>
     </tr>
 </table>
+<p *ngIf="recenzije.length==0">Agencija nema recenzije</p>
 <div  *ngIf="registrovan==true" >
     <h2>Saradnja sa agencijom</h2>
     <select [(ngModel)]="objekat">
@@ -20,3 +32,4 @@
     <input type="date" [(ngModel)]="vremenskiPeriod">
     <button (click)="zatraziSaradnju()">Zatrazi saradnju</button>
 </div>
+{{greska}}

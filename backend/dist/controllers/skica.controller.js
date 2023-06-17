@@ -39,6 +39,22 @@ class SkicaController {
                     res.json(skica);
             });
         };
+        this.izmeniSkicu = (req, res) => {
+            let id = req.body.id;
+            let koordinate = req.body.koordinate;
+            let dimenzije = req.body.dimenzije;
+            let koordinateVrata = req.body.koordinateVrata;
+            skica_1.default.updateOne({ _id: id }, {
+                koordinate: koordinate,
+                dimenzije: dimenzije,
+                koordinateVrata: koordinateVrata,
+            }, (err, skica) => {
+                if (err)
+                    console.log(err);
+                else
+                    res.json(skica);
+            });
+        };
     }
 }
 exports.SkicaController = SkicaController;

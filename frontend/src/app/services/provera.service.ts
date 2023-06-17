@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { KorisnikService } from './korisnik.service';
+import { Koordinata } from '../models/koordinata';
+import { Dimenzije } from '../models/dimenzije';
 
 @Injectable({
   providedIn: 'root',
@@ -149,16 +151,21 @@ export class ProveraService {
     return 'ok';
   }
 
-  async proveraKlijent(klijent) {
-    if (this.proveraKorisnickoIme(klijent.korisnickoIme) != 'ok') {
+  async proveraKlijent(klijent, azuriranje: boolean = false) {
+    if (
+      !azuriranje &&
+      this.proveraKorisnickoIme(klijent.korisnickoIme) != 'ok'
+    ) {
       return this.proveraKorisnickoIme(klijent.korisnickoIme);
     }
     if (
-      (await this.korisnikServis.korisnikPostoji(klijent.korisnickoIme)) == true
+      (!azuriranje &&
+        (await this.korisnikServis.korisnikPostoji(klijent.korisnickoIme))) ==
+      true
     ) {
       return 'Korisnicko ime vec postoji';
     }
-    if (this.proveraLozinka(klijent.lozinka) != 'ok') {
+    if (!azuriranje && this.proveraLozinka(klijent.lozinka) != 'ok') {
       return this.proveraLozinka(klijent.lozinka);
     }
     if (this.proveraTelefon(klijent.telefon) != 'ok') {
@@ -177,17 +184,21 @@ export class ProveraService {
     return 'ok';
   }
 
-  async proveraAgencija(agencija) {
-    if (this.proveraKorisnickoIme(agencija.korisnickoIme) != 'ok') {
+  async proveraAgencija(agencija, azuriranje: boolean = false) {
+    if (
+      !azuriranje &&
+      this.proveraKorisnickoIme(agencija.korisnickoIme) != 'ok'
+    ) {
       return this.proveraKorisnickoIme(agencija.korisnickoIme);
     }
     if (
-      (await this.korisnikServis.korisnikPostoji(agencija.korisnickoIme)) ==
+      (!azuriranje &&
+        (await this.korisnikServis.korisnikPostoji(agencija.korisnickoIme))) ==
       true
     ) {
       return 'Korisnicko ime vec postoji';
     }
-    if (this.proveraLozinka(agencija.lozinka) != 'ok') {
+    if (!azuriranje && this.proveraLozinka(agencija.lozinka) != 'ok') {
       return this.proveraLozinka(agencija.lozinka);
     }
     if (this.proveraTelefon(agencija.telefon) != 'ok') {
@@ -210,6 +221,78 @@ export class ProveraService {
     }
     if (this.proveraMaticniBroj(agencija.maticniBroj) != 'ok') {
       return this.proveraMaticniBroj(agencija.maticniBroj);
+    }
+
+    return 'ok';
+  }
+
+  async proveraRadnik(radnik) {
+    if (this.proveraIme(radnik.ime) != 'ok') {
+      return this.proveraIme(radnik.ime);
+    }
+    if (this.proveraPrezime(radnik.prezime) != 'ok') {
+      return this.proveraPrezime(radnik.prezime);
+    }
+    if (this.proveraTelefon(radnik.telefon) != 'ok') {
+      return this.proveraTelefon(radnik.telefon);
+    }
+    if (this.proveraMejl(radnik.mejl) != 'ok') {
+      return this.proveraMejl(radnik.mejl);
+    }
+
+    return 'ok';
+  }
+
+  async proveraObjekatJSON(
+    tip: string,
+    adresa: string,
+    brProstorija: number,
+    kvadratura: number,
+    koordinate: Koordinata[],
+    dimenzije: Dimenzije[],
+    koordinateVrata: Koordinata[]
+  ) {
+    if (tip == null || tip == undefined || tip == '') {
+      return 'Tip objekta nije unet';
+    }
+    if (adresa == null || adresa == undefined || adresa == '') {
+      return 'Adresa objekta nije uneta';
+    }
+    if (brProstorija == null || brProstorija == undefined || brProstorija < 1) {
+      return 'Broj prostorija nije unet';
+    }
+    if (kvadratura == null || kvadratura == undefined || kvadratura < 1) {
+      return 'Kvadratura nije uneta';
+    }
+    if (
+      koordinate == null ||
+      koordinate == undefined ||
+      koordinate.length == 0
+    ) {
+      return 'Koordinate nisu unete';
+    }
+    if (dimenzije == null || dimenzije == undefined || dimenzije.length == 0) {
+      return 'Dimenzije nisu unete';
+    }
+    if (
+      koordinateVrata == null ||
+      koordinateVrata == undefined ||
+      koordinateVrata.length == 0
+    ) {
+      return 'Koordinate vrata nisu unete';
+    }
+    if (tip != 'stan' && tip != 'kuca') {
+      return 'Tip objekta moze biti samo stan ili kuca';
+    }
+    if (brProstorija < 1 || brProstorija > 3) {
+      return 'Broj prostorija moze biti 1, 2 ili 3';
+    }
+    let proveraAdrese = await this.proveraUlica(adresa);
+    if (proveraAdrese != 'ok') {
+      return proveraAdrese;
+    }
+    if (kvadratura < 0) {
+      return 'Kvadratura ne moze biti negativna';
     }
 
     return 'ok';

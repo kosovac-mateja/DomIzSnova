@@ -1,27 +1,39 @@
-<table>
-    <tr>
-        <th>Tip</th>
-        <th>Adresa</th>
-        <th>Broj prostorija</th>
-        <th>Kvadratura</th>
-        <th colspan="2"></th>
-    </tr>
-    <tr *ngFor="let o of objekti">
-        <td><input type="text" [(ngModel)]="o.tip" [disabled]="!rezimIzmene"></td>
-        <td><input type="text" [(ngModel)]="o.adresa" [disabled]="!rezimIzmene"></td>
-        <td><input type="number" [(ngModel)]="o.brProstorija" [disabled]="!rezimIzmene"></td>
-        <td><input type="number" [(ngModel)]="o.kvadratura" [disabled]="!rezimIzmene"></td>
-        <td><button (click)="prikazSkice(o)" *ngIf="!rezimIzmene">Pogledaj skicu</button></td>
-        <td><button (click)="obrisiObjekat(o)" *ngIf="!rezimIzmene">Obrisi</button></td>
-        <td><button (click)="izmeniObjekat(o)" *ngIf="rezimIzmene">Potvrdi izmene</button></td>
-        <td><button (click)="izmeniSkicu(o)" *ngIf="rezimIzmene">Izmeni skicu</button></td>
-    </tr>
-</table>
+<a [routerLink]="['/klijent/profil']">Profil</a> 
+<a [routerLink]="['/klijent/objekat']">Objekat</a> 
+<a [routerLink]="['/klijent/agencije']">Agencije</a> 
+<a [routerLink]="['/klijent/poslovi']">Poslovi</a> 
+<button (click)="odjava()">Odjavi se</button>
 
-<input type="checkbox" id="cbox1" [(ngModel)]="rezimIzmene">
-<label for="cbox1">Rezim izmene</label>
+<h3>Moji objekti</h3>
+<ng-container *ngIf="objekti.length>0">
+    <table>
+        <tr>
+            <th>Tip</th>
+            <th>Adresa</th>
+            <th>Broj prostorija</th>
+            <th>Kvadratura</th>
+            <th colspan="2"></th>
+        </tr>
+        <tr *ngFor="let o of objekti">
+            <td><input type="text" [(ngModel)]="o.tip" [disabled]="!rezimIzmene"></td>
+            <td><input type="text" [(ngModel)]="o.adresa" [disabled]="!rezimIzmene"></td>
+            <td><input type="number" [(ngModel)]="o.brProstorija" [disabled]="!rezimIzmene"></td>
+            <td><input type="number" [(ngModel)]="o.kvadratura" [disabled]="!rezimIzmene"></td>
+            <td><button (click)="prikazSkice(o)" *ngIf="!rezimIzmene">Pogledaj skicu</button></td>
+            <td><button (click)="obrisiObjekat(o)" *ngIf="!rezimIzmene">Obrisi</button></td>
+            <td><button (click)="izmeniObjekat(o)" *ngIf="rezimIzmene">Potvrdi izmene</button></td>
+            <td><button (click)="izmeniSkicu(o)" *ngIf="rezimIzmene">Izmeni skicu</button></td>
+        </tr>
+    </table>
+    
+    <input type="checkbox" id="cbox1" [(ngModel)]="rezimIzmene">
+    <label for="cbox1">Rezim izmene</label>
+</ng-container>
+
+<p *ngIf="objekti.length==0">Trenutno nemate objekata</p>
 
 <button (click)="dodajObjekat()">Dodaj novi objekat</button>
+{{greska}}
 
 
 

@@ -3,6 +3,8 @@ import { RadnikService } from '../services/radnik.service';
 import { AgencijaService } from '../services/agencija.service';
 import { Agencija } from '../models/agencija';
 import { Radnik } from '../models/radnik';
+import { ProveraService } from '../services/provera.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-radnici-admin',
@@ -12,7 +14,9 @@ import { Radnik } from '../models/radnik';
 export class RadniciAdminComponent implements OnInit {
   constructor(
     private radnikServis: RadnikService,
-    private agencijaServis: AgencijaService
+    private agencijaServis: AgencijaService,
+    private proveraServis: ProveraService,
+    private ruter: Router
   ) {}
 
   ngOnInit(): void {
@@ -80,7 +84,19 @@ export class RadniciAdminComponent implements OnInit {
     this.rezimIzmene = false;
   }
 
-  dodajRadnika() {
+  async dodajRadnika() {
+    const radnik = {
+      telefon: this.telefon,
+      mejl: this.mejl,
+      ime: this.ime,
+      prezime: this.prezime,
+    };
+
+    let provera = await this.proveraServis.proveraRadnik(radnik);
+    if (provera != 'ok') {
+      this.greska = provera;
+      return;
+    }
     this.radnikServis
       .dodajRadnika(
         this.ime,
@@ -104,6 +120,12 @@ export class RadniciAdminComponent implements OnInit {
     this.mejl = '';
     this.telefon = '';
     this.specijalizacija = '';
+    this.greska = '';
+  }
+
+  odjava() {
+    sessionStorage.clear();
+    this.ruter.navigate(['/']);
   }
 
   radnici: Radnik[] = [];
@@ -116,4 +138,6 @@ export class RadniciAdminComponent implements OnInit {
   mejl: string = '';
   telefon: string = '';
   specijalizacija: string = '';
+
+  greska: string = '';
 }

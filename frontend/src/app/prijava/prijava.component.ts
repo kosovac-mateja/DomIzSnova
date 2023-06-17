@@ -25,7 +25,7 @@ export class PrijavaComponent implements OnInit {
       return;
     }
 
-    this.privLozinka = await this.mejlServis.dohvatiPrivremenuLozinku(
+    this.privLozinke = await this.mejlServis.dohvatiPrivremeneLozinke(
       this.korisnickoIme
     );
 
@@ -45,9 +45,13 @@ export class PrijavaComponent implements OnInit {
 
         if (this.korisnik.lozinka != this.lozinka) {
           if (
-            this.privLozinka == undefined ||
-            this.privLozinka.lozinka != this.lozinka ||
-            new Date(this.privLozinka.vremeIsteka) < new Date()
+            this.privLozinke == null ||
+            this.privLozinke.find((pl) => pl.lozinka == this.lozinka) == null ||
+            new Date(
+              this.privLozinke.find(
+                (pl) => pl.lozinka == this.lozinka
+              ).vremeIsteka
+            ) < new Date()
           ) {
             this.greska = 'Pogresna lozinka';
             return;
@@ -68,7 +72,7 @@ export class PrijavaComponent implements OnInit {
   lozinka: string = '';
   korisnik: Korisnik;
 
-  privLozinka: PrivremenaLozinka;
+  privLozinke: PrivremenaLozinka[] = [];
 
   greska: string = '';
 }

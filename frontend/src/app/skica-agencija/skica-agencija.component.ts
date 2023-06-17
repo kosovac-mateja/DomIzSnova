@@ -3,6 +3,7 @@ import { Skica } from '../models/skica';
 import { SkicaService } from '../services/skica.service';
 import { RadnikService } from '../services/radnik.service';
 import { Radnik } from '../models/radnik';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-skica-agencija',
@@ -12,7 +13,8 @@ import { Radnik } from '../models/radnik';
 export class SkicaAgencijaComponent implements OnInit {
   constructor(
     private skicaServis: SkicaService,
-    private radnikServis: RadnikService
+    private radnikServis: RadnikService,
+    private ruter: Router
   ) {}
 
   ngOnInit(): void {
@@ -163,6 +165,11 @@ export class SkicaAgencijaComponent implements OnInit {
         this.skica = skica;
         this.skiciraj();
       });
+  }
+
+  odjava() {
+    sessionStorage.clear();
+    this.ruter.navigate(['/']);
   }
 
   @ViewChild('canvas', { static: true })

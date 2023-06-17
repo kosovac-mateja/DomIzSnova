@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AgencijaService } from '../services/agencija.service';
 import { Router } from '@angular/router';
 import { Agencija } from '../models/agencija';
+import { ProveraService } from '../services/provera.service';
 
 @Component({
   selector: 'app-profil-agencija',
@@ -9,7 +10,11 @@ import { Agencija } from '../models/agencija';
   styleUrls: ['./profil-agencija.component.css'],
 })
 export class ProfilAgencijaComponent implements OnInit {
-  constructor(private agencijaServis: AgencijaService, private ruter: Router) {}
+  constructor(
+    private agencijaServis: AgencijaService,
+    private ruter: Router,
+    private proveraServis: ProveraService
+  ) {}
 
   ngOnInit(): void {
     this.korisnickoIme = sessionStorage.getItem('korisnik');
@@ -37,7 +42,27 @@ export class ProfilAgencijaComponent implements OnInit {
     };
   }
 
-  azuriraj() {
+  async azuriraj() {
+    const agencija = {
+      korisnickoIme: this.korisnickoIme,
+      lozinka: '',
+      telefon: this.telefon,
+      mejl: this.mejl,
+      slika: this.slika,
+      naziv: this.naziv,
+      ulica: this.ulica,
+      grad: this.grad,
+      drzava: this.drzava,
+      maticniBroj: this.maticniBroj,
+      opis: this.opis,
+    };
+
+    let provera = await this.proveraServis.proveraAgencija(agencija, true);
+    if (provera != 'ok') {
+      this.greska = provera;
+      return;
+    }
+
     this.agencijaServis
       .azurirajAgenciju(
         this.korisnickoIme,
@@ -65,6 +90,11 @@ export class ProfilAgencijaComponent implements OnInit {
     this.ruter.navigate(['agencija']);
   }
 
+  odjava() {
+    sessionStorage.clear();
+    this.ruter.navigate(['/']);
+  }
+
   korisnickoIme: string;
   naziv: string;
   opis: string;
@@ -75,4 +105,6 @@ export class ProfilAgencijaComponent implements OnInit {
   grad: string;
   drzava: string;
   maticniBroj: string;
+
+  greska: string = '';
 }

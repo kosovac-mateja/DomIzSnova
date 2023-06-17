@@ -1,6 +1,11 @@
+<a [routerLink]="['/agencija/profil']">Profil</a>
+<a [routerLink]="['/agencija/radnici']">Radnici</a>
+<a [routerLink]="['/agencija/poslovi']">Poslovi</a>
+<button (click)="odjava()">Odjavi se</button>
+<hr>
 Broj radnika: {{radnici.length}}
 Kapacitet radnika: {{agencija.kapacitetRadnika}}
-
+<hr>
 <table>
     <tr>
         <th>Ime</th>
@@ -23,7 +28,7 @@ Kapacitet radnika: {{agencija.kapacitetRadnika}}
 
 <input type="checkbox" id="cbox1" [(ngModel)]="rezimIzmene">
 <label for="cbox1">Rezim izmene</label>
-
+<hr>
 <div *ngIf="agencija.kapacitetRadnika > radnici.length">
     <h2>Dodaj radnika</h2>
     <table>
@@ -51,7 +56,9 @@ Kapacitet radnika: {{agencija.kapacitetRadnika}}
             <td colspan="2"><button (click)="dodajRadnika()">Dodaj radnika</button></td>
         </tr>
     </table>
+    <hr>
 </div>
+{{greska}}
 
 <div>
     <h2>Zahtevaj prosirenje kapaciteta radnika</h2>

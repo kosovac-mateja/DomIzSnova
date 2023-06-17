@@ -1,5 +1,7 @@
 <h3>Admin</h3>
-
+<button (click)="odjava()">Odjavi se</button>
+<hr>
+<h3>Korisnici</h3>
 <table>
     <tr>
         <th>Korisnicko ime</th>
@@ -17,7 +19,7 @@
         <td><button (click)="agencijaRadnici(k.korisnickoIme)" *ngIf="k.tip=='agencija' && k.status=='prihvacen'">Radnici agencije</button></td>
     </tr>
 </table>
-
+<hr>
 <h3>Zahtevi za otkazivanjem</h3>
 <table *ngIf="otkazivanja.length > 0">
     <tr>
@@ -30,4 +32,5 @@
         <td><button (click)="odbijOtkazivanje(o.idPosao)">Odbij</button></td>
     </tr>
 </table>
+<p *ngIf="otkazivanja.length == 0">Nema zahteva za otkazivanjem</p>
 

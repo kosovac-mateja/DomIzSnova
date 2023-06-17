@@ -3,6 +3,8 @@ import { RadnikService } from '../services/radnik.service';
 import { Radnik } from '../models/radnik';
 import { Agencija } from '../models/agencija';
 import { AgencijaService } from '../services/agencija.service';
+import { ProveraService } from '../services/provera.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-radnici-agencija',
@@ -12,7 +14,9 @@ import { AgencijaService } from '../services/agencija.service';
 export class RadniciAgencijaComponent implements OnInit {
   constructor(
     private radnikServis: RadnikService,
-    private agencijaServis: AgencijaService
+    private agencijaServis: AgencijaService,
+    private proveraServis: ProveraService,
+    private ruter: Router
   ) {}
 
   ngOnInit(): void {
@@ -52,7 +56,19 @@ export class RadniciAgencijaComponent implements OnInit {
     this.rezimIzmene = false;
   }
 
-  dodajRadnika() {
+  async dodajRadnika() {
+    const radnik = {
+      telefon: this.telefon,
+      mejl: this.mejl,
+      ime: this.ime,
+      prezime: this.prezime,
+    };
+
+    let provera = await this.proveraServis.proveraRadnik(radnik);
+    if (provera != 'ok') {
+      this.greska = provera;
+      return;
+    }
     this.radnikServis
       .dodajRadnika(
         this.ime,
@@ -76,6 +92,7 @@ export class RadniciAgencijaComponent implements OnInit {
     this.mejl = '';
     this.telefon = '';
     this.specijalizacija = '';
+    this.greska = '';
   }
 
   posaljiZahtev() {
@@ -93,6 +110,11 @@ export class RadniciAgencijaComponent implements OnInit {
       });
   }
 
+  odjava() {
+    sessionStorage.clear();
+    this.ruter.navigate(['/']);
+  }
+
   radnici: Radnik[] = [];
   agencija: Agencija = new Agencija();
 
@@ -105,4 +127,6 @@ export class RadniciAgencijaComponent implements OnInit {
   specijalizacija: string = '';
 
   prosirenje: number = 0;
+
+  greska: string = '';
 }

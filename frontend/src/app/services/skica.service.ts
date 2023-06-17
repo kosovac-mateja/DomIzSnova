@@ -35,4 +35,13 @@ export class SkicaService {
       boje: boje,
     });
   }
+
+  izmeniSkicu(id, koord, dim, vrata) {
+    return this.http.post(`${this.url}/skica/izmeniSkicu`, {
+      id: id,
+      koordinate: koord,
+      dimenzije: dim,
+      koordinateVrata: vrata,
+    });
+  }
 }

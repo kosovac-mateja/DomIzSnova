@@ -4,6 +4,7 @@ import { KlijentService } from '../services/klijent.service';
 import { Korisnik } from '../models/korisnik';
 import { Klijent } from '../models/klijent';
 import { Router } from '@angular/router';
+import { ProveraService } from '../services/provera.service';
 
 @Component({
   selector: 'app-profil-klijent',
@@ -11,7 +12,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./profil-klijent.component.css'],
 })
 export class ProfilKlijentComponent implements OnInit {
-  constructor(private klijentServis: KlijentService, private ruter: Router) {}
+  constructor(
+    private klijentServis: KlijentService,
+    private ruter: Router,
+    private proveraServis: ProveraService
+  ) {}
 
   ngOnInit(): void {
     this.korisnickoIme = sessionStorage.getItem('korisnik');
@@ -35,7 +40,23 @@ export class ProfilKlijentComponent implements OnInit {
     };
   }
 
-  azuriraj() {
+  async azuriraj() {
+    const klijent = {
+      korisnickoIme: this.korisnickoIme,
+      lozinka: '',
+      telefon: this.telefon,
+      mejl: this.mejl,
+      slika: this.slika,
+      ime: this.ime,
+      prezime: this.prezime,
+    };
+
+    let provera = await this.proveraServis.proveraKlijent(klijent, true);
+    if (provera != 'ok') {
+      this.greska = provera;
+      return;
+    }
+
     this.klijentServis
       .azurirajKlijenta(
         this.korisnickoIme,
@@ -59,10 +80,17 @@ export class ProfilKlijentComponent implements OnInit {
     this.ruter.navigate(['/klijent']);
   }
 
+  odjava() {
+    sessionStorage.clear();
+    this.ruter.navigate(['/']);
+  }
+
   korisnickoIme: string;
   ime: string;
   prezime: string;
   mejl: string;
   telefon: string;
   slika: string;
+
+  greska: string = '';
 }

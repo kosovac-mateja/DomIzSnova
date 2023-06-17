@@ -44,8 +44,6 @@ export class RecenzijaController {
         let ocena = req.body.ocena;
         let komentar = req.body.komentar;
 
-        console.log(idPosao, ocena, komentar);
-
         RecenzijaModel.updateOne(
             { idPosao: idPosao },
             {

@@ -1,11 +1,18 @@
+<a [routerLink]="['/klijent/profil']">Profil</a> 
+<a [routerLink]="['/klijent/objekat']">Objekat</a> 
+<a [routerLink]="['/klijent/agencije']">Agencije</a> 
+<a [routerLink]="['/klijent/poslovi']">Poslovi</a> 
+<button (click)="odjava()">Odjavi se</button>
+
 <h2>Moji poslovi</h2>
 
-<table>
+<table *ngIf="poslovi.length>0">
     <tr>
         <th>Agencija</th>
         <th>Objekat</th>
         <th>Status</th>
         <th>Vremenski period</th>
+        <th>Ponuda</th>
         <th>Akcija</th>
     </tr>
     <tr *ngFor="let p of poslovi">
@@ -19,60 +26,65 @@
         <td *ngIf="p.status=='aktivan'"><button (click)="skica(p)">Prikazi napredak</button></td>
     </tr>
 </table>
+<p *ngIf="poslovi.length==0">Trenutno nemate poslova</p>
 
-<h3>Ostavi recenziju</h3>
 
-<table>
-    <tr>
-        <td>Posao</td>
-        <td><select [(ngModel)]="idPosao">
-            <ng-container *ngFor="let p of poslovi">
-                <option *ngIf="p.status=='zavrsen' && !postojiRecenzija(p._id)" [value]="p._id">{{p.agencija}} - {{dohvatiObjekat(p.idObjekat)}}</option>
-            </ng-container>
-        </select></td>
-    </tr>
-    <tr>
-        <td>Komentar</td>
-        <td><textarea [(ngModel)]="komentar"></textarea></td>
-    </tr>
-    <tr>
-        <td>Ocena</td>
-        <td><select [(ngModel)]="ocena">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3" selected>3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-        </select></td>
-    </tr>
-    <tr>
-        <td colspan="2"><button (click)="ostaviRecenziju()">Ostavi recenziju</button></td>
-    </tr>
-</table>
+<ng-container *ngIf="brojZavrsenihPoslova>0">
+    <h3>Ostavi recenziju</h3>
+    <table>
+        <tr>
+            <td>Posao</td>
+            <td><select [(ngModel)]="idPosao">
+                <ng-container *ngFor="let p of poslovi">
+                    <option *ngIf="p.status=='zavrsen' && !postojiRecenzija(p._id)" [value]="p._id">{{p.agencija}} - {{dohvatiObjekat(p.idObjekat)}}</option>
+                </ng-container>
+            </select></td>
+        </tr>
+        <tr>
+            <td>Komentar</td>
+            <td><textarea [(ngModel)]="komentar"></textarea></td>
+        </tr>
+        <tr>
+            <td>Ocena</td>
+            <td><select [(ngModel)]="ocena">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3" selected>3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select></td>
+        </tr>
+        <tr>
+            <td colspan="2"><button (click)="ostaviRecenziju()">Ostavi recenziju</button></td>
+        </tr>
+    </table>
+</ng-container>
 
-<h3>Ostavljene recenzije</h3>
-<table>
-    <tr>
-        <th>Agencija</th>
-        <th>Komentar</th>
-        <th>Ocena</th>
-        <th>Akcija</th>
-    </tr>
-    <tr *ngFor="let r of recenzije">
-        <td><input type="text" [(ngModel)]="r.agencija" [disabled]="true"></td>
-        <td><input type="text" [(ngModel)]="r.komentar" [disabled]="!rezimIzmene"></td>
-        <td><select [(ngModel)]="r.ocena" [disabled]="!rezimIzmene">
-            <option value=1>1</option>
-            <option value=2>2</option>
-            <option value=3>3</option>
-            <option value=4>4</option>
-            <option value=5>5</option>
-        </select></td>
-        <td><button (click)="obrisiRecenziju(r)">Obrisi recenziju</button></td>
-        <td><button (click)="azurirajRecenziju(r)" [disabled]="!rezimIzmene">Izmeni</button></td>
-    </tr>
-</table>
-Rezim izmene
-<input type="checkbox" [(ngModel)]="rezimIzmene">
+<ng-container *ngIf="recenzije.length>0">
+    <h3>Ostavljene recenzije</h3>
+    <table>
+        <tr>
+            <th>Agencija</th>
+            <th>Komentar</th>
+            <th>Ocena</th>
+            <th>Akcija</th>
+        </tr>
+        <tr *ngFor="let r of recenzije">
+            <td><input type="text" [(ngModel)]="r.agencija" [disabled]="true"></td>
+            <td><input type="text" [(ngModel)]="r.komentar" [disabled]="!rezimIzmene"></td>
+            <td><select [(ngModel)]="r.ocena" [disabled]="!rezimIzmene">
+                <option value=1>1</option>
+                <option value=2>2</option>
+                <option value=3>3</option>
+                <option value=4>4</option>
+                <option value=5>5</option>
+            </select></td>
+            <td><button (click)="obrisiRecenziju(r)">Obrisi recenziju</button></td>
+            <td><button (click)="azurirajRecenziju(r)" [disabled]="!rezimIzmene">Izmeni</button></td>
+        </tr>
+    </table>
+    Rezim izmene
+    <input type="checkbox" [(ngModel)]="rezimIzmene">
+</ng-container>
 
 

@@ -39,17 +39,41 @@ export class SkicaKreiranjeComponent implements OnInit {
   }
 
   dodajProstorije() {
+    let sirineKopija = [];
+    let visineKopija = [];
+    if (
+      this.sirine.length != this.brProstorija ||
+      this.visine.length != this.brProstorija
+    ) {
+      this.greska = 'Niste uneli sve dimenzije';
+      return;
+    }
+    for (let i = 0; i < this.brProstorija; i++) {
+      if (
+        this.sirine[i] < 3 ||
+        this.sirine[i] > 10 ||
+        this.visine[i] < 3 ||
+        this.visine[i] > 10
+      ) {
+        this.greska = 'Dimenzije moraju biti izmedju 3 i 10 metara';
+        return;
+      } else {
+        sirineKopija[i] = this.sirine[i] * this.odnosVelicina;
+        visineKopija[i] = this.visine[i] * this.odnosVelicina;
+      }
+    }
     this.dodavanjeProstorija = true;
     this.prostorije = [];
     for (let i = 0; i < this.brProstorija; i++) {
       this.prostorije.push({
-        x: i == 0 ? 50 : 50 + this.sumaNiza(this.sirine, i),
-        y: i == 0 ? 50 : 50 + this.sumaNiza(this.visine, i),
-        sirina: this.sirine[i],
-        visina: this.visine[i],
+        x: i == 0 ? 50 : 50 + this.sumaNiza(sirineKopija, i),
+        y: i == 0 ? 50 : 50 + this.sumaNiza(visineKopija, i),
+        sirina: sirineKopija[i],
+        visina: visineKopija[i],
       });
     }
 
+    this.greska = '';
     this.skiciraj();
   }
   dodajVrata() {
@@ -345,6 +369,11 @@ export class SkicaKreiranjeComponent implements OnInit {
     return true;
   }
 
+  odjava() {
+    sessionStorage.clear();
+    this.ruter.navigate(['/']);
+  }
+
   @ViewChild('canvas', { static: true })
   platno: ElementRef<HTMLCanvasElement>;
   kontekst: CanvasRenderingContext2D;
@@ -363,9 +392,13 @@ export class SkicaKreiranjeComponent implements OnInit {
   kvadratura: number;
   vlasnik: string;
 
-  sirine: number[] = [100, 100, 100];
-  visine: number[] = [100, 100, 100];
+  sirine: number[] = [];
+  visine: number[] = [];
 
   dodavanjeProstorija: boolean = false;
   dodavanjeVrata: boolean = false;
+
+  greska: string = '';
+
+  odnosVelicina: number = 15;
 }

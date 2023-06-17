@@ -7,6 +7,7 @@ import { KlijentService } from '../services/klijent.service';
 import { Objekat } from '../models/objekat';
 import { ObjekatService } from '../services/objekat.service';
 import { PosaoService } from '../services/posao.service';
+import { Posao } from '../models/posao';
 
 @Component({
   selector: 'app-stranica-agencija',
@@ -41,11 +42,41 @@ export class StranicaAgencijaComponent implements OnInit {
         .dohvatiObjekteVlasnika(this.klijent)
         .subscribe((objekti: Objekat[]) => {
           this.objekti = objekti;
+          this.objekat = this.objekti[0]._id;
         });
     }
+
+    this.posaoServis
+      .dohvatiPosloveKlijenta(this.klijent)
+      .subscribe((poslovi: Posao[]) => {
+        this.posloviKlijenta = poslovi;
+      });
+  }
+
+  objekatZauzet(idObjekat) {
+    for (let posao of this.posloviKlijenta) {
+      if (
+        posao.idObjekat == idObjekat &&
+        posao.status != 'zavrsen' &&
+        posao.status != 'odbijen' &&
+        posao.status != 'otkazan'
+      ) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
   zatraziSaradnju() {
+    if (this.objekatZauzet(this.objekat)) {
+      this.greska = 'Izabrani objekat se vec nalazi medju poslovima';
+      return;
+    }
+    if (new Date(this.vremenskiPeriod) < new Date()) {
+      this.greska = 'Izabrani datum mora biti u buducnosti';
+      return;
+    }
     this.posaoServis
       .ubaciPosao(
         this.klijent,
@@ -59,6 +90,8 @@ export class StranicaAgencijaComponent implements OnInit {
         alert('Uspesno poslat zahtev za saradnju!');
         this.objekat = '';
         this.vremenskiPeriod = new Date();
+        this.greska = '';
+        this.ngOnInit();
       });
   }
 
@@ -70,4 +103,8 @@ export class StranicaAgencijaComponent implements OnInit {
   objekat: string = '';
   objekti: Objekat[] = [];
   vremenskiPeriod: Date = new Date();
+
+  posloviKlijenta: Posao[] = [];
+
+  greska: string = '';
 }

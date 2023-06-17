@@ -46,6 +46,10 @@ export class AgencijeKlijentComponent implements OnInit {
         });
     }
   }
+  odjava() {
+    sessionStorage.clear();
+    this.router.navigate(['/']);
+  }
 
   agencije: Agencija[] = [];
   pretragaNaziv: string;

@@ -71,11 +71,11 @@ class MejlController {
             });
         };
         this.ubaciPrivremenuLozinku = (req, res) => {
-            const currentDate = new Date();
+            const datum = new Date();
             let privremenaLozinka = new privremenaLozinka_1.default({
                 korisnickoIme: req.body.korisnickoIme,
                 lozinka: req.body.lozinka,
-                vremeIsteka: new Date(currentDate.getTime() + 10 * 60000), //10 minuta
+                vremeIsteka: new Date(datum.getTime() + 10 * 60000), //10 minuta
             });
             privremenaLozinka.save((greska, privremenaLozinka) => {
                 if (greska) {
@@ -86,14 +86,14 @@ class MejlController {
                 }
             });
         };
-        this.dohvatiPrivremenuLozinku = (req, res) => {
+        this.dohvatiPrivremeneLozinke = (req, res) => {
             let korisnickoIme = req.body.korisnickoIme;
-            privremenaLozinka_1.default.findOne({ korisnickoIme: korisnickoIme }, (greska, privremenaLozinka) => {
+            privremenaLozinka_1.default.find({ korisnickoIme: korisnickoIme }, (greska, privremeneLozinke) => {
                 if (greska) {
                     console.log(greska);
                 }
                 else {
-                    res.json(privremenaLozinka);
+                    res.json(privremeneLozinke);
                 }
             });
         };

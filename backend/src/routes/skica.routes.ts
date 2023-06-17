@@ -15,4 +15,8 @@ skicaRuter.route('/promeniBoju').post((req, res) => {
     new SkicaController().promeniBoju(req, res);
 });
 
+skicaRuter.route('/izmeniSkicu').post((req, res) => {
+    new SkicaController().izmeniSkicu(req, res);
+});
+
 export default skicaRuter;

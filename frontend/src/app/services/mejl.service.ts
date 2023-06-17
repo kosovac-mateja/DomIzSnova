@@ -21,13 +21,13 @@ export class MejlService {
     });
   }
 
-  async dohvatiPrivremenuLozinku(
+  async dohvatiPrivremeneLozinke(
     korisnickoIme: string
-  ): Promise<PrivremenaLozinka> {
+  ): Promise<PrivremenaLozinka[]> {
     return new Promise((resolve) => {
       this.http
-        .post(`${this.url}/mejl/dohvatiPrivremenuLozinku`, { korisnickoIme })
-        .subscribe((res: PrivremenaLozinka) => {
+        .post(`${this.url}/mejl/dohvatiPrivremeneLozinke`, { korisnickoIme })
+        .subscribe((res: PrivremenaLozinka[]) => {
           resolve(res);
         });
     });

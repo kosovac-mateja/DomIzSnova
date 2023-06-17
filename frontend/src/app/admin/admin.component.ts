@@ -6,6 +6,8 @@ import { AgencijaService } from '../services/agencija.service';
 import { Router } from '@angular/router';
 import { PosaoService } from '../services/posao.service';
 import { OtkazivanjePosla } from '../models/otkazivanjePosla';
+import { RadnikService } from '../services/radnik.service';
+import { Radnik } from '../models/radnik';
 
 @Component({
   selector: 'app-admin',
@@ -16,6 +18,7 @@ export class AdminComponent implements OnInit {
   constructor(
     private korisnikServis: KorisnikService,
     private posaoServis: PosaoService,
+    private radnikServis: RadnikService,
     private ruter: Router
   ) {}
 
@@ -94,12 +97,26 @@ export class AdminComponent implements OnInit {
             this.ngOnInit();
           });
       });
+    this.radnikServis
+      .dohvatiRadnikeNaPoslu(idPosao)
+      .subscribe((radnici: Radnik[]) => {
+        radnici.forEach((radnik) => {
+          this.radnikServis
+            .azurirajPosaoRadnika(radnik._id, null)
+            .subscribe((odgovor) => {});
+        });
+      });
   }
 
   odbijOtkazivanje(idPosao: string) {
     this.posaoServis.promeniStatus(idPosao, 'odbijen').subscribe((odgovor) => {
       this.ngOnInit();
     });
+  }
+
+  odjava() {
+    sessionStorage.clear();
+    this.ruter.navigate(['/']);
   }
 
   korisnici: Korisnik[] = [];

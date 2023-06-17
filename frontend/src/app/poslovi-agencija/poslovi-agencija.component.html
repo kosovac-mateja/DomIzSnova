@@ -1,5 +1,10 @@
+<a [routerLink]="['/agencija/profil']">Profil</a>
+<a [routerLink]="['/agencija/radnici']">Radnici</a>
+<a [routerLink]="['/agencija/poslovi']">Poslovi</a>
+<button (click)="odjava()">Odjavi se</button>
+<hr>
 <h2>Zahtevi od klijenata</h2>
-<table *ngIf="objekti.length==poslovi.length && klijenti.length==poslovi.length">
+<table *ngIf="objekti.length==poslovi.length && klijenti.length==poslovi.length && brojZahteva>0">
     <tr>
         <th>Ime</th>
         <th>Prezime</th>
@@ -13,7 +18,7 @@
         <th colspan="2">Akcija</th>
     </tr>
     <ng-container *ngFor="let p of poslovi">
-        <tr *ngIf="p.status=='na cekanju'">
+        <tr *ngIf="p.status=='na cekanju' || p.status=='ponuda'">
             <td>{{klijent(p.klijent).ime}}</td>
             <td>{{klijent(p.klijent).prezime}}</td>
             <td>{{klijent(p.klijent).telefon}}</td>
@@ -23,17 +28,19 @@
             <td>{{objekat(p.idObjekat).brProstorija}}</td>
             <td>{{objekat(p.idObjekat).kvadratura}}</td>
             <td>{{p.vremenskiPeriod}}</td>
-            <td><button (click)="prihvati()" *ngIf="!prihvacenaPonuda">Prihvati</button></td>
-            <td><button (click)="odbij(p._id)" *ngIf="!prihvacenaPonuda">Odbij</button></td>
+            <td><button (click)="prihvati()" *ngIf="!prihvacenaPonuda && p.status=='na cekanju'">Prihvati</button></td>
+            <td><button (click)="odbij(p._id)" *ngIf="!prihvacenaPonuda && p.status=='na cekanju'">Odbij</button></td>
             <td><input type="number" [(ngModel)]="ponuda" *ngIf="prihvacenaPonuda"></td>
             <td><button (click)="posaljiPonudu(p._id)" *ngIf="prihvacenaPonuda">Posalji ponudu</button></td>
         </tr>
     </ng-container>
 </table>
-
+<p *ngIf="brojZahteva==0">Trenutno nema zahteva</p>
+{{greska}}
+{{greska}}
 
 <h2>Aktivni poslovi</h2>
-<table *ngIf="objekti.length==poslovi.length && klijenti.length==poslovi.length">
+<table *ngIf="objekti.length==poslovi.length && klijenti.length==poslovi.length && brojAktivnih>0">
     <tr>
         <th>Ime</th>
         <th>Prezime</th>
@@ -61,3 +68,4 @@
         </tr>
     </ng-container>
 </table>
+<p *ngIf="brojAktivnih==0">Trenutno nema aktivnih poslova</p>

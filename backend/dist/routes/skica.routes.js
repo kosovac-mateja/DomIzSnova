@@ -15,5 +15,8 @@ skicaRuter.route('/dohvatiSkicu').post((req, res) => {
 skicaRuter.route('/promeniBoju').post((req, res) => {
     new skica_controller_1.SkicaController().promeniBoju(req, res);
 });
+skicaRuter.route('/izmeniSkicu').post((req, res) => {
+    new skica_controller_1.SkicaController().izmeniSkicu(req, res);
+});
 exports.default = skicaRuter;
 //# sourceMappingURL=skica.routes.js.map
