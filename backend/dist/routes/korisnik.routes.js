@@ -24,5 +24,8 @@ korisnikRouter.route('/azurirajStatus').post((req, res) => {
 korisnikRouter.route('/obrisi').post((req, res) => {
     new korisnik_controller_1.KorisnikController().obrisi(req, res);
 });
+korisnikRouter.route('/azurirajLozinku').post((req, res) => {
+    new korisnik_controller_1.KorisnikController().azurirajLozinku(req, res);
+});
 exports.default = korisnikRouter;
 //# sourceMappingURL=korisnik.routes.js.map

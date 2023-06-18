@@ -28,6 +28,7 @@ import { RadniciAdminComponent } from './radnici-admin/radnici-admin.component';
 import { SkicaAgencijaComponent } from './skica-agencija/skica-agencija.component';
 import { SkicaKlijentComponent } from './skica-klijent/skica-klijent.component';
 import { SkicaIzmeneComponent } from './skica-izmene/skica-izmene.component';
+import { PromenaLozinkeComponent } from './promena-lozinke/promena-lozinke.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { SkicaIzmeneComponent } from './skica-izmene/skica-izmene.component';
     SkicaAgencijaComponent,
     SkicaKlijentComponent,
     SkicaIzmeneComponent,
+    PromenaLozinkeComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],

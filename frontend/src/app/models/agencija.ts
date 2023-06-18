@@ -11,4 +11,5 @@ export class Agencija {
   opis: string;
   kapacitetRadnika: number;
   zahtev: number;
+  brojOtkazanih: number;
 }

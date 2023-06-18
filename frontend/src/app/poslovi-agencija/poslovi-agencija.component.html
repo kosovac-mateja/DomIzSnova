@@ -28,15 +28,14 @@
             <td>{{objekat(p.idObjekat).brProstorija}}</td>
             <td>{{objekat(p.idObjekat).kvadratura}}</td>
             <td>{{p.vremenskiPeriod}}</td>
-            <td><button (click)="prihvati()" *ngIf="!prihvacenaPonuda && p.status=='na cekanju'">Prihvati</button></td>
+            <td><button (click)="prihvati(p._id)" *ngIf="!prihvacenaPonuda && p.status=='na cekanju'">Prihvati</button></td>
             <td><button (click)="odbij(p._id)" *ngIf="!prihvacenaPonuda && p.status=='na cekanju'">Odbij</button></td>
-            <td><input type="number" [(ngModel)]="ponuda" *ngIf="prihvacenaPonuda"></td>
-            <td><button (click)="posaljiPonudu(p._id)" *ngIf="prihvacenaPonuda">Posalji ponudu</button></td>
+            <td><input type="number" [(ngModel)]="ponuda" *ngIf="prihvacenaPonuda && p._id==izabranaAgencija"></td>
+            <td><button (click)="posaljiPonudu(p._id)" *ngIf="prihvacenaPonuda && p._id==izabranaAgencija">Posalji ponudu</button></td>
         </tr>
     </ng-container>
 </table>
 <p *ngIf="brojZahteva==0">Trenutno nema zahteva</p>
-{{greska}}
 {{greska}}
 
 <h2>Aktivni poslovi</h2>

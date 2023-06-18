@@ -89,4 +89,21 @@ export class KorisnikController {
             }
         );
     }
+
+    azurirajLozinku(req: express.Request, res: express.Response) {
+        let korisnickoIme = req.body.korisnickoIme;
+        let lozinka = req.body.lozinka;
+
+        KorisnikModel.updateOne(
+            { korisnickoIme: korisnickoIme },
+            { $set: { lozinka: lozinka } },
+            (greska, korisnik) => {
+                if (greska) {
+                    console.log(greska);
+                } else {
+                    res.json({ poruka: 'ok' });
+                }
+            }
+        );
+    }
 }

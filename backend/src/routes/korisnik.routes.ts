@@ -27,4 +27,8 @@ korisnikRouter.route('/obrisi').post((req, res) => {
     new KorisnikController().obrisi(req, res);
 });
 
+korisnikRouter.route('/azurirajLozinku').post((req, res) => {
+    new KorisnikController().azurirajLozinku(req, res);
+});
+
 export default korisnikRouter;

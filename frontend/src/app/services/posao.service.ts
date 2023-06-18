@@ -78,4 +78,10 @@ export class PosaoService {
       idPosao: idPosao,
     });
   }
+
+  dohvatiPosao(idPosao: string) {
+    return this.http.post(`${this.url}/posao/dohvatiPosao`, {
+      id: idPosao,
+    });
+  }
 }

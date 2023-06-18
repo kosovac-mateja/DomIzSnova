@@ -28,6 +28,7 @@ export class AgencijaService {
       opis: agencija.opis,
       kapacitetRadnika: 0,
       zahtev: 0,
+      brojOtkazanih: 0,
     };
     return this.http.post(`${this.url}/agencija/registracija`, podaci);
   }
@@ -125,6 +126,12 @@ export class AgencijaService {
         .subscribe((res: Agencija) => {
           resolve(res);
         });
+    });
+  }
+
+  otkaziPosao(korisnickoIme: string) {
+    return this.http.post(`${this.url}/agencija/otkaziPosao`, {
+      korisnickoIme: korisnickoIme,
     });
   }
 }

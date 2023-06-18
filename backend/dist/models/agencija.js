@@ -42,6 +42,9 @@ let Agencija = new Schema({
     zahtev: {
         type: Number,
     },
+    brojOtkazanih: {
+        type: Number,
+    },
 });
 exports.default = mongoose_1.default.model('AgencijaModel', Agencija, 'agencije');
 //# sourceMappingURL=agencija.js.map

@@ -77,6 +77,18 @@ class KorisnikController {
             }
         });
     }
+    azurirajLozinku(req, res) {
+        let korisnickoIme = req.body.korisnickoIme;
+        let lozinka = req.body.lozinka;
+        korisnik_1.default.updateOne({ korisnickoIme: korisnickoIme }, { $set: { lozinka: lozinka } }, (greska, korisnik) => {
+            if (greska) {
+                console.log(greska);
+            }
+            else {
+                res.json({ poruka: 'ok' });
+            }
+        });
+    }
 }
 exports.KorisnikController = KorisnikController;
 //# sourceMappingURL=korisnik.controller.js.map

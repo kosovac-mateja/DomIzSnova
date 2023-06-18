@@ -23,4 +23,8 @@ posaoRuter.route('/obrisiPosao').post((req, res) => {
     new PossaoController().obrisiPosao(req, res);
 });
 
+posaoRuter.route('/dohvatiPosao').post((req, res) => {
+    new PossaoController().dohvatiPosao(req, res);
+});
+
 export default posaoRuter;

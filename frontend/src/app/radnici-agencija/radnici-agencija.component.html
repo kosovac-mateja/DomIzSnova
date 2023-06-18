@@ -6,7 +6,7 @@
 Broj radnika: {{radnici.length}}
 Kapacitet radnika: {{agencija.kapacitetRadnika}}
 <hr>
-<table>
+<table *ngIf="radnici.length>0">
     <tr>
         <th>Ime</th>
         <th>Prezime</th>
@@ -24,10 +24,10 @@ Kapacitet radnika: {{agencija.kapacitetRadnika}}
         <td><button (click)="obrisiRadnika(r)" *ngIf="!rezimIzmene">Obrisi</button></td>
         <td><button (click)="izmeniRadnika(r)" *ngIf="rezimIzmene">Potvrdi izmene</button></td>
     </tr>
+    <input type="checkbox" id="cbox1" [(ngModel)]="rezimIzmene">
+    <label for="cbox1">Rezim izmene</label>
 </table>
-
-<input type="checkbox" id="cbox1" [(ngModel)]="rezimIzmene">
-<label for="cbox1">Rezim izmene</label>
+<p *ngIf="radnici.length==0">Trenutno nemate radnika</p>
 <hr>
 <div *ngIf="agencija.kapacitetRadnika > radnici.length">
     <h2>Dodaj radnika</h2>

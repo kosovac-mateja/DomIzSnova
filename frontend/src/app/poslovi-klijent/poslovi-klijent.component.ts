@@ -6,6 +6,8 @@ import { Objekat } from '../models/objekat';
 import { Router } from '@angular/router';
 import { RecenzijaService } from '../services/recenzija.service';
 import { Recenzija } from '../models/recenzija';
+import { BlokiranjeService } from '../services/blokiranje.service';
+import { BlokiranaAgencija } from '../models/blokiranaAgencija';
 
 @Component({
   selector: 'app-poslovi-klijent',
@@ -17,6 +19,7 @@ export class PosloviKlijentComponent implements OnInit {
     private posaoServis: PosaoService,
     private objekatServis: ObjekatService,
     private recenzijaServis: RecenzijaService,
+    private blokiranjeServis: BlokiranjeService,
     private ruter: Router
   ) {}
 
@@ -46,8 +49,7 @@ export class PosloviKlijentComponent implements OnInit {
 
   dohvatiObjekat(id: string): string {
     for (let objekat of this.objekti) {
-      if (objekat['_id'] == id)
-        return objekat['adresa'] + ', ' + objekat['tip'];
+      if (objekat._id == id) return objekat.adresa + ', ' + objekat.tip;
     }
     return null;
   }
@@ -89,8 +91,25 @@ export class PosloviKlijentComponent implements OnInit {
   }
 
   ostaviRecenziju() {
-    console.log(this.idPosao);
     let posao = this.poslovi.find((posao: Posao) => posao._id == this.idPosao);
+    if (this.ocena > 3) {
+      this.blokiranjeServis
+        .dohvatiAgenciju(posao.agencija)
+        .subscribe((blokiranaAgencija: BlokiranaAgencija) => {
+          if (blokiranaAgencija != null) {
+            console.log(blokiranaAgencija);
+            if (blokiranaAgencija.brojPozitivnihOcena == 1) {
+              this.blokiranjeServis
+                .izbrisi(posao.agencija)
+                .subscribe((res) => {});
+            } else {
+              this.blokiranjeServis
+                .dodajPozitivnuOcenu(posao.agencija)
+                .subscribe((res) => {});
+            }
+          }
+        });
+    }
     this.recenzijaServis
       .ubaciRecenziju(
         posao._id,
@@ -139,7 +158,7 @@ export class PosloviKlijentComponent implements OnInit {
   }
 
   poslovi: Posao[] = [];
-  objekti: Object[] = [];
+  objekti: Objekat[] = [];
   recenzije: Recenzija[] = [];
 
   idPosao: string = '';

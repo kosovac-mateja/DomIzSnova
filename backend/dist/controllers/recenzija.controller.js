@@ -40,7 +40,6 @@ class RecenzijaController {
             let idPosao = req.body.idPosao;
             let ocena = req.body.ocena;
             let komentar = req.body.komentar;
-            console.log(idPosao, ocena, komentar);
             recenzija_1.default.updateOne({ idPosao: idPosao }, {
                 $set: {
                     ocena: ocena,

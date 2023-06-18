@@ -64,4 +64,13 @@ export class PossaoController {
             }
         });
     };
+
+    dohvatiPosao = (req: express.Request, res: express.Response) => {
+        let id = req.body.id;
+
+        PosaoModel.findOne({ _id: id }, (err, posao) => {
+            if (err) console.log(err);
+            else res.json(posao);
+        });
+    };
 }

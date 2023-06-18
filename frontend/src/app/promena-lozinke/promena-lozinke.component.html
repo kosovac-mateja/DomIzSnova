@@ -1,0 +1,22 @@
+<h3>Promena lozinke</h3>
+
+<table>
+    <tr>
+        <td>Stara lozinka</td>
+        <td><input type="password" [(ngModel)]="staraLozinka" /></td>
+    </tr>
+    <tr>
+        <td>Nova lozinka</td>
+        <td><input type="password" [(ngModel)]="novaLozinka" /></td>
+    </tr>
+    <tr>
+        <td>Potvrda nove lozinke</td>
+        <td><input type="password" [(ngModel)]="potvrdaNoveLozinke" /></td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <button (click)="promeniLozinku()">Promeni lozinku</button>
+        </td>
+    </tr>
+</table>
+{{greska}}

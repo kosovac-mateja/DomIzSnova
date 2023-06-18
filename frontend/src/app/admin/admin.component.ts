@@ -8,6 +8,10 @@ import { PosaoService } from '../services/posao.service';
 import { OtkazivanjePosla } from '../models/otkazivanjePosla';
 import { RadnikService } from '../services/radnik.service';
 import { Radnik } from '../models/radnik';
+import { BlokiranjeService } from '../services/blokiranje.service';
+import { Posao } from '../models/posao';
+import { Agencija } from '../models/agencija';
+import { BlokiranaAgencija } from '../models/blokiranaAgencija';
 
 @Component({
   selector: 'app-admin',
@@ -19,6 +23,8 @@ export class AdminComponent implements OnInit {
     private korisnikServis: KorisnikService,
     private posaoServis: PosaoService,
     private radnikServis: RadnikService,
+    private blokiranjeServis: BlokiranjeService,
+    private agencijaServis: AgencijaService,
     private ruter: Router
   ) {}
 
@@ -32,6 +38,11 @@ export class AdminComponent implements OnInit {
       .dohvatiOtkazivanja()
       .subscribe((otkazivanja: OtkazivanjePosla[]) => {
         this.otkazivanja = otkazivanja;
+      });
+    this.blokiranjeServis
+      .dohvatiSve()
+      .subscribe((blokiranja: BlokiranaAgencija[]) => {
+        this.blokiraneAgencije = blokiranja;
       });
   }
 
@@ -88,6 +99,27 @@ export class AdminComponent implements OnInit {
   }
 
   prihvatiOtkazivanje(idPosao: string) {
+    let korisnickoIme = '';
+    this.posaoServis.dohvatiPosao(idPosao).subscribe((posao: Posao) => {
+      korisnickoIme = posao.agencija;
+      console.log(korisnickoIme);
+      this.agencijaServis
+        .dohvatiAgenciju(korisnickoIme)
+        .subscribe((agencija: Agencija) => {
+          if (agencija.brojOtkazanih == 3) {
+            this.blokiranjeServis
+              .ubaci(korisnickoIme)
+              .subscribe((odgovor) => {});
+            this.agencijaServis
+              .azurirajPodatak(korisnickoIme, 'brojOtkazanih', 0)
+              .subscribe((odgovor) => {});
+          } else {
+            this.agencijaServis
+              .otkaziPosao(korisnickoIme)
+              .subscribe((odgovor) => {});
+          }
+        });
+    });
     this.posaoServis
       .promeniStatus(idPosao, 'prihvacen')
       .subscribe((odgovor) => {
@@ -114,6 +146,12 @@ export class AdminComponent implements OnInit {
     });
   }
 
+  odblokirajAgenciju(korisnickoIme: string) {
+    this.blokiranjeServis.izbrisi(korisnickoIme).subscribe((odgovor) => {
+      this.ngOnInit();
+    });
+  }
+
   odjava() {
     sessionStorage.clear();
     this.ruter.navigate(['/']);
@@ -121,4 +159,5 @@ export class AdminComponent implements OnInit {
 
   korisnici: Korisnik[] = [];
   otkazivanja: OtkazivanjePosla[] = [];
+  blokiraneAgencije: BlokiranaAgencija[] = [];
 }

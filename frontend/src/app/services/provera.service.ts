@@ -2,12 +2,18 @@ import { Injectable } from '@angular/core';
 import { KorisnikService } from './korisnik.service';
 import { Koordinata } from '../models/koordinata';
 import { Dimenzije } from '../models/dimenzije';
+import { AgencijaService } from './agencija.service';
+import { KlijentService } from './klijent.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProveraService {
-  constructor(private korisnikServis: KorisnikService) {}
+  constructor(
+    private korisnikServis: KorisnikService,
+    private agencijaServis: AgencijaService,
+    private klijentServis: KlijentService
+  ) {}
 
   proveraKorisnickoIme(korisnickoIme: string) {
     if (korisnickoIme.length < 3 || korisnickoIme.length > 20) {
@@ -174,6 +180,12 @@ export class ProveraService {
     if (this.proveraMejl(klijent.mejl) != 'ok') {
       return this.proveraMejl(klijent.mejl);
     }
+    if ((await this.klijentServis.mejlPostoji(klijent.mejl)) == true) {
+      return 'Mejl adresa vec postoji';
+    }
+    if ((await this.agencijaServis.mejlPostoji(klijent.mejl)) == true) {
+      return 'Mejl adresa vec postoji';
+    }
     if (this.proveraIme(klijent.ime) != 'ok') {
       return this.proveraIme(klijent.ime);
     }
@@ -206,6 +218,12 @@ export class ProveraService {
     }
     if (this.proveraMejl(agencija.mejl) != 'ok') {
       return this.proveraMejl(agencija.mejl);
+    }
+    if ((await this.klijentServis.mejlPostoji(agencija.mejl)) == true) {
+      return 'Mejl adresa vec postoji';
+    }
+    if ((await this.agencijaServis.mejlPostoji(agencija.mejl)) == true) {
+      return 'Mejl adresa vec postoji';
     }
     if (this.proveraNazivAgencije(agencija.naziv) != 'ok') {
       return this.proveraNazivAgencije(agencija.naziv);

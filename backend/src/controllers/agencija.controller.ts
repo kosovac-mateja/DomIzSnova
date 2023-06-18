@@ -165,4 +165,20 @@ export class AgencijaController {
             }
         });
     };
+
+    otkaziPosao = (req: express.Request, res: express.Response) => {
+        let korisnickoIme = req.body.korisnickoIme;
+
+        AgencijaModel.updateOne(
+            { korisnickoIme: korisnickoIme },
+            { $inc: { brojOtkazanih: 1 } },
+            (greska) => {
+                if (greska) {
+                    console.log(greska);
+                } else {
+                    res.json({ poruka: 'ok' });
+                }
+            }
+        );
+    };
 }

@@ -23,6 +23,7 @@ import { RadniciAdminComponent } from './radnici-admin/radnici-admin.component';
 import { SkicaAgencijaComponent } from './skica-agencija/skica-agencija.component';
 import { SkicaKlijentComponent } from './skica-klijent/skica-klijent.component';
 import { SkicaIzmeneComponent } from './skica-izmene/skica-izmene.component';
+import { PromenaLozinkeComponent } from './promena-lozinke/promena-lozinke.component';
 
 const routes: Routes = [
   { path: '', component: PocetnaComponent },
@@ -33,6 +34,7 @@ const routes: Routes = [
   { path: 'klijent', component: KlijentComponent },
   { path: 'agencija', component: AgencijaComponent },
   { path: 'admin', component: AdminComponent },
+  { path: 'promena-lozinke', component: PromenaLozinkeComponent },
   { path: 'admin/azuriranje', component: AzuriranjeAdminComponent },
   { path: 'admin/radnici', component: RadniciAdminComponent },
   { path: 'agencija/stranica', component: StranicaAgencijaComponent },

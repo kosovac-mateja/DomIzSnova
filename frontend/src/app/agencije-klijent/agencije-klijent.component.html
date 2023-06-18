@@ -21,6 +21,18 @@
         </select>
         <button (click)="pretraga()">Pretraga</button>
     </div>
+    <div class="sortiranje">
+        Sortiraj po
+        <select name="parametarSortiranja" [(ngModel)]="parametarSortiranja">
+            <option value="naziv">nazivu</option>
+            <option value="adresa">adresi</option>
+        </select>
+        <select name="nacinSortiranja" [(ngModel)]="nacinSortiranja">
+            <option value="rastuce">rastuce</option>
+            <option value="opadajuce">opadajuce</option>
+        </select>
+        <button (click)="sortiranje()">Sortiraj</button>
+    </div>
     <div class="agency-list">
         <div *ngFor="let a of agencije" class="agency-item">
             <div class="title"><a [routerLink]="['/agencija/stranica']" (click)="agencijaIzbor(a.korisnickoIme)">{{a.naziv}}</a></div>

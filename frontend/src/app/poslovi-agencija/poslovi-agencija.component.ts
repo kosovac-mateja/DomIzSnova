@@ -8,6 +8,8 @@ import { Objekat } from '../models/objekat';
 import { Radnik } from '../models/radnik';
 import { RadnikService } from '../services/radnik.service';
 import { Router } from '@angular/router';
+import { BlokiranjeService } from '../services/blokiranje.service';
+import { BlokiranaAgencija } from '../models/blokiranaAgencija';
 
 @Component({
   selector: 'app-poslovi-agencija',
@@ -19,6 +21,7 @@ export class PosloviAgencijaComponent implements OnInit {
     private posaoServis: PosaoService,
     private objekatServis: ObjekatService,
     private klijentServis: KlijentService,
+    private blokiranjeServis: BlokiranjeService,
     private ruter: Router
   ) {}
 
@@ -44,6 +47,11 @@ export class PosloviAgencijaComponent implements OnInit {
             });
         });
       });
+    this.blokiranjeServis
+      .dohvatiSve()
+      .subscribe((blokirane: BlokiranaAgencija[]) => {
+        this.blokiraneAgencije = blokirane;
+      });
   }
 
   klijent(korisnickoIme: string) {
@@ -56,7 +64,16 @@ export class PosloviAgencijaComponent implements OnInit {
     return this.objekti.find((objekat) => objekat._id == idObjekat);
   }
 
-  prihvati() {
+  prihvati(id: string) {
+    this.izabranaAgencija = id;
+    let blokirana = this.blokiraneAgencije.find(
+      (agencija) => agencija.korisnickoIme == this.agencija
+    );
+    if (blokirana) {
+      this.greska =
+        'Vasa agencija je blokirana, ne mozete prihvatati nove poslove!';
+      return;
+    }
     this.prihvacenaPonuda = true;
   }
 
@@ -80,8 +97,7 @@ export class PosloviAgencijaComponent implements OnInit {
           .azurirajPodatak(id, 'status', 'ponuda')
           .subscribe((odgovor) => {
             alert('Ponuda uspesno poslata!');
-            this.ponuda = 0;
-            this.ngOnInit();
+            window.location.reload();
           });
       });
   }
@@ -102,12 +118,14 @@ export class PosloviAgencijaComponent implements OnInit {
   poslovi: Posao[] = [];
   klijenti: Klijent[] = [];
   objekti: Objekat[] = [];
+  blokiraneAgencije: BlokiranaAgencija[] = [];
 
   brojZahteva: number = 0;
   brojAktivnih: number = 0;
 
   prihvacenaPonuda: boolean = false;
   ponuda: number = 0;
+  izabranaAgencija: string = '';
 
   greska: string = '';
 }

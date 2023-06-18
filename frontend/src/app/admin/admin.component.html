@@ -33,4 +33,21 @@
     </tr>
 </table>
 <p *ngIf="otkazivanja.length == 0">Nema zahteva za otkazivanjem</p>
+<hr>
+<h3>Blokirane agencije</h3>
+<table *ngIf="blokiraneAgencije.length > 0">
+    <tr>
+        <th>Agencija</th>
+        <th>Vreme odblokiranja</th>
+        <th>Broj pozitivnih ocena</th>
+        <th>Akcija</th>
+    </tr>
+    <tr *ngFor="let a of blokiraneAgencije">
+        <td>{{a.korisnickoIme}}</td>
+        <td>{{a.datumOdblokiranja}}</td>
+        <td>{{a.brojPozitivnihOcena}}</td>
+        <td><button (click)="odblokirajAgenciju(a.korisnickoIme)">Odblokiraj</button></td>
+    </tr>
+</table>
+<p *ngIf="blokiraneAgencije.length == 0">Nema blokiranih agencija</p>
 

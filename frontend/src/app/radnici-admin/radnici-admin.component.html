@@ -33,11 +33,11 @@ Trenutni broj radnika: {{radnici.length}}
         <td><button (click)="obrisiRadnika(r)" *ngIf="!rezimIzmene">Obrisi</button></td>
         <td><button (click)="izmeniRadnika(r)" *ngIf="rezimIzmene">Potvrdi izmene</button></td>
     </tr>
-</table>
-<p *ngIf="radnici.length==0">Nema radnika</p>
-
-<input type="checkbox" id="cbox1" [(ngModel)]="rezimIzmene">
+    <input type="checkbox" id="cbox1" [(ngModel)]="rezimIzmene">
 <label for="cbox1">Rezim izmene</label>
+
+</table>
+<p *ngIf="radnici.length==0">Agencija trenutno nema radnika</p>
 
 <div *ngIf="agencija.kapacitetRadnika > radnici.length">
     <hr>

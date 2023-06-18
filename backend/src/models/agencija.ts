@@ -39,6 +39,9 @@ let Agencija = new Schema({
     zahtev: {
         type: Number,
     },
+    brojOtkazanih: {
+        type: Number,
+    },
 });
 
 export default mongoose.model('AgencijaModel', Agencija, 'agencije');

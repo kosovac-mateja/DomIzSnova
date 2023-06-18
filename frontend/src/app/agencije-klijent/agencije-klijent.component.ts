@@ -51,8 +51,43 @@ export class AgencijeKlijentComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
+  sortiranje() {
+    if (this.parametarSortiranja == 'naziv') {
+      if (this.nacinSortiranja == 'rastuce') {
+        this.agencije.sort((a, b) => {
+          if (a.naziv > b.naziv) return 1;
+          else if (a.naziv < b.naziv) return -1;
+          else return 0;
+        });
+      } else if (this.nacinSortiranja == 'opadajuce') {
+        this.agencije.sort((a, b) => {
+          if (a.naziv > b.naziv) return -1;
+          else if (a.naziv < b.naziv) return 1;
+          else return 0;
+        });
+      }
+    } else if (this.parametarSortiranja == 'adresa') {
+      if (this.nacinSortiranja == 'rastuce') {
+        this.agencije.sort((a, b) => {
+          if (a.ulica > b.ulica) return 1;
+          else if (a.ulica < b.ulica) return -1;
+          else return 0;
+        });
+      } else if (this.nacinSortiranja == 'opadajuce') {
+        this.agencije.sort((a, b) => {
+          if (a.ulica > b.ulica) return -1;
+          else if (a.ulica < b.ulica) return 1;
+          else return 0;
+        });
+      }
+    }
+  }
+
   agencije: Agencija[] = [];
   pretragaNaziv: string;
   pretragaAdresa: string;
   parametarPretrage: string = 'naziv';
+
+  parametarSortiranja: string = 'naziv';
+  nacinSortiranja: string = 'rastuce';
 }

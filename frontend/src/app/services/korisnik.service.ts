@@ -58,4 +58,11 @@ export class KorisnikService {
       korisnickoIme: korisnickoIme,
     });
   }
+
+  azurirajLozinku(korisnickoIme, lozinka) {
+    return this.http.post(`${this.url}/korisnik/azurirajLozinku`, {
+      korisnickoIme: korisnickoIme,
+      lozinka: lozinka,
+    });
+  }
 }

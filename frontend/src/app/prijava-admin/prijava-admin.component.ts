@@ -28,7 +28,7 @@ export class PrijavaAdminComponent implements OnInit {
     );
 
     if (admin == undefined) {
-      this.greska = 'Ne postoji korisnik sa unetim korisnickim imenom';
+      this.greska = 'Ne postoji administrator sa unetim korisnickim imenom';
       return;
     }
 
