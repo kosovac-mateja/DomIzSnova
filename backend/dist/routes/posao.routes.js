@@ -24,5 +24,8 @@ posaoRuter.route('/obrisiPosao').post((req, res) => {
 posaoRuter.route('/dohvatiPosao').post((req, res) => {
     new posao_controller_1.PossaoController().dohvatiPosao(req, res);
 });
+posaoRuter.route('/dohvatiPoslove').get((req, res) => {
+    new posao_controller_1.PossaoController().dohvatiPoslove(req, res);
+});
 exports.default = posaoRuter;
 //# sourceMappingURL=posao.routes.js.map

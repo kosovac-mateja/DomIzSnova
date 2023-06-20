@@ -90,6 +90,16 @@ class KlijentController {
                 }
             });
         };
+        this.dohvatiSveKlijente = (req, res) => {
+            klijent_1.default.find({}, (greska, klijenti) => {
+                if (greska) {
+                    console.log(greska);
+                }
+                else {
+                    res.json(klijenti);
+                }
+            });
+        };
     }
 }
 exports.KlijentController = KlijentController;

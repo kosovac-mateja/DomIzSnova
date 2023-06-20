@@ -100,4 +100,14 @@ export class KlijentController {
             }
         });
     };
+
+    dohvatiSveKlijente = (req: express.Request, res: express.Response) => {
+        KlijentModel.find({}, (greska, klijenti) => {
+            if (greska) {
+                console.log(greska);
+            } else {
+                res.json(klijenti);
+            }
+        });
+    };
 }

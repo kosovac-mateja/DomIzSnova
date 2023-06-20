@@ -27,4 +27,8 @@ posaoRuter.route('/dohvatiPosao').post((req, res) => {
     new PossaoController().dohvatiPosao(req, res);
 });
 
+posaoRuter.route('/dohvatiPoslove').get((req, res) => {
+    new PossaoController().dohvatiPoslove(req, res);
+});
+
 export default posaoRuter;

@@ -24,5 +24,8 @@ klijentRouter.route('/mejlPostoji').post((req, res) => {
 klijentRouter.route('/dohvatiKlijentaPoMejlu').post((req, res) => {
     new klijent_controller_1.KlijentController().dohvatiKlijentaPoMejlu(req, res);
 });
+klijentRouter.route('/dohvatiKlijente').get((req, res) => {
+    new klijent_controller_1.KlijentController().dohvatiSveKlijente(req, res);
+});
 exports.default = klijentRouter;
 //# sourceMappingURL=klijent.routes.js.map

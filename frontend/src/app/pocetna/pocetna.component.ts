@@ -109,8 +109,8 @@ export class PocetnaComponent implements OnInit {
   }
 
   agencije: Agencija[] = [];
-  pretragaNaziv: string;
-  pretragaAdresa: string;
+  pretragaNaziv: string = '';
+  pretragaAdresa: string = '';
   parametarPretrage: string = 'naziv';
 
   parametarSortiranja: string = 'naziv';

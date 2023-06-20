@@ -1,16 +1,29 @@
-<h3>Zaboravljena lozinka</h3>
+<app-zaglavlje-pocetna></app-zaglavlje-pocetna>
 
-<table>
-    <tr>
-        <td>Mejl adresa</td>
-        <td><input type="text" name="mejl" [(ngModel)]="mejl"></td>
-    </tr>
-    <tr>
-        <td>Potvrda mejl adrese</td>
-        <td><input type="text" name="mejlPotvrda" [(ngModel)]="mejlPotvrda"></td>
-    </tr>
-    <tr>
-        <td colspan="2"><button (click)="resetuj()">Posalji</button></td>
-    </tr>
-</table>
-{{greska}}
+<div class="container">
+    <h3>Zaboravljena lozinka</h3>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="mejl">Mejl adresa</label>
+                <input type="text" class="form-control" id="mejl" name="mejl" [(ngModel)]="mejl">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="mejlPotvrda">Potvrda mejl adrese</label>
+                <input type="text" class="form-control" id="mejlPotvrda" name="mejlPotvrda" [(ngModel)]="mejlPotvrda">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <button class="btn btn-primary" (click)="resetuj()">Posalji</button>
+            </div>
+        </div>
+    </div>
+    <span class="text-danger">{{ greska }}</span>
+</div>

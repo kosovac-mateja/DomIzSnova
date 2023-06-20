@@ -1,0 +1,35 @@
+/* Styles for the table */
+table {
+    width: 100%;
+  }
+  
+  th, td {
+    padding: 10px;
+  }
+  
+  /* Styles for the form controls */
+  .form-control {
+    width: 100%;
+  }
+  
+  /* Styles for the buttons */
+  .btn {
+    margin-top: 10px;
+  }
+  
+  /* Styles for the heading sections */
+  h2, h4 {
+    margin-top: 20px;
+  }
+  
+  /* Styles for the error message */
+  .text-danger {
+    color: red;
+  }
+
+  input[type="number"] {
+    margin-left: 5px;
+    margin-right: 5px;
+    width: 100px;
+  }
+  

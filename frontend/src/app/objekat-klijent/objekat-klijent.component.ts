@@ -38,7 +38,7 @@ export class ObjekatKlijentComponent implements OnInit {
   }
 
   obrisiObjekat(objekat: Objekat) {
-    this.posloviKlijenta.forEach((posao) => {
+    for (let posao of this.posloviKlijenta) {
       if (
         posao.idObjekat == objekat._id &&
         (posao.status == 'aktivan' ||
@@ -48,7 +48,7 @@ export class ObjekatKlijentComponent implements OnInit {
         this.greska = 'Ne možete obrisati objekat koji je uključen u posao.';
         return;
       }
-    });
+    }
 
     this.objekatServis.obrisiObjekat(objekat._id).subscribe((res) => {
       this.objekatServis
@@ -63,6 +63,17 @@ export class ObjekatKlijentComponent implements OnInit {
     if (objekat.tip != 'stan' && objekat.tip != 'kuca') {
       this.greska = 'Tip objekta može biti samo stan ili kuća.';
       return;
+    }
+    for (let posao of this.posloviKlijenta) {
+      if (
+        posao.idObjekat == objekat._id &&
+        (posao.status == 'aktivan' ||
+          posao.status == 'na cekanju' ||
+          posao.status == 'ponuda')
+      ) {
+        this.greska = 'Ne možete menjati objekat koji je uključen u posao.';
+        return;
+      }
     }
     this.objekatServis.azurirajObjekat(objekat).subscribe((res) => {
       this.objekatServis
@@ -79,6 +90,17 @@ export class ObjekatKlijentComponent implements OnInit {
   }
 
   izmeniSkicu(objekat: Objekat) {
+    for (let posao of this.posloviKlijenta) {
+      if (
+        posao.idObjekat == objekat._id &&
+        (posao.status == 'aktivan' ||
+          posao.status == 'na cekanju' ||
+          posao.status == 'ponuda')
+      ) {
+        this.greska = 'Ne možete menjati objekat koji je uključen u posao.';
+        return;
+      }
+    }
     sessionStorage.setItem('idSkica', objekat.idSkica);
     this.ruter.navigate(['/klijent/skica/izmene']);
   }

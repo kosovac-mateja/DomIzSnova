@@ -1,67 +1,94 @@
-<a [routerLink]="['/agencija/profil']">Profil</a>
-<a [routerLink]="['/agencija/radnici']">Radnici</a>
-<a [routerLink]="['/agencija/poslovi']">Poslovi</a>
-<button (click)="odjava()">Odjavi se</button>
-<hr>
-Broj radnika: {{radnici.length}}
-Kapacitet radnika: {{agencija.kapacitetRadnika}}
-<hr>
-<table *ngIf="radnici.length>0">
-    <tr>
+<app-zaglavlje-agencija></app-zaglavlje-agencija>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h4>Broj radnika: {{ radnici.length }}</h4>
+      <h4>Kapacitet radnika: {{ agencija.kapacitetRadnika }}</h4>
+      <hr>
+    </div>
+  </div>
+
+  <table *ngIf="radnici.length > 0" class="table table-striped">
+    <thead>
+      <tr>
         <th>Ime</th>
         <th>Prezime</th>
         <th>Broj telefona</th>
         <th>Mejl</th>
         <th>Specijalizacija</th>
-        <th colspan="2">Akcije</th>
-    </tr>
-    <tr *ngFor="let r of radnici">
-        <td><input type="text" [(ngModel)]="r.ime" [disabled]="!rezimIzmene"></td>
-        <td><input type="text" [(ngModel)]="r.prezime" [disabled]="!rezimIzmene"></td>
-        <td><input type="text" [(ngModel)]="r.telefon" [disabled]="!rezimIzmene"></td>
-        <td><input type="text" [(ngModel)]="r.mejl" [disabled]="!rezimIzmene"></td>
-        <td><input type="text" [(ngModel)]="r.specijalizacija" [disabled]="!rezimIzmene"></td>
-        <td><button (click)="obrisiRadnika(r)" *ngIf="!rezimIzmene">Obrisi</button></td>
-        <td><button (click)="izmeniRadnika(r)" *ngIf="rezimIzmene">Potvrdi izmene</button></td>
-    </tr>
-    <input type="checkbox" id="cbox1" [(ngModel)]="rezimIzmene">
-    <label for="cbox1">Rezim izmene</label>
-</table>
-<p *ngIf="radnici.length==0">Trenutno nemate radnika</p>
-<hr>
-<div *ngIf="agencija.kapacitetRadnika > radnici.length">
-    <h2>Dodaj radnika</h2>
-    <table>
-        <tr>
-            <td>Ime</td>
-            <td><input type="text" [(ngModel)]="ime"></td>
-        </tr>
-        <tr>
-            <td>Prezime</td>
-            <td><input type="text" [(ngModel)]="prezime"></td>
-        </tr>
-        <tr>
-            <td>Broj telefona</td>
-            <td><input type="text" [(ngModel)]="telefon"></td>
-        </tr>
-        <tr>
-            <td>Mejl</td>
-            <td><input type="text" [(ngModel)]="mejl"></td>
-        </tr>
-        <tr>
-            <td>Specijalizacija</td>
-            <td><input type="text" [(ngModel)]="specijalizacija"></td>
-        </tr>
-        <tr>
-            <td colspan="2"><button (click)="dodajRadnika()">Dodaj radnika</button></td>
-        </tr>
-    </table>
-    <hr>
-</div>
-{{greska}}
+        <th>Akcija</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let r of radnici">
+        <td><input type="text" class="form-control" [(ngModel)]="r.ime" [disabled]="!rezimIzmene"></td>
+        <td><input type="text" class="form-control" [(ngModel)]="r.prezime" [disabled]="!rezimIzmene"></td>
+        <td><input type="text" class="form-control" [(ngModel)]="r.telefon" [disabled]="!rezimIzmene"></td>
+        <td><input type="text" class="form-control" [(ngModel)]="r.mejl" [disabled]="!rezimIzmene"></td>
+        <td><input type="text" class="form-control" [(ngModel)]="r.specijalizacija" [disabled]="!rezimIzmene"></td>
+        <td><button class="btn btn-danger" (click)="obrisiRadnika(r)" *ngIf="!rezimIzmene">Obrisi</button></td>
+        <td><button class="btn btn-primary" (click)="izmeniRadnika(r)" *ngIf="rezimIzmene">Potvrdi</button></td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="7">
+          <input type="checkbox" id="cbox1" [(ngModel)]="rezimIzmene">
+          <label for="cbox1">Režim izmene</label>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
 
-<div>
-    <h2>Zahtevaj prosirenje kapaciteta radnika</h2>
-    Zahtevaj jos <input type="number" [(ngModel)]="prosirenje"> radnika
-    <button (click)="posaljiZahtev()">Posalji zahtev</button>
+  <div class="row">
+    <div class="col-md-6" *ngIf="agencija.kapacitetRadnika > radnici.length">
+      <h2>Dodaj radnika</h2>
+      <table class="table">
+        <tr>
+          <td>Ime</td>
+          <td><input type="text" class="form-control" [(ngModel)]="ime"></td>
+        </tr>
+        <tr>
+          <td>Prezime</td>
+          <td><input type="text" class="form-control" [(ngModel)]="prezime"></td>
+        </tr>
+        <tr>
+          <td>Broj telefona</td>
+          <td><input type="text" class="form-control" [(ngModel)]="telefon"></td>
+        </tr>
+        <tr>
+          <td>Mejl</td>
+          <td><input type="text" class="form-control" [(ngModel)]="mejl"></td>
+        </tr>
+        <tr>
+          <td>Specijalizacija</td>
+          <td><input type="text" class="form-control" [(ngModel)]="specijalizacija"></td>
+        </tr>
+        <tr>
+          <td colspan="2"><button class="btn btn-primary" (click)="dodajRadnika()">Dodaj radnika</button></td>
+        </tr>
+      </table>
+      <hr>
+    </div>
+
+    <div class="col-md-6">
+      <h2>Zahtevaj proširenje kapaciteta radnika</h2>
+      <div class="row">
+          Zahtevaj još <input type="number" class="form-control" [(ngModel)]="prosirenje"> radnika
+        <div class="row">
+          <button class="btn btn-primary" (click)="posaljiZahtev()">Pošalji zahtev</button>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <p class="text-danger">{{ greskaZahtev }}</p>
+          </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <p class="text-danger">{{ greska }}</p>
+    </div>
+  </div>
 </div>

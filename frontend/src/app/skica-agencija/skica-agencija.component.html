@@ -1,43 +1,53 @@
-<a [routerLink]="['/agencija/profil']">Profil</a>
-<a [routerLink]="['/agencija/radnici']">Radnici</a>
-<a [routerLink]="['/agencija/poslovi']">Poslovi</a>
-<button (click)="odjava()">Odjavi se</button>
-<hr>
-<h2>Radnici trenutno na poslu</h2>
-<table>
-    <tr>
-        <th>Ime</th>
-        <th>Prezime</th>
-        <th>Specijalizacija</th>
-    </tr>
-    <tr *ngFor="let r of radniciPosao">
-        <td>{{r.ime}}</td>
-        <td>{{r.prezime}}</td>
-        <td>{{r.specijalizacija}}</td>
-    </tr>
-</table>
+<app-zaglavlje-agencija></app-zaglavlje-agencija>
 
-<h2>Dodaj nove radnike na posao</h2>
-<table>
-    <tr>
-        <th>Ime</th>
-        <th>Prezime</th>
-        <th>Specijalizacija</th>
-    </tr>
-    <tr *ngFor="let r of radniciSlobodni">
-        <td>{{r.ime}}</td>
-        <td>{{r.prezime}}</td>
-        <td>{{r.specijalizacija}}</td>
-        <td><button (click)="dodajRadnika(r)">Dodaj</button></td>
-    </tr>
-</table>
-
-<canvas #canvas 
-width="1000" height="500" 
-style="border: 1px solid black;"
-(mousedown)="izaberiProstoriju($event)"></canvas>
-
-<div *ngIf="izabranaProstorija != null">
-    <button *ngIf="prostorije[izabranaProstorija].boja=='white'" (click)="napredak()" [disabled]="radniciPosao.length<prostorije.length">Opremi prostoriju</button>
-    <button *ngIf="prostorije[izabranaProstorija].boja=='red'" (click)="napredak()" [disabled]="radniciPosao.length<prostorije.length">Zavrsi posao</button>
-</div>
+<div class="container">
+   
+    <h2>Radnici na ovom poslu</h2>
+    <table class="table" *ngIf="radniciPosao.length > 0">
+      <thead>
+        <tr>
+          <th>Ime</th>
+          <th>Prezime</th>
+          <th>Specijalizacija</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let r of radniciPosao">
+          <td>{{ r.ime }}</td>
+          <td>{{ r.prezime }}</td>
+          <td>{{ r.specijalizacija }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <p *ngIf="radniciPosao.length === 0">Trenutno nemate radnike na ovom poslu</p>
+  
+    <h2>Dodaj nove radnike na posao</h2>
+    <table class="table" *ngIf="radniciSlobodni.length > 0">
+      <thead>
+        <tr>
+          <th>Ime</th>
+          <th>Prezime</th>
+          <th>Specijalizacija</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let r of radniciSlobodni">
+          <td>{{ r.ime }}</td>
+          <td>{{ r.prezime }}</td>
+          <td>{{ r.specijalizacija }}</td>
+          <td>
+            <button class="btn btn-primary" (click)="dodajRadnika(r)">Dodaj</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p *ngIf="radniciSlobodni.length === 0">Trenutno nemate slobodnih radnika</p>
+  
+    <canvas #canvas width="1000" height="500" style="border: 1px solid black;" (mousedown)="izaberiProstoriju($event)"></canvas>
+  <br>
+    <div *ngIf="izabranaProstorija != null">
+      <button *ngIf="prostorije[izabranaProstorija].boja === 'white'" class="btn btn-primary" (click)="napredak()" [disabled]="radniciPosao.length < prostorije.length">Opremi prostoriju</button>
+      <button *ngIf="prostorije[izabranaProstorija].boja === 'red'" class="btn btn-primary" (click)="napredak()" [disabled]="radniciPosao.length < prostorije.length">Zavrsi posao</button>
+    </div>
+  </div>
+  

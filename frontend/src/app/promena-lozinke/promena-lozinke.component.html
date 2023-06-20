@@ -1,22 +1,39 @@
-<h3>Promena lozinke</h3>
+<app-zaglavlje-klijent *ngIf="korisnik.tip=='klijent'"></app-zaglavlje-klijent>
+<app-zaglavlje-agencija *ngIf="korisnik.tip=='agencija'"></app-zaglavlje-agencija>
 
-<table>
-    <tr>
-        <td>Stara lozinka</td>
-        <td><input type="password" [(ngModel)]="staraLozinka" /></td>
-    </tr>
-    <tr>
-        <td>Nova lozinka</td>
-        <td><input type="password" [(ngModel)]="novaLozinka" /></td>
-    </tr>
-    <tr>
-        <td>Potvrda nove lozinke</td>
-        <td><input type="password" [(ngModel)]="potvrdaNoveLozinke" /></td>
-    </tr>
-    <tr>
-        <td colspan="2">
-            <button (click)="promeniLozinku()">Promeni lozinku</button>
-        </td>
-    </tr>
-</table>
-{{greska}}
+<div class="container">
+    <h3>Promena lozinke</h3>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="staraLozinka">Stara lozinka</label>
+                <input type="password" class="form-control" id="staraLozinka" [(ngModel)]="staraLozinka">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="novaLozinka">Nova lozinka</label>
+                <input type="password" class="form-control" id="novaLozinka" [(ngModel)]="novaLozinka">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="potvrdaNoveLozinke">Potvrda nove lozinke</label>
+                <input type="password" class="form-control" id="potvrdaNoveLozinke" [(ngModel)]="potvrdaNoveLozinke">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <button class="btn btn-primary" (click)="promeniLozinku()">Promeni lozinku</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<span class="text-danger">{{ greska }}</span>

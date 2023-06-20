@@ -24,6 +24,9 @@ import { SkicaAgencijaComponent } from './skica-agencija/skica-agencija.componen
 import { SkicaKlijentComponent } from './skica-klijent/skica-klijent.component';
 import { SkicaIzmeneComponent } from './skica-izmene/skica-izmene.component';
 import { PromenaLozinkeComponent } from './promena-lozinke/promena-lozinke.component';
+import { KorisniciAdminComponent } from './korisnici-admin/korisnici-admin.component';
+import { RegistracijaAdminComponent } from './registracija-admin/registracija-admin.component';
+import { PosloviAdminComponent } from './poslovi-admin/poslovi-admin.component';
 
 const routes: Routes = [
   { path: '', component: PocetnaComponent },
@@ -34,6 +37,9 @@ const routes: Routes = [
   { path: 'klijent', component: KlijentComponent },
   { path: 'agencija', component: AgencijaComponent },
   { path: 'admin', component: AdminComponent },
+  { path: 'admin/korisnici', component: KorisniciAdminComponent },
+  { path: 'admin/registracija', component: RegistracijaAdminComponent },
+  { path: 'admin/poslovi', component: PosloviAdminComponent },
   { path: 'promena-lozinke', component: PromenaLozinkeComponent },
   { path: 'admin/azuriranje', component: AzuriranjeAdminComponent },
   { path: 'admin/radnici', component: RadniciAdminComponent },

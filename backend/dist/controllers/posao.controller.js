@@ -71,6 +71,14 @@ class PossaoController {
                     res.json(posao);
             });
         };
+        this.dohvatiPoslove = (req, res) => {
+            posao_1.default.find({}, (err, poslovi) => {
+                if (err)
+                    console.log(err);
+                else
+                    res.json(poslovi);
+            });
+        };
     }
 }
 exports.PossaoController = PossaoController;

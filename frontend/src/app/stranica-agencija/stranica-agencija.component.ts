@@ -8,6 +8,8 @@ import { Objekat } from '../models/objekat';
 import { ObjekatService } from '../services/objekat.service';
 import { PosaoService } from '../services/posao.service';
 import { Posao } from '../models/posao';
+import { BlokiranaAgencija } from '../models/blokiranaAgencija';
+import { BlokiranjeService } from '../services/blokiranje.service';
 
 @Component({
   selector: 'app-stranica-agencija',
@@ -19,7 +21,8 @@ export class StranicaAgencijaComponent implements OnInit {
     private agencijaServis: AgencijaService,
     private recenzijaServis: RecenzijaService,
     private objekatServis: ObjekatService,
-    private posaoServis: PosaoService
+    private posaoServis: PosaoService,
+    private blokiranjeServis: BlokiranjeService
   ) {}
 
   ngOnInit(): void {
@@ -51,6 +54,11 @@ export class StranicaAgencijaComponent implements OnInit {
       .subscribe((poslovi: Posao[]) => {
         this.posloviKlijenta = poslovi;
       });
+    this.blokiranjeServis
+      .dohvatiAgenciju(korisnickoIme)
+      .subscribe((blokiranaAgencija: BlokiranaAgencija) => {
+        this.blokiranaAgencija = blokiranaAgencija;
+      });
   }
 
   objekatZauzet(idObjekat) {
@@ -73,8 +81,12 @@ export class StranicaAgencijaComponent implements OnInit {
       this.greska = 'Izabrani objekat se vec nalazi medju poslovima';
       return;
     }
-    if (new Date(this.vremenskiPeriod) < new Date()) {
+    if (new Date(this.pocetak) < new Date()) {
       this.greska = 'Izabrani datum mora biti u buducnosti';
+      return;
+    }
+    if (new Date(this.kraj) < new Date(this.pocetak)) {
+      this.greska = 'Krajnji datum mora biti posle pocetnog';
       return;
     }
     this.posaoServis
@@ -84,25 +96,29 @@ export class StranicaAgencijaComponent implements OnInit {
         this.objekat,
         'na cekanju',
         false,
-        this.vremenskiPeriod
+        this.pocetak,
+        this.kraj
       )
       .subscribe((posao) => {
         alert('Uspesno poslat zahtev za saradnju!');
         this.objekat = '';
-        this.vremenskiPeriod = new Date();
+        this.pocetak = new Date();
+        this.kraj = new Date();
         this.greska = '';
         this.ngOnInit();
       });
   }
 
-  agencija: Agencija;
+  agencija: Agencija = new Agencija();
   klijent: string = '';
   registrovan: boolean = false;
   recenzije: Recenzija[] = [];
+  blokiranaAgencija: BlokiranaAgencija = new BlokiranaAgencija();
 
   objekat: string = '';
   objekti: Objekat[] = [];
-  vremenskiPeriod: Date = new Date();
+  pocetak: Date = new Date();
+  kraj: Date = new Date();
 
   posloviKlijenta: Posao[] = [];
 

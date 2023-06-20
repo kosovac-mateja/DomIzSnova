@@ -1,46 +1,17 @@
-<a [routerLink]="['/agencija/profil']">Profil</a>
-<a [routerLink]="['/agencija/radnici']">Radnici</a>
-<a [routerLink]="['/agencija/poslovi']">Poslovi</a>
-<button (click)="odjava()">Odjavi se</button>
-<hr>
-<h2>Zahtevi od klijenata</h2>
-<table *ngIf="objekti.length==poslovi.length && klijenti.length==poslovi.length && brojZahteva>0">
-    <tr>
-        <th>Ime</th>
-        <th>Prezime</th>
-        <th>Kontakt telefon</th>
-        <th>Mejl</th>
-        <th>Adresa</th>
-        <th>Tip</th>
-        <th>Broj prostorija</th>
-        <th>Kvadratura</th>
-        <th>Vremenski period</th>
-        <th colspan="2">Akcija</th>
-    </tr>
-    <ng-container *ngFor="let p of poslovi">
-        <tr *ngIf="p.status=='na cekanju' || p.status=='ponuda'">
-            <td>{{klijent(p.klijent).ime}}</td>
-            <td>{{klijent(p.klijent).prezime}}</td>
-            <td>{{klijent(p.klijent).telefon}}</td>
-            <td>{{klijent(p.klijent).mejl}}</td>
-            <td>{{objekat(p.idObjekat).adresa}}</td>
-            <td>{{objekat(p.idObjekat).tip}}</td>
-            <td>{{objekat(p.idObjekat).brProstorija}}</td>
-            <td>{{objekat(p.idObjekat).kvadratura}}</td>
-            <td>{{p.vremenskiPeriod}}</td>
-            <td><button (click)="prihvati(p._id)" *ngIf="!prihvacenaPonuda && p.status=='na cekanju'">Prihvati</button></td>
-            <td><button (click)="odbij(p._id)" *ngIf="!prihvacenaPonuda && p.status=='na cekanju'">Odbij</button></td>
-            <td><input type="number" [(ngModel)]="ponuda" *ngIf="prihvacenaPonuda && p._id==izabranaAgencija"></td>
-            <td><button (click)="posaljiPonudu(p._id)" *ngIf="prihvacenaPonuda && p._id==izabranaAgencija">Posalji ponudu</button></td>
-        </tr>
-    </ng-container>
-</table>
-<p *ngIf="brojZahteva==0">Trenutno nema zahteva</p>
-{{greska}}
+<div class="container">
+  <app-zaglavlje-agencija></app-zaglavlje-agencija>
 
-<h2>Aktivni poslovi</h2>
-<table *ngIf="objekti.length==poslovi.length && klijenti.length==poslovi.length && brojAktivnih>0">
-    <tr>
+  <h2>Zahtevi od klijenata</h2>
+  <table
+    class="table"
+    *ngIf="
+      objekti.length == poslovi.length &&
+      klijenti.length == poslovi.length &&
+      brojZahteva > 0
+    "
+  >
+    <thead>
+      <tr>
         <th>Ime</th>
         <th>Prezime</th>
         <th>Kontakt telefon</th>
@@ -50,21 +21,106 @@
         <th>Broj prostorija</th>
         <th>Kvadratura</th>
         <th>Vremenski period</th>
-        <th colspan="2">Akcija</th>
-    </tr>
-    <ng-container *ngFor="let p of poslovi">
-        <tr *ngIf="p.status=='aktivan'">
-            <td>{{klijent(p.klijent).ime}}</td>
-            <td>{{klijent(p.klijent).prezime}}</td>
-            <td>{{klijent(p.klijent).telefon}}</td>
-            <td>{{klijent(p.klijent).mejl}}</td>
-            <td>{{objekat(p.idObjekat).adresa}}</td>
-            <td>{{objekat(p.idObjekat).tip}}</td>
-            <td>{{objekat(p.idObjekat).brProstorija}}</td>
-            <td>{{objekat(p.idObjekat).kvadratura}}</td>
-            <td>{{p.vremenskiPeriod}}</td>
-            <td><button (click)="skica(p.idObjekat, p._id)">Prikazi skicu</button></td>
+        <th colspan="3">Akcija</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let p of poslovi">
+        <tr *ngIf="p.status === 'na cekanju' || p.status === 'ponuda'">
+          <td>{{ klijent(p.klijent).ime }}</td>
+          <td>{{ klijent(p.klijent).prezime }}</td>
+          <td>{{ klijent(p.klijent).telefon }}</td>
+          <td>{{ klijent(p.klijent).mejl }}</td>
+          <td>{{ objekat(p.idObjekat).adresa }}</td>
+          <td>{{ objekat(p.idObjekat).tip }}</td>
+          <td>{{ objekat(p.idObjekat).brProstorija }}</td>
+          <td>{{ objekat(p.idObjekat).kvadratura }}</td>
+          <td>{{ vremenskiPeriod(p) }}</td>
+          <td>
+            <button
+              class="btn btn-primary"
+              (click)="prihvati(p._id)"
+              *ngIf="!prihvacenaPonuda && p.status === 'na cekanju'"
+            >
+              Prihvati
+            </button>
+          </td>
+          <td>
+            <button
+              class="btn btn-danger"
+              (click)="odbij(p._id)"
+              *ngIf="!prihvacenaPonuda && p.status === 'na cekanju'"
+            >
+              Odbij
+            </button>
+          </td>
+          <td>
+            <input
+              type="number"
+              class="short-input"
+              [(ngModel)]="ponuda"
+              *ngIf="prihvacenaPonuda && p._id === izabranaAgencija"
+            />
+          </td>
+          <td>
+            <button
+              class="btn btn-primary"
+              (click)="posaljiPonudu(p._id)"
+              *ngIf="prihvacenaPonuda && p._id === izabranaAgencija"
+            >
+              Posalji ponudu
+            </button>
+          </td>
         </tr>
-    </ng-container>
-</table>
-<p *ngIf="brojAktivnih==0">Trenutno nema aktivnih poslova</p>
+      </ng-container>
+    </tbody>
+  </table>
+  <p *ngIf="brojZahteva === 0">Trenutno nema zahteva</p>
+  <div>{{ greska }}</div>
+
+  <h2>Aktivni poslovi</h2>
+  <table
+    class="table"
+    *ngIf="
+      objekti.length == poslovi.length &&
+      klijenti.length == poslovi.length &&
+      brojAktivnih > 0
+    "
+  >
+    <thead>
+      <tr>
+        <th>Ime</th>
+        <th>Prezime</th>
+        <th>Kontakt telefon</th>
+        <th>Mejl</th>
+        <th>Adresa</th>
+        <th>Tip</th>
+        <th>Broj prostorija</th>
+        <th>Kvadratura</th>
+        <th>Vremenski period</th>
+        <th>Akcija</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let p of poslovi">
+        <tr *ngIf="p.status === 'aktivan'">
+          <td>{{ klijent(p.klijent).ime }}</td>
+          <td>{{ klijent(p.klijent).prezime }}</td>
+          <td>{{ klijent(p.klijent).telefon }}</td>
+          <td>{{ klijent(p.klijent).mejl }}</td>
+          <td class="wide-column">{{ objekat(p.idObjekat).adresa }}</td>
+          <td>{{ objekat(p.idObjekat).tip }}</td>
+          <td>{{ objekat(p.idObjekat).brProstorija }}</td>
+          <td>{{ objekat(p.idObjekat).kvadratura }}</td>
+          <td class="wide-column">{{ vremenskiPeriod(p) }}</td>
+          <td>
+            <button class="btn btn-primary" (click)="skica(p.idObjekat, p._id)">
+              Prikazi skicu
+            </button>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+  <p *ngIf="brojAktivnih === 0">Trenutno nema aktivnih poslova</p>
+</div>

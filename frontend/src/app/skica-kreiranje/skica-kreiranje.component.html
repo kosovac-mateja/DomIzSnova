@@ -1,48 +1,44 @@
-<a [routerLink]="['/klijent/profil']">Profil</a> 
-<a [routerLink]="['/klijent/objekat']">Objekat</a> 
-<a [routerLink]="['/klijent/agencije']">Agencije</a> 
-<a [routerLink]="['/klijent/poslovi']">Poslovi</a> 
-<button (click)="odjava()">Odjavi se</button>
-
-<table>
-    <ng-container *ngIf="!dodavanjeVrata">
-        <tr>
-            <td>Prostorija 1</td>
-            <td><input type="number" [(ngModel)]="sirine[0]" placeholder="Sirina [m]"></td>
-            <td><input type="number" [(ngModel)]="visine[0]" placeholder="Visina [m]"></td>
-        </tr>
-        <tr *ngIf="brProstorija > 1">
-            <td>Prostorija 2</td>
-            <td><input type="number" [(ngModel)]="sirine[1]" placeholder="Sirina [m]"></td>
-            <td><input type="number" [(ngModel)]="visine[1]" placeholder="Visina [m]"></td>
-        </tr>
-        <tr *ngIf="brProstorija > 2">
-            <td>Prostorija 3</td>
-            <td><input type="number" [(ngModel)]="sirine[2]" placeholder="Sirina [m]"></td>
-            <td><input type="number" [(ngModel)]="visine[2]" placeholder="Visina [m]"></td>
-        </tr>
-    </ng-container>
-    {{greska}}
-    <tr>
-        <td>
-            <button (click)="dodajProstorije()"  *ngIf="!dodavanjeProstorija && !dodavanjeVrata">Dodaj prostorije</button>
-            <button (click)="dodajProstorije()"  *ngIf="dodavanjeProstorija">Izmeni prostorije</button>
-        </td> 
-        <td>
-            <button (click)="dodajVrata()" *ngIf="dodavanjeProstorija" [disabled]="!prostorijeSeDodiruju()">Dodaj vrata</button>
-        </td>
-    </tr>
-    <tr>
-        <td colspan="3">
-            <button (click)="zavrsi()" *ngIf="dodavanjeVrata" [disabled]="!vrataDodirujuProstorije()">Zavrsi uredjivanje i dodaj novi objekat</button>
-        </td>
-    </tr>
-</table>
-
-<canvas #canvas 
-width="1000" height="500" 
-style="border: 1px solid black;"
-(mousedown)="pocetakPrevlacenja($event)"
-(mousemove)="prevuci($event)"
-(mouseup)="krajPrevlacenja()">
-</canvas>
+<app-zaglavlje-klijent></app-zaglavlje-klijent>
+<div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <table>
+          <ng-container>
+            <tr>
+              <td>Prostorija 1</td>
+              <td><input type="number" [(ngModel)]="sirine[0]" placeholder="Sirina [m]" class="form-control" [disabled]="dodavanjeVrata"></td>
+              <td><input type="number" [(ngModel)]="visine[0]" placeholder="Visina [m]" class="form-control" [disabled]="dodavanjeVrata"></td>
+            </tr>
+            <tr *ngIf="brProstorija > 1">
+              <td>Prostorija 2</td>
+              <td><input type="number" [(ngModel)]="sirine[1]" placeholder="Sirina [m]" class="form-control" [disabled]="dodavanjeVrata"></td>
+              <td><input type="number" [(ngModel)]="visine[1]" placeholder="Visina [m]" class="form-control" [disabled]="dodavanjeVrata"></td>
+            </tr>
+            <tr *ngIf="brProstorija > 2">
+              <td>Prostorija 3</td>
+              <td><input type="number" [(ngModel)]="sirine[2]" placeholder="Sirina [m]" class="form-control" [disabled]="dodavanjeVrata"></td>
+              <td><input type="number" [(ngModel)]="visine[2]" placeholder="Visina [m]" class="form-control" [disabled]="dodavanjeVrata"></td>
+            </tr>
+          </ng-container>
+        </table>
+        {{greska}}
+      </div>
+      <div class="col-md-6">
+        <div class="text-right mb-2">
+            <button (click)="dodajProstorije()" *ngIf="!dodavanjeProstorija && !dodavanjeVrata" class="btn btn-primary">Dodaj prostorije</button>
+            <button (click)="dodajProstorije()" *ngIf="dodavanjeProstorija" class="btn btn-primary ml-2">Izmeni prostorije</button>
+          </div>
+          <div class="text-right mb-2">
+            <button (click)="dodajVrata()" *ngIf="dodavanjeProstorija" [disabled]="!prostorijeSeDodiruju()" class="btn btn-primary">Dodaj vrata</button>
+          </div>
+          <div class="text-right">
+            <button (click)="zavrsi()" *ngIf="dodavanjeVrata" [disabled]="!vrataDodirujuProstorije()" class="btn btn-primary">Zavrsi uredjivanje i dodaj novi objekat</button>
+          </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <canvas #canvas width="1000" height="500" style="border: 1px solid black;" (mousedown)="pocetakPrevlacenja($event)" (mousemove)="prevuci($event)" (mouseup)="krajPrevlacenja()"></canvas>
+      </div>
+    </div>
+  </div>
+  

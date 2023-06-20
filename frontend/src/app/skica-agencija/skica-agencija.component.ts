@@ -133,7 +133,7 @@ export class SkicaAgencijaComponent implements OnInit {
     this.radnikServis
       .azurirajPosaoRadnika(radnik._id, sessionStorage.getItem('idPosao'))
       .subscribe((radnik: Radnik) => {
-        this.ngOnInit();
+        window.location.reload();
       });
   }
 
@@ -151,19 +151,20 @@ export class SkicaAgencijaComponent implements OnInit {
       }
     });
 
-    if (zavrsenoProstorija == this.prostorije.length) {
-      this.radniciPosao.forEach((radnik) => {
-        this.radnikServis
-          .azurirajPosaoRadnika(radnik._id, null)
-          .subscribe((res) => {});
-      });
-    }
-
     this.skicaServis
       .promeniBoju(this.skica._id, noveBoje)
       .subscribe((skica: Skica) => {
-        this.skica = skica;
-        this.skiciraj();
+        if (zavrsenoProstorija == this.prostorije.length) {
+          this.radniciPosao.forEach((radnik) => {
+            this.radnikServis
+              .azurirajPosaoRadnika(radnik._id, null)
+              .subscribe((res) => {
+                window.location.reload();
+              });
+          });
+        } else {
+          window.location.reload();
+        }
       });
   }
 

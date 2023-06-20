@@ -1,27 +1,30 @@
-<div class="telo">
-    <img src="../../assets/logo.png" alt="logotip kompanije" class="logo">
-    <h1>Prijava u DomIzSnova</h1>
-    <div class="forma">
-      <div class="red">
-        <label for="korisnickoIme">Korisničko ime</label>
-        <input type="text" name="korisnickoIme" id="korisnickoIme" [(ngModel)]="korisnickoIme">
+<app-zaglavlje-pocetna></app-zaglavlje-pocetna>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-4 col-md-6 col-sm-8">
+      <h1 class="text-center">Prijavi se</h1>
+      <div class="card">
+        <div class="card-body">
+          <div class="form-group">
+            <label for="korisnickoIme">Korisničko ime</label>
+            <input type="text" class="form-control" name="korisnickoIme" id="korisnickoIme" [(ngModel)]="korisnickoIme">
+          </div>
+          <div class="form-group">
+            <label for="lozinka">Lozinka</label>
+            <input type="password" class="form-control" name="lozinka" id="lozinka" [(ngModel)]="lozinka">
+          </div>
+          <div class="form-group text-center">
+            <a class="forgot-password-link" [routerLink]="['/zaboravljenaLozinka']">Zaboravljena lozinka?</a>
+          </div>
+          <div class="form-group text-center">
+            <button class="btn btn-primary" (click)="prijava()">Prijava</button>
+          </div>
+        </div>
       </div>
-      <div class="red">
-        <label for="lozinka">Lozinka</label>
-        <input type="password" name="lozinka" id="lozinka" [(ngModel)]="lozinka">
+      <div class="text-center mt-3">
+        Niste prijavljeni? <a [routerLink]="['/registracija']">Registruj se</a>
       </div>
-      <div class="zaboravljenaLozinka">
-        <a [routerLink]="['/zaboravljenaLozinka']">Zaboravljena lozinka?</a>
-      </div>
-      <div class="red">
-        <button (click)="prijava()">Prijava</button>
-      </div>
+      <div class="text-center text-danger">{{ greska }}</div>
     </div>
-
-    <div class="registracija">
-      Niste prijavljeni? <a [routerLink]="['/registracija']">Registruj se</a>
-    </div>
-  
-    <div class="greska">{{ greska }}</div>
   </div>
-  
+</div>

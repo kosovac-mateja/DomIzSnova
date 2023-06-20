@@ -1,0 +1,52 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+
+.navbar-domizsnova {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .04);
+}
+
+.navbar-section {
+  display: flex;
+  align-items: center;
+}
+
+.profile-section {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-brand,
+.nav-link,
+.my-form,
+.login-form {
+  font-family: Raleway, sans-serif;
+}
+
+.navbar-nav {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-nav li {
+  margin-right: 15px;
+}
+
+.profile-info {
+  display: flex;
+  align-items: center;
+}
+
+.username {
+  margin-right: 10px;
+}
+
+.profile-image {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.logout-link {
+  cursor: pointer;
+}

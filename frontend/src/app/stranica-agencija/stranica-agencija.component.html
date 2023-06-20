@@ -1,35 +1,63 @@
-<ng-container *ngIf="registrovan==true">
-    <a [routerLink]="['/klijent/profil']">Profil</a> 
-    <a [routerLink]="['/klijent/objekat']">Objekat</a> 
-    <a [routerLink]="['/klijent/agencije']">Agencije</a> 
-    <a [routerLink]="['/klijent/poslovi']">Poslovi</a> 
-</ng-container>
+<app-zaglavlje-pocetna *ngIf="!registrovan"></app-zaglavlje-pocetna>
+<app-zaglavlje-klijent *ngIf="registrovan"></app-zaglavlje-klijent>
+<div class="container">
+    <div class="agency-details">
+      <div class="logo">
+        <img *ngIf="agencija.slika !== ''" [src]="agencija.slika" alt="logoFirme">
+        <img *ngIf="agencija.slika === ''" src="../../assets/agencijaLogo.png" alt="logoFirme" height="50px" width="50px">
+      </div>
+      <div class="details">
+        <h1 [ngStyle]="{'color': blokiranaAgencija!=null ? 'red' : 'black'}">{{agencija.naziv}}</h1>
+        <h1 [ngStyle]="{'color': 'red'}" *ngIf="blokiranaAgencija!=null">(blokirana)</h1>
+        <p>{{agencija.opis}}</p>
+      </div>
+    </div>
+    
+    <div class="contact-details">
+      <table>
+        <tr>
+          <td>Adresa:</td>
+          <td>{{agencija.ulica}}, {{agencija.grad}}, {{agencija.drzava}}</td>
+        </tr>
+        <tr>
+          <td>Telefon:</td>
+          <td>{{agencija.telefon}}</td>
+        </tr>
+        <tr>
+          <td>Mejl:</td>
+          <td>{{agencija.mejl}}</td>
+        </tr>
+      </table>
+    </div>
+    
+    <h3>Recenzije klijenata</h3>
+    <div class="reviews-container" *ngIf="recenzije.length > 0">
+    <div class="review" *ngFor="let r of recenzije">
+    <div class="review-header">
+        <span class="review-author">{{ registrovan ? r.klijent : 'Registrovan korisnik' }}</span>
+        <span class="review-rating">{{ r.ocena }}</span>
+    </div>
+    <div class="review-content">{{ r.komentar }}</div>
+    </div>
+    </div>
+    <p *ngIf="recenzije.length === 0">Agencija nema recenzije</p>
 
-<div *ngIf="agencija">
-    {{agencija.naziv}}
-</div>
-
-<h2>Recenzije klijenata</h2>
-<table *ngIf="recenzije.length>0">
-    <tr>
-        <th>Korisnicko ime</th>
-        <th>Ocena</th>
-        <th>Komentar</th>
-    </tr>
-    <tr *ngFor="let r of recenzije">
-        <td *ngIf="registrovan==true">{{r.klijent}}</td>
-        <td *ngIf="registrovan!=true">Registrovan korisnik</td>
-        <td>{{r.ocena}}</td>
-        <td>{{r.komentar}}</td>
-    </tr>
-</table>
-<p *ngIf="recenzije.length==0">Agencija nema recenzije</p>
-<div  *ngIf="registrovan==true" >
-    <h2>Saradnja sa agencijom</h2>
-    <select [(ngModel)]="objekat">
-        <option *ngFor="let o of objekti" [value]="o._id">{{o.tip}}, {{o.adresa}}</option>
-    </select>
-    <input type="date" [(ngModel)]="vremenskiPeriod">
-    <button (click)="zatraziSaradnju()">Zatrazi saradnju</button>
-</div>
-{{greska}}
+  
+    <div *ngIf="registrovan && objekti.length>0" class="collaboration-section">
+      <h2>Saradnja sa agencijom</h2>
+      <div class="form-group">
+        <label for="objekat">Izaberite objekat:</label>
+        <select id="objekat" class="form-control" [(ngModel)]="objekat">
+          <option *ngFor="let o of objekti" [value]="o._id">{{o.tip}}, {{o.adresa}}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="vremenskiPeriod">Izaberite vremenski period:</label>
+        <input type="date" id="pocetak" class="form-control" [(ngModel)]="pocetak">-
+        <input type="date" id="kraj" class="form-control" [(ngModel)]="kraj">
+      </div>
+      <button class="btn btn-primary" (click)="zatraziSaradnju()">Zatrazi saradnju</button>
+    </div>
+    <p class="text-danger" *ngIf="greska">{{greska}}</p>
+  </div>
+  

@@ -1,50 +1,48 @@
-<a [routerLink]="['/klijent/profil']">Profil</a> 
-<a [routerLink]="['/klijent/objekat']">Objekat</a> 
-<a [routerLink]="['/klijent/agencije']">Agencije</a> 
-<a [routerLink]="['/klijent/poslovi']">Poslovi</a> 
-<button (click)="odjava()">Odjavi se</button>
-<div class="telo">
-    <div class="header-container">
-        <div class="header">Dom Iz Snova</div>
-        <div class="logo-firme">
-            <img src="../../assets/logo.png" alt="Logo">
+<app-zaglavlje-klijent></app-zaglavlje-klijent>
+<div class="container">
+    <div class="telo">
+      <div class="d-flex justify-content-between">
+        <div class="pretraga-container">
+          <div class="pretraga">
+            <input type="text" name="pretragaNaziv" [(ngModel)]="pretragaNaziv" *ngIf="parametarPretrage=='naziv' || parametarPretrage=='oba'" placeholder="Naziv agencije">
+            <input type="text" name="pretragaAdresa" [(ngModel)]="pretragaAdresa" *ngIf="parametarPretrage=='adresa' || parametarPretrage=='oba'" placeholder="Adresa agencije">
+            Pretraga po 
+            <select name="parametarPretrage" [(ngModel)]="parametarPretrage">
+              <option value="naziv">nazivu</option>
+              <option value="adresa">adresi</option>
+              <option value="oba">nazivu i adresi</option>
+            </select>
+            <button class="btn btn-primary" (click)="pretraga()">Pretraga</button>
+          </div>
         </div>
-    </div>
-    <div class="pretraga">
-        <input type="text" name="pretragaNaziv" [(ngModel)]="pretragaNaziv" *ngIf="parametarPretrage=='naziv' || parametarPretrage=='oba'" placeholder="Naziv agencije">
-        <input type="text" name="pretragaAdresa" [(ngModel)]="pretragaAdresa" *ngIf="parametarPretrage=='adresa' || parametarPretrage=='oba'" placeholder="Adresa agencije">
-        Pretraga po
-        <select name="parametarPretrage" [(ngModel)]="parametarPretrage">
-            <option value="naziv">nazivu</option>
-            <option value="adresa">adresi</option>
-            <option value="oba">nazivu i adresi</option>
-        </select>
-        <button (click)="pretraga()">Pretraga</button>
-    </div>
-    <div class="sortiranje">
-        Sortiraj po
-        <select name="parametarSortiranja" [(ngModel)]="parametarSortiranja">
-            <option value="naziv">nazivu</option>
-            <option value="adresa">adresi</option>
-        </select>
-        <select name="nacinSortiranja" [(ngModel)]="nacinSortiranja">
-            <option value="rastuce">rastuce</option>
-            <option value="opadajuce">opadajuce</option>
-        </select>
-        <button (click)="sortiranje()">Sortiraj</button>
-    </div>
-    <div class="agency-list">
+        <div class="sortiranje-container">
+          <div class="sortiranje">
+            Sortiraj po 
+            <select name="parametarSortiranja" [(ngModel)]="parametarSortiranja">
+              <option value="naziv">nazivu</option>
+              <option value="adresa">adresi</option>
+            </select>
+            <select name="nacinSortiranja" [(ngModel)]="nacinSortiranja">
+              <option value="rastuce">rastuce</option>
+              <option value="opadajuce">opadajuce</option>
+            </select>
+            <button class="btn btn-primary" (click)="sortiranje()">Sortiraj</button>
+          </div>
+        </div>
+      </div>
+      <div class="agency-list">
         <div *ngFor="let a of agencije" class="agency-item">
-            <div class="title"><a [routerLink]="['/agencija/stranica']" (click)="agencijaIzbor(a.korisnickoIme)">{{a.naziv}}</a></div>
-            <hr class="divider" />
-            <div class="content">
-                <div class="logo">
-                    <img *ngIf="a.slika !== ''" [src]="a.slika" alt="logoFirme">
-                    <img *ngIf="a.slika === ''" src="../../assets/agencijaLogo.png" alt="logoFirme" height="50px" width="50px">
-                </div>
-                <div class="description">{{a.opis}}</div>
+          <div class="title"><a [routerLink]="['/agencija/stranica']" (click)="agencijaIzbor(a.korisnickoIme)">{{a.naziv}}</a></div>
+          <hr class="divider" />
+          <div class="content">
+            <div class="logo">
+              <img *ngIf="a.slika !== ''" [src]="a.slika" alt="logoFirme">
+              <img *ngIf="a.slika === ''" src="../../assets/agencijaLogo.png" alt="logoFirme" height="50px" width="50px">
             </div>
+            <div class="description">{{a.opis}}</div>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-
+  </div>
+  

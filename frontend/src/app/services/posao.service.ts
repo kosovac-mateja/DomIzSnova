@@ -15,7 +15,8 @@ export class PosaoService {
     idObjekat: string,
     status: string,
     prekid: boolean,
-    vremenskiPeriod: Date
+    pocetak: Date,
+    kraj: Date
   ) {
     const posao = {
       klijent: klijent,
@@ -23,7 +24,8 @@ export class PosaoService {
       idObjekat: idObjekat,
       status: status,
       prekid: prekid,
-      vremenskiPeriod: vremenskiPeriod,
+      pocetak: pocetak,
+      kraj: kraj,
       ponuda: 0,
     };
 
@@ -83,5 +85,9 @@ export class PosaoService {
     return this.http.post(`${this.url}/posao/dohvatiPosao`, {
       id: idPosao,
     });
+  }
+
+  dohvatiPoslove() {
+    return this.http.get(`${this.url}/posao/dohvatiPoslove`);
   }
 }

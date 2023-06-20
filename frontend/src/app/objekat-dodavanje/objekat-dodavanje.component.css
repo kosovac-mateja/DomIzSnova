@@ -1,0 +1,32 @@
+.container {
+    margin-top: 20px;
+  }
+  
+  .table {
+    margin-bottom: 20px;
+  }
+  
+  .form-control {
+    width: 100%;
+  }
+  
+  .btn-primary {
+    margin-top: 10px;
+  }
+  
+  h1 {
+    margin: 20px 0;
+  }
+  
+  .form-label {
+    margin-top: 10px;
+  }
+  
+  p {
+    margin-top: 10px;
+  }
+  
+  .text-danger {
+    font-size: 14px;
+    color: red;
+  }

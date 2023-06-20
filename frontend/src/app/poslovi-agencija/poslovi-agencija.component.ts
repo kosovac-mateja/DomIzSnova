@@ -81,7 +81,7 @@ export class PosloviAgencijaComponent implements OnInit {
     this.posaoServis
       .azurirajPodatak(id, 'status', 'odbijen')
       .subscribe((odgovor) => {
-        this.ngOnInit();
+        window.location.reload();
       });
   }
 
@@ -107,6 +107,24 @@ export class PosloviAgencijaComponent implements OnInit {
     sessionStorage.setItem('idSkica', idSkica);
     sessionStorage.setItem('idPosao', idP);
     this.ruter.navigate(['/agencija/skica']);
+  }
+
+  vremenskiPeriod(posao: Posao): string {
+    let pocetak = new Date(posao.pocetak);
+    let kraj = new Date(posao.kraj);
+    return (
+      pocetak.getDate() +
+      '.' +
+      (pocetak.getMonth() + 1) +
+      '.' +
+      pocetak.getFullYear() +
+      ' - ' +
+      kraj.getDate() +
+      '.' +
+      (kraj.getMonth() + 1) +
+      '.' +
+      kraj.getFullYear()
+    );
   }
 
   odjava() {

@@ -29,6 +29,13 @@ import { SkicaAgencijaComponent } from './skica-agencija/skica-agencija.componen
 import { SkicaKlijentComponent } from './skica-klijent/skica-klijent.component';
 import { SkicaIzmeneComponent } from './skica-izmene/skica-izmene.component';
 import { PromenaLozinkeComponent } from './promena-lozinke/promena-lozinke.component';
+import { ZaglavljePocetnaComponent } from './zaglavlje-pocetna/zaglavlje-pocetna.component';
+import { ZaglavljeKlijentComponent } from './zaglavlje-klijent/zaglavlje-klijent.component';
+import { ZaglavljeAgencijaComponent } from './zaglavlje-agencija/zaglavlje-agencija.component';
+import { ZaglavljeAdminComponent } from './zaglavlje-admin/zaglavlje-admin.component';
+import { KorisniciAdminComponent } from './korisnici-admin/korisnici-admin.component';
+import { PosloviAdminComponent } from './poslovi-admin/poslovi-admin.component';
+import { RegistracijaAdminComponent } from './registracija-admin/registracija-admin.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +64,13 @@ import { PromenaLozinkeComponent } from './promena-lozinke/promena-lozinke.compo
     SkicaKlijentComponent,
     SkicaIzmeneComponent,
     PromenaLozinkeComponent,
+    ZaglavljePocetnaComponent,
+    ZaglavljeKlijentComponent,
+    ZaglavljeAgencijaComponent,
+    ZaglavljeAdminComponent,
+    KorisniciAdminComponent,
+    PosloviAdminComponent,
+    RegistracijaAdminComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],

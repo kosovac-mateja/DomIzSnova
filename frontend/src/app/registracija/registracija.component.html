@@ -1,67 +1,82 @@
-Ja sam
-<select [(ngModel)]="tip">
-    <option value="klijent">klijent</option>
-    <option value="agencija">agencija</option>
-</select>
-<table>
-    <tr>
-        <td>Korisnicko ime</td>
-        <td><input type="text" [(ngModel)]="korisnickoIme"></td>
-    </tr>
-    <tr>
-        <td>Lozinka</td>
-        <td><input type="password" [(ngModel)]="lozinka"></td>
-    </tr>
-    <tr>
-        <td>Potvrda lozinke</td>
-        <td><input type="password" [(ngModel)]="potvrdaLozinke"></td>
-    </tr>
-    <tr>
-        <td>Kontakt telefon</td>
-        <td><input type="text" [(ngModel)]="telefon"></td>
-    </tr>
-    <tr>
-        <td>Mejl</td>
-        <td><input type="text" [(ngModel)]="mejl"></td>
-    </tr>
-    <tr *ngIf="tip=='klijent'">
-        <td>Ime</td>
-        <td><input type="text" [(ngModel)]="ime"></td>
-    </tr>
-    <tr *ngIf="tip=='klijent'">
-        <td>Prezime</td>
-        <td><input type="text" [(ngModel)]="prezime"></td>
-    </tr>
-    <tr *ngIf="tip=='agencija'">
-        <td>Naziv agencije</td>
-        <td><input type="text" [(ngModel)]="naziv"></td>
-    </tr>
-    <tr *ngIf="tip=='agencija'">
-        <td>Ulica i broj</td>
-        <td><input type="text" [(ngModel)]="ulica"></td>
-    </tr>
-    <tr *ngIf="tip=='agencija'">
-        <td>Grad</td>
-        <td><input type="text" [(ngModel)]="grad"></td>
-    </tr>
-    <tr *ngIf="tip=='agencija'">
-        <td>Drzava</td>
-        <td><input type="text" [(ngModel)]="drzava"></td>
-    </tr>
-    <tr *ngIf="tip=='agencija'">
-        <td>Maticni broj agencije</td>
-        <td><input type="text" [(ngModel)]="maticniBroj"></td>
-    </tr>
-    <tr *ngIf="tip=='agencija'">
-        <td>Kratak opis agencije</td>
-        <td><textarea [(ngModel)]="opis"></textarea></td>
-    </tr>
-    <tr>
-        <td>Profilna slika</td>
-        <td><input type="file" (change)="otpremanjeSlike($event)"></td>
-    </tr>
-    <tr>
-        <td colspan="2"><button (click)="registracija()">Registruj se</button></td>
-    </tr>
-</table>
-{{greska}}
+<app-zaglavlje-pocetna></app-zaglavlje-pocetna>
+<div class="container">
+    <div class="row">
+      <div class="col-lg-6 offset-lg-3">
+        <h1 class="text-center">Registracija</h1>
+        <form>
+          <div class="form-group">
+            <label for="tip">Ja sam</label>
+            <select class="form-control" id="tip" [(ngModel)]="tip" name="tip">
+              <option value="klijent">klijent</option>
+              <option value="agencija">agencija</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="korisnickoIme">Korisničko ime</label>
+            <input type="text" class="form-control" id="korisnickoIme" [(ngModel)]="korisnickoIme" name="korisnickoIme">
+          </div>
+          <div class="form-group">
+            <label for="lozinka">Lozinka</label>
+            <input type="password" class="form-control" id="lozinka" [(ngModel)]="lozinka" name="lozinka">
+          </div>
+          <div class="form-group">
+            <label for="potvrdaLozinke">Potvrda lozinke</label>
+            <input type="password" class="form-control" id="potvrdaLozinke" [(ngModel)]="potvrdaLozinke" name="potvrdaLozinke">
+          </div>
+          <div class="form-group">
+            <label for="telefon">Kontakt telefon</label>
+            <input type="text" class="form-control" id="telefon" [(ngModel)]="telefon" name="telefon">
+          </div>
+          <div class="form-group">
+            <label for="mejl">Mejl</label>
+            <input type="text" class="form-control" id="mejl" [(ngModel)]="mejl" name="mejl">
+          </div>
+          <div *ngIf="tip=='klijent'">
+            <div class="form-group">
+              <label for="ime">Ime</label>
+              <input type="text" class="form-control" id="ime" [(ngModel)]="ime" name="ime">
+            </div>
+            <div class="form-group">
+              <label for="prezime">Prezime</label>
+              <input type="text" class="form-control" id="prezime" [(ngModel)]="prezime" name="prezime">
+            </div>
+          </div>
+          <div *ngIf="tip=='agencija'">
+            <div class="form-group">
+              <label for="naziv">Naziv agencije</label>
+              <input type="text" class="form-control" id="naziv" [(ngModel)]="naziv" name="naziv">
+            </div>
+            <div class="form-group">
+              <label for="ulica">Ulica i broj</label>
+              <input type="text" class="form-control" id="ulica" [(ngModel)]="ulica" name="ulica">
+            </div>
+            <div class="form-group">
+              <label for="grad">Grad</label>
+              <input type="text" class="form-control" id="grad" [(ngModel)]="grad" name="grad">
+            </div>
+            <div class="form-group">
+              <label for="drzava">Država</label>
+              <input type="text" class="form-control" id="drzava" [(ngModel)]="drzava" name="drzava">
+            </div>
+            <div class="form-group">
+              <label for="maticniBroj">Matični broj agencije</label>
+              <input type="text" class="form-control" id="maticniBroj" [(ngModel)]="maticniBroj" name="maticniBroj">
+            </div>
+            <div class="form-group">
+              <label for="opis">Kratak opis agencije</label>
+              <textarea class="form-control" id="opis" rows="3" [(ngModel)]="opis" name="opis"></textarea>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="profilnaSlika">Profilna slika</label>
+            <input type="file" class="form-control-file" id="profilnaSlika" (change)="otpremanjeSlike($event)" name="profilnaSlika">
+          </div>
+          <div class="form-group text-center">
+            <button class="btn btn-primary" (click)="registracija()">Registruj se</button>
+          </div>
+        </form>
+        <div class="text-danger">{{ greska }}</div>
+      </div>
+    </div>
+  </div>
+  

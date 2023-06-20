@@ -1,0 +1,66 @@
+.container {
+    margin-top: 50px;
+  }
+  
+  .telo {
+    margin-bottom: 50px;
+  }
+  
+  .d-flex {
+    display: flex;
+  }
+  
+  .justify-content-between {
+    justify-content: space-between;
+  }
+  
+  .pretraga-container {
+    margin-right: 10px;
+  }
+  
+  .sortiranje-container {
+    margin-left: 10px;
+  }
+  
+  .pretraga,
+  .sortiranje {
+    display: flex;
+    align-items: center;
+  }
+  
+  .pretraga input[type="text"],
+  .sortiranje select {
+    margin-right: 5px;
+  }
+  
+  .pretraga button,
+  .sortiranje button {
+    margin-left: 10px;
+  }
+  
+  .agency-list {
+    margin-top: 20px;
+  }
+  
+  .agency-item {
+    margin-bottom: 20px;
+  }
+  
+  .title {
+    font-weight: bold;
+  }
+  
+  .divider {
+    margin-top: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .logo img {
+    height: 50px;
+    width: 50px;
+  }
+  
+  .description {
+    margin-top: 10px;
+  }
+  

@@ -73,4 +73,11 @@ export class PossaoController {
             else res.json(posao);
         });
     };
+
+    dohvatiPoslove = (req: express.Request, res: express.Response) => {
+        PosaoModel.find({}, (err, poslovi) => {
+            if (err) console.log(err);
+            else res.json(poslovi);
+        });
+    };
 }

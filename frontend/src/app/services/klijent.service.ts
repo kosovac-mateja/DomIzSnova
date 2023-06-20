@@ -81,4 +81,8 @@ export class KlijentService {
         });
     });
   }
+
+  dohvatiKlijente() {
+    return this.http.get(`${this.url}/klijent/dohvatiKlijente`);
+  }
 }

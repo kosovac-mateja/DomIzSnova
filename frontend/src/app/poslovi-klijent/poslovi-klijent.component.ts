@@ -8,6 +8,7 @@ import { RecenzijaService } from '../services/recenzija.service';
 import { Recenzija } from '../models/recenzija';
 import { BlokiranjeService } from '../services/blokiranje.service';
 import { BlokiranaAgencija } from '../models/blokiranaAgencija';
+import { SkicaService } from '../services/skica.service';
 
 @Component({
   selector: 'app-poslovi-klijent',
@@ -20,6 +21,7 @@ export class PosloviKlijentComponent implements OnInit {
     private objekatServis: ObjekatService,
     private recenzijaServis: RecenzijaService,
     private blokiranjeServis: BlokiranjeService,
+    private skicaServis: SkicaService,
     private ruter: Router
   ) {}
 
@@ -29,6 +31,8 @@ export class PosloviKlijentComponent implements OnInit {
       .dohvatiPosloveKlijenta(klijent)
       .subscribe((poslovi: Posao[]) => {
         this.poslovi = poslovi;
+        console.log(poslovi);
+        this.izabraniPoslovi = poslovi;
         poslovi.forEach((p) => {
           if (p.status == 'zavrsen') {
             this.brojZavrsenihPoslova++;
@@ -58,13 +62,22 @@ export class PosloviKlijentComponent implements OnInit {
     this.posaoServis
       .azurirajPodatak(posao._id, 'status', 'aktivan')
       .subscribe((res) => {
-        posao.status = 'aktivan';
+        const objekat: Objekat = this.objekti.find(
+          (objekat: Objekat) => objekat._id == posao.idObjekat
+        );
+        let boje = [];
+        for (let i = 0; i < objekat.brProstorija; i++) {
+          boje.push('white');
+        }
+        this.skicaServis.promeniBoju(objekat.idSkica, boje).subscribe((res) => {
+          window.location.reload();
+        });
       });
   }
 
   odbijPonudu(posao: Posao) {
     this.posaoServis.obrisiPosao(posao._id).subscribe((res) => {
-      this.poslovi = this.poslovi.filter((p) => p._id != posao._id);
+      window.location.reload();
     });
   }
 
@@ -152,12 +165,62 @@ export class PosloviKlijentComponent implements OnInit {
     });
   }
 
+  izmeniPrikaz() {
+    if (this.prikaz == 'sve') {
+      this.izabraniPoslovi = this.poslovi;
+    } else if (this.prikaz == 'zavrsen') {
+      this.izabraniPoslovi = this.poslovi.filter(
+        (posao: Posao) => posao.status == 'zavrsen'
+      );
+    } else if (this.prikaz == 'aktivan') {
+      this.izabraniPoslovi = this.poslovi.filter(
+        (posao: Posao) => posao.status == 'aktivan'
+      );
+    } else if (this.prikaz == 'zahtev') {
+      this.izabraniPoslovi = this.poslovi.filter(
+        (posao: Posao) =>
+          posao.status == 'na cekanju' ||
+          posao.status == 'ponuda' ||
+          posao.status == 'odbijen'
+      );
+    }
+  }
+
+  boja(status: string): string {
+    if (status == 'ponuda') {
+      return 'green';
+    } else if (status == 'odbijen') {
+      return 'red';
+    } else {
+      return 'black';
+    }
+  }
+
+  vremenskiPeriod(posao: Posao): string {
+    let pocetak = new Date(posao.pocetak);
+    let kraj = new Date(posao.kraj);
+    return (
+      pocetak.getDate() +
+      '.' +
+      (pocetak.getMonth() + 1) +
+      '.' +
+      pocetak.getFullYear() +
+      ' - ' +
+      kraj.getDate() +
+      '.' +
+      (kraj.getMonth() + 1) +
+      '.' +
+      kraj.getFullYear()
+    );
+  }
+
   odjava() {
     sessionStorage.clear();
     this.ruter.navigate(['/']);
   }
 
   poslovi: Posao[] = [];
+  izabraniPoslovi: Posao[] = [];
   objekti: Objekat[] = [];
   recenzije: Recenzija[] = [];
 
@@ -168,4 +231,5 @@ export class PosloviKlijentComponent implements OnInit {
   brojZavrsenihPoslova: number = 0;
 
   rezimIzmene: boolean = false;
+  prikaz: string = 'sve';
 }

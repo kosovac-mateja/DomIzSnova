@@ -24,7 +24,10 @@ let Posao = new Schema({
     prekid: {
         Boolean,
     },
-    vremenskiPeriod: {
+    pocetak: {
+        type: Date,
+    },
+    kraj: {
         type: Date,
     },
     ponuda: {

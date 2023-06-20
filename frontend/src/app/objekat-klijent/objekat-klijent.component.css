@@ -1,0 +1,42 @@
+/* Add custom styles here */
+
+.container {
+    margin-top: 20px;
+  }
+  
+  .table-responsive {
+    margin-bottom: 20px;
+  }
+  
+  .btn-primary {
+    margin-right: 5px;
+  }
+  
+  .btn-danger {
+    margin-right: 5px;
+  }
+  
+  .btn-success {
+    margin-right: 5px;
+  }
+  
+  .btn-secondary {
+    margin-right: 5px;
+  }
+  
+  .form-check-label {
+    margin-left: 5px;
+  }
+  
+  p {
+    margin-bottom: 20px;
+  }
+  
+  .long-input {
+    width: 400px;
+  }
+  
+  .short-input {
+    width: 100px;
+  }
+  

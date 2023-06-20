@@ -180,10 +180,16 @@ export class ProveraService {
     if (this.proveraMejl(klijent.mejl) != 'ok') {
       return this.proveraMejl(klijent.mejl);
     }
-    if ((await this.klijentServis.mejlPostoji(klijent.mejl)) == true) {
+    if (
+      !azuriranje &&
+      (await this.klijentServis.mejlPostoji(klijent.mejl)) == true
+    ) {
       return 'Mejl adresa vec postoji';
     }
-    if ((await this.agencijaServis.mejlPostoji(klijent.mejl)) == true) {
+    if (
+      !azuriranje &&
+      (await this.agencijaServis.mejlPostoji(klijent.mejl)) == true
+    ) {
       return 'Mejl adresa vec postoji';
     }
     if (this.proveraIme(klijent.ime) != 'ok') {
@@ -219,10 +225,16 @@ export class ProveraService {
     if (this.proveraMejl(agencija.mejl) != 'ok') {
       return this.proveraMejl(agencija.mejl);
     }
-    if ((await this.klijentServis.mejlPostoji(agencija.mejl)) == true) {
+    if (
+      !azuriranje &&
+      (await this.klijentServis.mejlPostoji(agencija.mejl)) == true
+    ) {
       return 'Mejl adresa vec postoji';
     }
-    if ((await this.agencijaServis.mejlPostoji(agencija.mejl)) == true) {
+    if (
+      !azuriranje &&
+      (await this.agencijaServis.mejlPostoji(agencija.mejl)) == true
+    ) {
       return 'Mejl adresa vec postoji';
     }
     if (this.proveraNazivAgencije(agencija.naziv) != 'ok') {

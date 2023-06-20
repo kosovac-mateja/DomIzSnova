@@ -1,0 +1,51 @@
+<app-zaglavlje-admin></app-zaglavlje-admin>
+<div class="container">
+    <h2>Poslovi</h2>
+    <table *ngIf="poslovi.length > 0" class="table">
+        <thead>
+            <tr>
+                <th>Klijent</th>
+                <th>Agencija</th>
+                <th>Status</th>
+                <th>Vremenski period</th>
+                <th>Ponuda</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let p of poslovi">
+                <td>{{ p.klijent }}</td>
+                <td>{{ p.agencija }}</td>
+                <td>{{ p.status }}</td>
+                <td>{{ vremenskiPeriod(p) }}</td>
+                <td>{{ p.ponuda }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <p *ngIf="poslovi.length === 0">Trenutno nema poslova</p>
+
+    <h3>Zahtevi za otkazivanjem</h3>
+    <table *ngIf="otkazivanja.length > 0" class="table">
+        <thead>
+            <tr>
+                <th>Razlog otkazivanja</th>
+                <th>Klijent</th>
+                <th>Agencija</th>
+                <th>Vremenski period</th>
+                <th>Cena</th>
+                <th colspan="2">Akcija</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let o of otkazivanja">
+                <td>{{ o.razlog }}</td>
+                <td>{{ posao(o).klijent }}</td>
+                <td>{{ posao(o).agencija }}</td>
+                <td>{{ vremenskiPeriod(posao(o)) }}</td>
+                <td>{{ posao(o).ponuda }}</td>
+                <td><button (click)="prihvatiOtkazivanje(o.idPosao)" class="btn btn-primary">Prihvati</button></td>
+                <td><button (click)="odbijOtkazivanje(o.idPosao)" class="btn btn-danger">Odbij</button></td>
+            </tr>
+        </tbody>
+    </table>
+    <p *ngIf="otkazivanja.length === 0">Nema zahteva za otkazivanjem</p>
+</div>

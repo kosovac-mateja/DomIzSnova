@@ -1,19 +1,17 @@
-<a [routerLink]="['/klijent/profil']">Profil</a> 
-<a [routerLink]="['/klijent/objekat']">Objekat</a> 
-<a [routerLink]="['/klijent/agencije']">Agencije</a> 
-<a [routerLink]="['/klijent/poslovi']">Poslovi</a> 
-<button (click)="odjava()">Odjavi se</button>
+<app-zaglavlje-klijent></app-zaglavlje-klijent>
 
-<canvas #canvas 
-width="1000" height="500" 
-style="border: 1px solid black;"></canvas>
-
-<div *ngIf="sveZavrseno">
-    <button (click)="zavrsiPosao()">Zavrsi posao i plati</button>
-</div>
-
-<div *ngIf="!sveZavrseno && !otkazan && status=='aktivan'">
-    <h3>Otkazivanje posla</h3>
-    <textarea name="razlog" [(ngModel)]="razlog"></textarea>
-    <button (click)="otkaziPosao()">Posalji zahtev za otkazivanjem posla</button>
-</div>
+<div class="container">
+    <canvas #canvas class="border border-dark"
+      width="1000" height="500"></canvas>
+  
+    <div *ngIf="sveZavrseno && status=='aktivan'" class="mt-3">
+      <button (click)="zavrsiPosao()" class="btn btn-primary">Zavrsi posao i plati</button>
+    </div>
+  
+    <div *ngIf="!sveZavrseno && !otkazan && status=='aktivan'" class="mt-3">
+      <h3>Otkazivanje posla</h3>
+      <textarea name="razlog" [(ngModel)]="razlog" class="form-control"></textarea>
+      <button (click)="otkaziPosao()" class="btn btn-primary">Posalji zahtev za otkazivanjem posla</button>
+    </div>
+  </div>
+  

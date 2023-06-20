@@ -1,43 +1,58 @@
-<a [routerLink]="['/klijent/profil']">Profil</a> 
-<a [routerLink]="['/klijent/objekat']">Objekat</a> 
-<a [routerLink]="['/klijent/agencije']">Agencije</a> 
-<a [routerLink]="['/klijent/poslovi']">Poslovi</a> 
-<button (click)="odjava()">Odjavi se</button>
-
-<table>
-    <tr>
-        <td>Tip objekta</td>
-        <select [(ngModel)]="tip">
-            <option value="stan">stan</option>
-            <option value="kuca">kuca</option>
-        </select>
-    </tr>
-    <tr>
-        <td>Adresa</td>
-        <td><input type="text" [(ngModel)]="adresa"></td>
-    </tr>
-    <tr>
-        <td>Broj prostorija</td>
-        <td><select [(ngModel)]="brProstorija">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-        </select></td>
-    </tr>
-    <tr>
-        <td>Broj kvadrata</td>
-        <td><input type="number" [(ngModel)]="kvadratura"></td>
-    </tr>
-    <tr>
-        <td colspan="2">
-            <button (click)="dalje()">Dalje</button>
-        </td>
-    </tr>
-</table>
-
-<h1>ILI</h1>
-
-Otpremi objekat u JSON formatu
-<input type="file" (change)="otpremanjeFajla($event)">
-<button (click)="dodajObjekat()">Dodaj objekat</button>
-{{greska}}
+<app-zaglavlje-klijent></app-zaglavlje-klijent>
+<div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <table class="table">
+          <tr>
+            <td>Tip objekta</td>
+            <td>
+              <select class="form-select" [(ngModel)]="tip">
+                <option value="stan">stan</option>
+                <option value="kuca">kuca</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>Adresa</td>
+            <td><input type="text" class="form-control" [(ngModel)]="adresa"></td>
+          </tr>
+          <tr>
+            <td>Broj prostorija</td>
+            <td>
+              <select class="form-select" [(ngModel)]="brProstorija">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>Broj kvadrata</td>
+            <td><input type="number" class="form-control" [(ngModel)]="kvadratura"></td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <button class="btn btn-primary" (click)="dalje()">Dalje</button>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  
+    <h1>ILI</h1>
+  
+    <div class="row">
+      <div class="col-md-6">
+        <label for="jsonFile" class="form-label">Otpremi objekat u JSON formatu</label>
+        <input type="file" id="jsonFile" (change)="otpremanjeFajla($event)" class="form-control">
+        <button class="btn btn-primary mt-2" (click)="dodajObjekat()">Dodaj objekat</button>
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="col-md-12">
+        <p class="text-danger">{{ greska }}</p>
+      </div>
+    </div>
+  </div>
+  

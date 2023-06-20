@@ -129,7 +129,7 @@ export class RadniciAdminComponent implements OnInit {
   }
 
   radnici: Radnik[] = [];
-  agencija: Agencija;
+  agencija: Agencija = new Agencija();
 
   rezimIzmene: boolean = false;
 

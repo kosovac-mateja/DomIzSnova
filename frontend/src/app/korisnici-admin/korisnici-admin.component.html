@@ -1,0 +1,136 @@
+<app-zaglavlje-admin></app-zaglavlje-admin>
+<div class="container">
+
+  <div class="form-group">
+    <label for="prikaz">Prikazi</label>
+    <select class="form-control" [(ngModel)]="prikaz" id="prikaz">
+      <option value="zahtev">zahteve za registracijom</option>
+      <option value="korisnik">registrovane korisnike</option>
+      <option value="klijent">klijente</option>
+      <option value="agencija">agencije</option>
+    </select>
+  </div>
+
+  <table class="table" *ngIf="prikaz=='zahtev' && registracijaZahtevi.length>0">
+    <thead>
+      <tr>
+        <th scope="col">Korisnicko ime</th>
+        <th scope="col">Tip</th>
+        <th scope="col">Status</th>
+        <th colspan="2" scope="col">Akcija</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let r of registracijaZahtevi">
+        <td>{{r.korisnickoIme}}</td>
+        <td>{{r.tip}}</td>
+        <td>{{r.status}}</td>
+        <td><button class="btn btn-primary" (click)="prihvatiRegistraciju(r.korisnickoIme)">Prihvati zahtev</button>
+        </td>
+        <td><button class="btn btn-danger" (click)="odbijRegistraciju(r.korisnickoIme)">Odbij zahtev</button></td>
+      </tr>
+    </tbody>
+  </table>
+  <p *ngIf="prikaz=='zahtev' && registracijaZahtevi.length==0">Trenutno nema zahteva za registracijom</p>
+
+  <table class="table" *ngIf="prikaz=='korisnik' && registrovaniKorisnici.length>0">
+    <thead>
+      <tr>
+        <th scope="col">Korisnicko ime</th>
+        <th scope="col">Tip</th>
+        <th scope="col">Status</th>
+        <th colspan="2" scope="col">Akcija</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let k of registrovaniKorisnici">
+        <td>{{k.korisnickoIme}}</td>
+        <td>{{k.tip}}</td>
+        <td>{{k.status}}</td>
+        <td><button class="btn btn-primary" (click)="azuriraj(k.korisnickoIme, k.tip)">Azuriraj</button></td>
+        <td><button class="btn btn-danger" (click)="obrisi(k.korisnickoIme)">Obrisi</button></td>
+      </tr>
+    </tbody>
+  </table>
+  <p *ngIf="prikaz=='korisnik' && registrovaniKorisnici.length==0">Trenutno nema registrovanih korisnika</p>
+
+  <table class="table" *ngIf="prikaz=='klijent' && klijenti.length>0">
+    <thead>
+      <tr>
+        <th scope="col">Korisnicko ime</th>
+        <th scope="col">Telefon</th>
+        <th scope="col">Mejl</th>
+        <th scope="col">Ime</th>
+        <th scope="col">Prezime</th>
+        <th colspan="2" scope="col">Akcija</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let k of klijenti">
+        <td>{{k.korisnickoIme}}</td>
+        <td>{{k.telefon}}</td>
+        <td>{{k.mejl}}</td>
+        <td>{{k.ime}}</td>
+        <td>{{k.prezime}}</td>
+        <td><button class="btn btn-primary" (click)="azuriraj(k.korisnickoIme, 'klijent')">Azuriraj</button></td>
+        <td><button class="btn btn-danger" (click)="obrisi(k.korisnickoIme)">Obrisi</button></td>
+      </tr>
+    </tbody>
+  </table>
+  <p *ngIf="prikaz=='klijent' && klijenti.length==0">Trenutno nema registrovanih klijenata</p>
+
+  <table class="table" *ngIf="prikaz=='agencija' && agencije.length>0">
+    <thead>
+      <tr>
+        <th scope="col">Korisnicko ime</th>
+        <th scope="col">Naziv</th>
+        <th scope="col">Telefon</th>
+        <th scope="col">Mejl</th>
+        <th scope="col">Adresa</th>
+        <th scope="col">Maticni broj</th>
+        <th colspan="2" scope="col">Akcija</th>
+        <th scope="col">Radnici</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let a of agencije">
+        <td>{{a.korisnickoIme}}</td>
+        <td>{{a.naziv}}</td>
+        <td>{{a.telefon}}</td>
+        <td>{{a.mejl}}</td>
+        <td>{{a.ulica}}, {{a.grad}}, {{a.drzava}}</td>
+        <td>{{a.maticniBroj}}</td>
+        <td><button class="btn btn-primary" (click)="azuriraj(a.korisnickoIme, 'agencija')">Azuriraj</button></td>
+        <td><button class="btn btn-danger" (click)="obrisi(a.korisnickoIme)">Obrisi</button></td>
+        <td><button class="btn btn-secondary" (click)="agencijaRadnici(a.korisnickoIme)">Radnici</button></td>
+      </tr>
+    </tbody>
+  </table>
+  <p *ngIf="prikaz=='agencija' && agencije.length==0">Trenutno nema registrovanih agencija</p>
+
+  <button class="btn btn-success" (click)="dodajKorisnika()">Dodaj novog korisnika</button>
+
+  <div *ngIf="prikaz=='agencija'">
+    <hr>
+    <h3>Blokirane agencije</h3>
+    <table class="table" *ngIf="blokiraneAgencije.length > 0">
+      <thead>
+        <tr>
+          <th scope="col">Agencija</th>
+          <th scope="col">Vreme odblokiranja</th>
+          <th scope="col">Broj pozitivnih ocena</th>
+          <th scope="col">Akcija</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let a of blokiraneAgencije">
+          <td>{{a.korisnickoIme}}</td>
+          <td>{{a.datumOdblokiranja}}</td>
+          <td>{{a.brojPozitivnihOcena}}</td>
+          <td><button class="btn btn-primary" (click)="odblokirajAgenciju(a.korisnickoIme)">Odblokiraj</button></td>
+        </tr>
+      </tbody>
+    </table>
+    <p *ngIf="blokiraneAgencije.length == 0">Trenutno nema blokiranih agencija</p>
+  </div>
+</div>

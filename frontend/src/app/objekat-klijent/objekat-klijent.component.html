@@ -1,39 +1,69 @@
-<a [routerLink]="['/klijent/profil']">Profil</a> 
-<a [routerLink]="['/klijent/objekat']">Objekat</a> 
-<a [routerLink]="['/klijent/agencije']">Agencije</a> 
-<a [routerLink]="['/klijent/poslovi']">Poslovi</a> 
-<button (click)="odjava()">Odjavi se</button>
+<app-zaglavlje-klijent></app-zaglavlje-klijent>
 
-<h3>Moji objekti</h3>
-<ng-container *ngIf="objekti.length>0">
-    <table>
-        <tr>
-            <th>Tip</th>
-            <th>Adresa</th>
-            <th>Broj prostorija</th>
-            <th>Kvadratura</th>
-            <th colspan="2"></th>
-        </tr>
-        <tr *ngFor="let o of objekti">
-            <td><input type="text" [(ngModel)]="o.tip" [disabled]="!rezimIzmene"></td>
-            <td><input type="text" [(ngModel)]="o.adresa" [disabled]="!rezimIzmene"></td>
-            <td><input type="number" [(ngModel)]="o.brProstorija" [disabled]="!rezimIzmene"></td>
-            <td><input type="number" [(ngModel)]="o.kvadratura" [disabled]="!rezimIzmene"></td>
-            <td><button (click)="prikazSkice(o)" *ngIf="!rezimIzmene">Pogledaj skicu</button></td>
-            <td><button (click)="obrisiObjekat(o)" *ngIf="!rezimIzmene">Obrisi</button></td>
-            <td><button (click)="izmeniObjekat(o)" *ngIf="rezimIzmene">Potvrdi izmene</button></td>
-            <td><button (click)="izmeniSkicu(o)" *ngIf="rezimIzmene">Izmeni skicu</button></td>
-        </tr>
-    </table>
-    
-    <input type="checkbox" id="cbox1" [(ngModel)]="rezimIzmene">
-    <label for="cbox1">Rezim izmene</label>
-</ng-container>
-
-<p *ngIf="objekti.length==0">Trenutno nemate objekata</p>
-
-<button (click)="dodajObjekat()">Dodaj novi objekat</button>
-{{greska}}
-
-
-
+<div class="container">
+  
+    <h3>Moji objekti</h3>
+  
+    <ng-container *ngIf="objekti.length > 0">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Tip</th>
+              <th scope="col">Adresa</th>
+              <th scope="col">Broj prostorija</th>
+              <th scope="col">Kvadratura</th>
+              <th colspan="2"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let o of objekti">
+              <td>
+                <input type="text" class="form-control short-input" [(ngModel)]="o.tip" [disabled]="!rezimIzmene">
+              </td>
+              <td>
+                <input type="text" class="form-control long-input" [(ngModel)]="o.adresa" [disabled]="!rezimIzmene">
+              </td>
+              <td>
+                <input type="number" class="form-control short-input" [(ngModel)]="o.brProstorija" [disabled]="!rezimIzmene">
+              </td>
+              <td>
+                <input type="number" class="form-control short-input" [(ngModel)]="o.kvadratura" [disabled]="!rezimIzmene">
+              </td>
+              <td>
+                <button class="btn btn-primary" (click)="prikazSkice(o)" *ngIf="!rezimIzmene">
+                  Pogledaj skicu
+                </button>
+              </td>
+              <td>
+                <button class="btn btn-danger" (click)="obrisiObjekat(o)" *ngIf="!rezimIzmene">
+                  Obrisi
+                </button>
+              </td>
+              <td>
+                <button class="btn btn-success" (click)="izmeniObjekat(o)" *ngIf="rezimIzmene">
+                  Potvrdi izmene
+                </button>
+              </td>
+              <td>
+                <button class="btn btn-secondary" (click)="izmeniSkicu(o)" *ngIf="rezimIzmene">
+                  Izmeni skicu
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="cbox1" [(ngModel)]="rezimIzmene" (click)="greska=''">
+        <label class="form-check-label" for="cbox1">Rezim izmene</label>
+      </div>
+    </ng-container>
+  
+    <p *ngIf="objekti.length == 0">Trenutno nemate objekata</p>
+  
+    <button class="btn btn-primary" (click)="dodajObjekat()">Dodaj novi objekat</button>
+    <div class="text-danger">{{ greska }}</div>
+  </div>
+  

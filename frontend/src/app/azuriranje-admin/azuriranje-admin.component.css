@@ -1,0 +1,29 @@
+.container {
+  margin-top: 20px;
+}
+
+.table {
+  max-width: 500px;
+}
+
+.table td {
+  padding: 10px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form-control-file {
+  display: block;
+}
+
+.btn {
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+

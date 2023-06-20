@@ -96,10 +96,13 @@ export class RadniciAgencijaComponent implements OnInit {
   }
 
   posaljiZahtev() {
+    if (this.prosirenje <= 0) {
+      this.greskaZahtev = 'Zahtev za broj radnih mesta mora biti veci od 0';
+      return;
+    }
     if (this.agencija.zahtev != 0) {
-      alert(
-        'Vec ste poslali zahtev za prosirenje broja radnih mesta!\nAdministratori ce uskoro razmotriti vas zahtev'
-      );
+      this.greskaZahtev =
+        'Vec ste poslali zahtev za povecanje broja radnih mesta';
       return;
     }
     this.agencijaServis
@@ -107,6 +110,7 @@ export class RadniciAgencijaComponent implements OnInit {
       .subscribe((res) => {
         alert('Uspesno ste poslali zahtev za povecanje broja radnih mesta!');
         this.prosirenje = 0;
+        this.greskaZahtev = '';
       });
   }
 
@@ -129,4 +133,5 @@ export class RadniciAgencijaComponent implements OnInit {
   prosirenje: number = 0;
 
   greska: string = '';
+  greskaZahtev: string = '';
 }
