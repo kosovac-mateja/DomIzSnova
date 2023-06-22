@@ -52,7 +52,8 @@
   }
   
   .text-danger {
-    color: red;
+    margin-top: 5px;
+    font-size: 14px;
   }
 
   
@@ -86,5 +87,12 @@
   
   .review-content {
     margin-top: 5px;
+  }
+
+  .btn-primary {
+    margin-top: 10px;
+    background-color: lightblue;
+    color: black;
+    border-color: black;
   }
   

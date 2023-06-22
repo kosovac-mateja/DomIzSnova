@@ -48,7 +48,7 @@
         <td>{{k.tip}}</td>
         <td>{{k.status}}</td>
         <td><button class="btn btn-primary" (click)="azuriraj(k.korisnickoIme, k.tip)">Azuriraj</button></td>
-        <td><button class="btn btn-danger" (click)="obrisi(k.korisnickoIme)">Obrisi</button></td>
+        <td><button class="btn btn-danger" (click)="obrisi(k.korisnickoIme, k.tip)">Obrisi</button></td>
       </tr>
     </tbody>
   </table>
@@ -73,7 +73,7 @@
         <td>{{k.ime}}</td>
         <td>{{k.prezime}}</td>
         <td><button class="btn btn-primary" (click)="azuriraj(k.korisnickoIme, 'klijent')">Azuriraj</button></td>
-        <td><button class="btn btn-danger" (click)="obrisi(k.korisnickoIme)">Obrisi</button></td>
+        <td><button class="btn btn-danger" (click)="obrisi(k.korisnickoIme, 'klijent')">Obrisi</button></td>
       </tr>
     </tbody>
   </table>
@@ -101,14 +101,14 @@
         <td>{{a.ulica}}, {{a.grad}}, {{a.drzava}}</td>
         <td>{{a.maticniBroj}}</td>
         <td><button class="btn btn-primary" (click)="azuriraj(a.korisnickoIme, 'agencija')">Azuriraj</button></td>
-        <td><button class="btn btn-danger" (click)="obrisi(a.korisnickoIme)">Obrisi</button></td>
+        <td><button class="btn btn-danger" (click)="obrisi(a.korisnickoIme, 'agencija')">Obrisi</button></td>
         <td><button class="btn btn-secondary" (click)="agencijaRadnici(a.korisnickoIme)">Radnici</button></td>
       </tr>
     </tbody>
   </table>
   <p *ngIf="prikaz=='agencija' && agencije.length==0">Trenutno nema registrovanih agencija</p>
 
-  <button class="btn btn-success" (click)="dodajKorisnika()">Dodaj novog korisnika</button>
+  <button class="btn btn-primary" (click)="dodajKorisnika()">Dodaj novog korisnika</button>
 
   <div *ngIf="prikaz=='agencija'">
     <hr>
@@ -117,7 +117,7 @@
       <thead>
         <tr>
           <th scope="col">Agencija</th>
-          <th scope="col">Vreme odblokiranja</th>
+          <th scope="col">Datum odblokiranja</th>
           <th scope="col">Broj pozitivnih ocena</th>
           <th scope="col">Akcija</th>
         </tr>
@@ -125,9 +125,9 @@
       <tbody>
         <tr *ngFor="let a of blokiraneAgencije">
           <td>{{a.korisnickoIme}}</td>
-          <td>{{a.datumOdblokiranja}}</td>
+          <td>{{formatirajDatum(a.datumOdblokiranja)}}</td>
           <td>{{a.brojPozitivnihOcena}}</td>
-          <td><button class="btn btn-primary" (click)="odblokirajAgenciju(a.korisnickoIme)">Odblokiraj</button></td>
+          <td><button class="btn btn-danger" (click)="odblokirajAgenciju(a.korisnickoIme)">Odblokiraj</button></td>
         </tr>
       </tbody>
     </table>

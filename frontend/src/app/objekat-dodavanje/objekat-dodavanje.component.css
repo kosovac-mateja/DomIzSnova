@@ -12,6 +12,9 @@
   
   .btn-primary {
     margin-top: 10px;
+    background-color: lightblue;
+    color: black;
+    border-color: black;
   }
   
   h1 {
@@ -28,5 +31,5 @@
   
   .text-danger {
     font-size: 14px;
-    color: red;
+    margin-top: 10px;
   }

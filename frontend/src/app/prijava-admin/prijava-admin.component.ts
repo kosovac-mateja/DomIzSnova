@@ -37,7 +37,7 @@ export class PrijavaAdminComponent implements OnInit {
       return;
     }
 
-    this.ruter.navigate(['/admin']);
+    this.ruter.navigate(['/admin/korisnici']);
   }
 
   korisnickoIme: string;

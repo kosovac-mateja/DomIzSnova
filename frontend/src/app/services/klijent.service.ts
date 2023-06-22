@@ -85,4 +85,10 @@ export class KlijentService {
   dohvatiKlijente() {
     return this.http.get(`${this.url}/klijent/dohvatiKlijente`);
   }
+
+  obrisiKlijenta(korisnickoIme) {
+    return this.http.post(`${this.url}/klijent/obrisiKlijenta`, {
+      korisnickoIme: korisnickoIme,
+    });
+  }
 }

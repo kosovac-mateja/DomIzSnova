@@ -3,7 +3,7 @@ body {
   }
   
   .container {
-    margin-top: px;
+    margin-top: 20px;
   }
   
   h1 {
@@ -18,10 +18,14 @@ body {
   
   .btn-primary {
     width: 100%;
+    background-color: lightblue;
+    color: black;
+    border-color: black;
   }
   
   .text-danger {
     font-size: 14px;
+    margin-top: 10px;
   }
   
   .text-center {
@@ -36,9 +40,5 @@ body {
   
   .text-center .form-group .form-control {
     margin-left: auto;
-  }
-  
-  .text-danger {
-    margin-top: 10px;
   }
   

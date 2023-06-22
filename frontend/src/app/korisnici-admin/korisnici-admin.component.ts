@@ -95,10 +95,20 @@ export class KorisniciAdminComponent implements OnInit {
     this.ruter.navigate(['/admin/azuriranje']);
   }
 
-  obrisi(korisnickoIme) {
+  obrisi(korisnickoIme, tip) {
     this.korisnikServis.obrisiKorisnika(korisnickoIme).subscribe((odgovor) => {
-      if (odgovor['poruka'] == 'ok') {
-        window.location.reload();
+      if (tip == 'klijent') {
+        this.klijentServis
+          .obrisiKlijenta(korisnickoIme)
+          .subscribe((odgovor) => {
+            window.location.reload();
+          });
+      } else {
+        this.agencijaServis
+          .obrisiAgenciju(korisnickoIme)
+          .subscribe((odgovor) => {
+            window.location.reload();
+          });
       }
     });
   }
@@ -116,6 +126,15 @@ export class KorisniciAdminComponent implements OnInit {
     this.blokiranjeServis.izbrisi(korisnickoIme).subscribe((odgovor) => {
       this.ngOnInit();
     });
+  }
+
+  formatirajDatum(datum: Date) {
+    datum = new Date(datum);
+    let dan = datum.getDate();
+    let mesec = datum.getMonth() + 1;
+    let godina = datum.getFullYear();
+
+    return dan + '.' + mesec + '.' + godina + '.';
   }
 
   registrovaniKorisnici: Korisnik[] = [];

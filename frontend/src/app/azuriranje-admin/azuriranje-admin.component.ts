@@ -88,10 +88,10 @@ export class AzuriranjeAdminComponent implements OnInit {
         .subscribe((odgovor) => {
           if (odgovor['poruka'] == 'ok') {
             alert('Uspesno ste azurirali podatke');
-            this.ruter.navigate(['/admin']);
+            this.ruter.navigate(['/admin/korisnici']);
           } else {
             alert('Greska pri azuriranju podataka');
-            this.ruter.navigate(['/admin']);
+            this.ruter.navigate(['/admin/korisnici']);
           }
         });
     } else {
@@ -130,10 +130,10 @@ export class AzuriranjeAdminComponent implements OnInit {
         .subscribe((odgovor) => {
           if (odgovor['poruka'] == 'ok') {
             alert('Uspesno ste azurirali podatke');
-            this.ruter.navigate(['/admin']);
+            this.ruter.navigate(['/admin/korisnici']);
           } else {
             alert('Greska pri azuriranju podataka');
-            this.ruter.navigate(['/admin']);
+            this.ruter.navigate(['/admin/korisnici']);
           }
         });
     }

@@ -21,9 +21,27 @@
   display: block;
 }
 
-.btn {
-  padding: 8px 16px;
-  border-radius: 4px;
-  cursor: pointer;
+.btn-primary {
+  background-color: lightgray;
+  color: black;
+  border-color: black;
+}
+
+.btn-success {
+  background-color: lightgreen;
+  color: black;
+  border-color: black;
+}
+
+.btn-danger {
+  background-color: lightcoral;
+  color: black;
+  border-color: black;
+}
+
+.btn-secondary {
+  background-color: lightgoldenrodyellow;
+  color: black;
+  border-color: black;
 }
 

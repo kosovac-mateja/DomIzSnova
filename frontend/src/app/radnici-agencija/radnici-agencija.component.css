@@ -7,24 +7,30 @@ table {
     padding: 10px;
   }
   
-  /* Styles for the form controls */
   .form-control {
     width: 100%;
   }
   
-  /* Styles for the buttons */
-  .btn {
-    margin-top: 10px;
+  .btn-primary {
+    margin-top: 5px;
+    background-color: lightblue;
+    color: black;
+    border-color: black;
   }
-  
-  /* Styles for the heading sections */
+
+  .btn-danger {
+    margin-top: 5px;
+    background-color: lightcoral;
+    color: black;
+    border-color: black;
+  }
+
   h2, h4 {
     margin-top: 20px;
   }
-  
-  /* Styles for the error message */
   .text-danger {
-    color: red;
+    font-size: 14px;
+    margin-top: 5px;
   }
 
   input[type="number"] {

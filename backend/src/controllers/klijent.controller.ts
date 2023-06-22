@@ -110,4 +110,19 @@ export class KlijentController {
             }
         });
     };
+
+    obrisiKlijenta = (req: express.Request, res: express.Response) => {
+        let korisnickoIme = req.body.korisnickoIme;
+
+        KlijentModel.deleteOne(
+            { korisnickoIme: korisnickoIme },
+            (greska, klijent) => {
+                if (greska) {
+                    console.log(greska);
+                } else {
+                    res.json({ poruka: 'ok' });
+                }
+            }
+        );
+    };
 }

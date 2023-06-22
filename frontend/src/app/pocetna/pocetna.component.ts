@@ -5,11 +5,12 @@ import { Agencija } from '../models/agencija';
 import { KorisnikService } from '../services/korisnik.service';
 import { Korisnik } from '../models/korisnik';
 import { BlokiranjeService } from '../services/blokiranje.service';
+import { style } from '@angular/animations';
 
 @Component({
   selector: 'app-pocetna',
   templateUrl: './pocetna.component.html',
-  styleUrls: ['./pocetna.component.css'],
+  styleUrls: ['./pocetna.component.css', '../../styles.css'],
 })
 export class PocetnaComponent implements OnInit {
   constructor(

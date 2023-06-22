@@ -1,0 +1,15 @@
+.container {
+    margin-top: 20px;
+}
+
+.text-danger {
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.btn-primary {
+    margin-bottom: 5px;
+    background-color: lightblue;
+    color: black;
+    border-color: black;
+}

@@ -53,8 +53,16 @@
       </div>
       <div class="form-group">
         <label for="vremenskiPeriod">Izaberite vremenski period:</label>
-        <input type="date" id="pocetak" class="form-control" [(ngModel)]="pocetak">-
-        <input type="date" id="kraj" class="form-control" [(ngModel)]="kraj">
+        <div class="row">
+          <div class="col">
+            <input type="date" id="pocetak" class="form-control" [(ngModel)]="pocetak">
+          </div>
+          -
+          <div class="col">
+            <input type="date" id="kraj" class="form-control" [(ngModel)]="kraj">
+          </div>
+        </div>
+        
       </div>
       <button class="btn btn-primary" (click)="zatraziSaradnju()">Zatrazi saradnju</button>
     </div>

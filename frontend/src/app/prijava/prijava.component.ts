@@ -60,10 +60,10 @@ export class PrijavaComponent implements OnInit {
 
         if (this.korisnik.tip == 'klijent') {
           sessionStorage.setItem('korisnik', this.korisnik.korisnickoIme);
-          this.ruter.navigate(['/klijent']);
+          this.ruter.navigate(['/klijent/agencije']);
         } else if (this.korisnik.tip == 'agencija') {
           sessionStorage.setItem('korisnik', this.korisnik.korisnickoIme);
-          this.ruter.navigate(['/agencija']);
+          this.ruter.navigate(['/agencija/poslovi']);
         }
       });
   }

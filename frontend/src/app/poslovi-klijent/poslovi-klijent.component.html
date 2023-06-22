@@ -34,7 +34,7 @@
             <td *ngIf="prikaz!='sve'">{{p.ponuda}}</td>
             <td *ngIf="p.status=='ponuda' && prikaz=='zahtev'"><button class="btn btn-primary" (click)="prihvatiPonudu(p)">Prihvati ponudu</button></td>
             <td *ngIf="p.status=='ponuda' && prikaz=='zahtev'"><button class="btn btn-danger" (click)="odbijPonudu(p)">Odbij ponudu</button></td>
-            <td *ngIf="prikaz=='aktivan'"><button class="btn btn-info" (click)="skica(p)">Prikazi napredak</button></td>
+            <td *ngIf="prikaz=='aktivan'"><button class="btn btn-primary" (click)="skica(p)">Prikazi napredak</button></td>
           </tr>
         </tbody>
       </table>
@@ -104,7 +104,7 @@
               </select>
             </td>
             <td><button class="btn btn-danger" (click)="obrisiRecenziju(r)">Obrisi</button></td>
-            <td><button class="btn btn-info" (click)="azurirajRecenziju(r)" *ngIf="rezimIzmene">Izmeni</button></td>
+            <td><button class="btn btn-success" (click)="azurirajRecenziju(r)" *ngIf="rezimIzmene">Izmeni</button></td>
           </tr>
         </tbody>
       </table>

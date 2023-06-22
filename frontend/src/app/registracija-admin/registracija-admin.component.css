@@ -18,6 +18,9 @@ body {
   
   .btn-primary {
     width: 100%;
+    background-color: lightblue;
+    color: black;
+    border-color: black;
   }
   
   .text-danger {

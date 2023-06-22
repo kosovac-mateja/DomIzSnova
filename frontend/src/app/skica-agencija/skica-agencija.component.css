@@ -2,20 +2,19 @@
     margin-top: 20px;
   }
   
-  /* Center the canvas horizontally */
   canvas {
     display: block;
     margin: 0 auto;
+    
   }
   
-  /* Adjust the padding for table cells */
   table.table td,
   table.table th {
     padding: 8px;
   }
 
-.btn-primary {
-  margin: 0 auto;
-  display: block;
-
-}
+  .btn-primary {
+    background-color: lightblue;
+    color: black;
+    border-color: black;
+  }

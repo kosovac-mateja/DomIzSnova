@@ -68,8 +68,10 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="profilnaSlika">Profilna slika</label>
-            <input type="file" class="form-control-file" id="profilnaSlika" (change)="otpremanjeSlike($event)" name="profilnaSlika">
+            <div class="mb-3">
+              <label for="profilnaSlika" class="form-label">Profilna slika</label>
+              <input type="file" class="form-control" id="profilnaSlika" (change)="otpremanjeSlike($event)" name="profilnaSlika">
+            </div>
           </div>
           <div class="form-group text-center">
             <button class="btn btn-primary" (click)="registracija()">Registruj se</button>

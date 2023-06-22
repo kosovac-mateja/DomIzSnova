@@ -10,22 +10,39 @@
   
   .btn-primary {
     margin-right: 5px;
+    background-color: lightblue;
+    color: black;
+    border-color: black;
   }
   
   .btn-danger {
     margin-right: 5px;
+    background-color: lightcoral;
+    color: black;
+    border-color: black;
   }
   
   .btn-success {
     margin-right: 5px;
+    background-color: lightgreen;
+    color: black;
+    border-color: black;
   }
   
   .btn-secondary {
     margin-right: 5px;
+    background-color: lightgrey;
+    color: black;
+    border-color: black;
   }
   
   .form-check-label {
     margin-left: 5px;
+  }
+
+  .text-danger {
+    font-size: 14px;
+    margin-top: 10px;
   }
   
   p {

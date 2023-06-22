@@ -181,4 +181,16 @@ export class AgencijaController {
             }
         );
     };
+
+    obrisiAgenciju = (req: express.Request, res: express.Response) => {
+        let korisnickoIme = req.body.korisnickoIme;
+
+        AgencijaModel.deleteOne({ korisnickoIme: korisnickoIme }, (greska) => {
+            if (greska) {
+                console.log(greska);
+            } else {
+                res.json({ poruka: 'ok' });
+            }
+        });
+    };
 }

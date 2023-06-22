@@ -36,7 +36,7 @@
           <tr>
             <td>Profilna slika</td>
             <td>
-              <input class="form-control-file" type="file" (change)="otpremanjeFajla($event)">
+              <input class="form-control" type="file" (change)="otpremanjeFajla($event)">
             </td>
           </tr>
           <tr>
@@ -53,7 +53,7 @@
             </td>
           </tr>
         </table>
-        <p>{{ greska }}</p>
+        <p class="text-danger">{{ greska }}</p>
       </div>
     </div>
   </div>

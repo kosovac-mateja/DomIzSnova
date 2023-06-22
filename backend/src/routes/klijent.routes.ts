@@ -31,4 +31,8 @@ klijentRouter.route('/dohvatiKlijente').get((req, res) => {
     new KlijentController().dohvatiSveKlijente(req, res);
 });
 
+klijentRouter.route('/obrisiKlijenta').post((req, res) => {
+    new KlijentController().obrisiKlijenta(req, res);
+});
+
 export default klijentRouter;

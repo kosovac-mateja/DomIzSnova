@@ -100,6 +100,17 @@ class KlijentController {
                 }
             });
         };
+        this.obrisiKlijenta = (req, res) => {
+            let korisnickoIme = req.body.korisnickoIme;
+            klijent_1.default.deleteOne({ korisnickoIme: korisnickoIme }, (greska, klijent) => {
+                if (greska) {
+                    console.log(greska);
+                }
+                else {
+                    res.json({ poruka: 'ok' });
+                }
+            });
+        };
     }
 }
 exports.KlijentController = KlijentController;

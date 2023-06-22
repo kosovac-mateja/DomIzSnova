@@ -1,48 +1,46 @@
-/* Full-page CSS for Angular HTML with Bootstrap */
-
-/* Set container width and center it horizontally */
 .container {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
+    margin-top: 20px;
   }
   
-  /* Add padding between rows */
   .row {
     margin-bottom: 20px;
   }
   
-  /* Set column width */
   .col {
     width: 100%;
   }
   
-  /* Style table headers */
   table thead th {
     font-weight: bold;
   }
   
-  /* Add spacing to table cells */
   table td {
     padding: 8px;
   }
   
-  /* Set color based on status */
-  td[ngStyle*="color"] {
-    color: inherit !important;
-  }
   
-  /* Style buttons */
-  .btn {
-    margin-right: 4px;
-  }
-  
-  /* Hide elements by default */
-  *[hidden] {
-    display: none !important;
-  }
-
   .job-type {
     width: 200px;
+  }
+
+  .btn-primary {
+    margin-bottom: 5px;
+    background-color: lightblue;
+    color: black;
+    border-color: black;
+  }
+
+  .btn-danger {
+    margin-bottom: 5px;
+    background-color: lightcoral;
+    color: black;
+    border-color: black;
+  }
+
+  .btn-success {
+    margin-bottom: 5px;
+    background-color: lightgreen;
+    color: black;
+    border-color: black;
   }
   

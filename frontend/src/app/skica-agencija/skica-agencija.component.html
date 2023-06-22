@@ -45,7 +45,7 @@
   
     <canvas #canvas width="1000" height="500" style="border: 1px solid black;" (mousedown)="izaberiProstoriju($event)"></canvas>
   <br>
-    <div *ngIf="izabranaProstorija != null">
+    <div class="row" *ngIf="izabranaProstorija != null">
       <button *ngIf="prostorije[izabranaProstorija].boja === 'white'" class="btn btn-primary" (click)="napredak()" [disabled]="radniciPosao.length < prostorije.length">Opremi prostoriju</button>
       <button *ngIf="prostorije[izabranaProstorija].boja === 'red'" class="btn btn-primary" (click)="napredak()" [disabled]="radniciPosao.length < prostorije.length">Zavrsi posao</button>
     </div>

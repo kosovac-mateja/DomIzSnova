@@ -13,6 +13,6 @@ export class ZaglavljeAdminComponent implements OnInit {
 
   odjava() {
     sessionStorage.clear();
-    this.ruter.navigate(['/']);
+    this.ruter.navigate(['/prijava/admin']);
   }
 }

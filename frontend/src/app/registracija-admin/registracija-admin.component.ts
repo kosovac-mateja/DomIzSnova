@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-registracija-admin',
   templateUrl: './registracija-admin.component.html',
-  styleUrls: ['./registracija-admin.component.css'],
+  styleUrls: ['./registracija-admin.component.css', '../../styles.css'],
 })
 export class RegistracijaAdminComponent implements OnInit {
   constructor(

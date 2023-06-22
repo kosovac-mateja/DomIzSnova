@@ -36,6 +36,7 @@ import { ZaglavljeAdminComponent } from './zaglavlje-admin/zaglavlje-admin.compo
 import { KorisniciAdminComponent } from './korisnici-admin/korisnici-admin.component';
 import { PosloviAdminComponent } from './poslovi-admin/poslovi-admin.component';
 import { RegistracijaAdminComponent } from './registracija-admin/registracija-admin.component';
+import { ZaglavljeAdminPrijavaComponent } from './zaglavlje-admin-prijava/zaglavlje-admin-prijava.component';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { RegistracijaAdminComponent } from './registracija-admin/registracija-ad
     KorisniciAdminComponent,
     PosloviAdminComponent,
     RegistracijaAdminComponent,
+    ZaglavljeAdminPrijavaComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],

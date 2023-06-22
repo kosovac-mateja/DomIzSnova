@@ -6,23 +6,21 @@
           <div class="pretraga">
             <input type="text" name="pretragaNaziv" [(ngModel)]="pretragaNaziv" *ngIf="parametarPretrage=='naziv' || parametarPretrage=='oba'" placeholder="Naziv agencije">
             <input type="text" name="pretragaAdresa" [(ngModel)]="pretragaAdresa" *ngIf="parametarPretrage=='adresa' || parametarPretrage=='oba'" placeholder="Adresa agencije">
-            Pretraga po 
-            <select name="parametarPretrage" [(ngModel)]="parametarPretrage">
-              <option value="naziv">nazivu</option>
-              <option value="adresa">adresi</option>
-              <option value="oba">nazivu i adresi</option>
+            <select name="parametarPretrage" class="form-select" [(ngModel)]="parametarPretrage">
+              <option value="naziv">po nazivu</option>
+              <option value="adresa">po adresi</option>
+              <option value="oba">po nazivu i adresi</option>
             </select>
             <button class="btn btn-primary" (click)="pretraga()">Pretraga</button>
           </div>
         </div>
         <div class="sortiranje-container">
           <div class="sortiranje">
-            Sortiraj po 
-            <select name="parametarSortiranja" [(ngModel)]="parametarSortiranja">
-              <option value="naziv">nazivu</option>
-              <option value="adresa">adresi</option>
+            <select name="parametarSortiranja"  class="form-select" [(ngModel)]="parametarSortiranja">
+              <option value="naziv">po nazivu</option>
+              <option value="adresa">po adresi</option>
             </select>
-            <select name="nacinSortiranja" [(ngModel)]="nacinSortiranja">
+            <select name="nacinSortiranja"  class="form-select" [(ngModel)]="nacinSortiranja">
               <option value="rastuce">rastuce</option>
               <option value="opadajuce">opadajuce</option>
             </select>

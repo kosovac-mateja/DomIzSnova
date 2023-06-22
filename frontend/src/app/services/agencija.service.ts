@@ -134,4 +134,10 @@ export class AgencijaService {
       korisnickoIme: korisnickoIme,
     });
   }
+
+  obrisiAgenciju(korisnickoIme: string) {
+    return this.http.post(`${this.url}/agencija/obrisiAgenciju`, {
+      korisnickoIme: korisnickoIme,
+    });
+  }
 }

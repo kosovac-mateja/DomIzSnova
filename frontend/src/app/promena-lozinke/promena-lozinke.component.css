@@ -11,12 +11,13 @@
   }
   
   .btn-primary {
-    color: #fff;
-    background-color: #007bff;
-    border-color: #007bff;
+    background-color: lightblue;
+    color: black;
+    border-color: black;
   }
   
   .text-danger {
-    color: #dc3545;
+    margin-top: 5px;
+    font-size: 14px;
   }
   

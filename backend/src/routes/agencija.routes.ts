@@ -47,4 +47,8 @@ agencijaRouter.route('/otkaziPosao').post((req, res) => {
     new AgencijaController().otkaziPosao(req, res);
 });
 
+agencijaRouter.route('/obrisiAgenciju').post((req, res) => {
+    new AgencijaController().obrisiAgenciju(req, res);
+});
+
 export default agencijaRouter;

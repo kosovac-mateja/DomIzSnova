@@ -31,10 +31,14 @@
   
   .btn-primary {
     width: 100%;
+    background-color: lightgray;
+    color: black;
+    border-color: black;
   }
   
   .text-danger {
     font-size: 14px;
+    margin-top: 10px;
   }
   
   .text-center {

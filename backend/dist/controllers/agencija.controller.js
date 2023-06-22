@@ -151,6 +151,17 @@ class AgencijaController {
                 }
             });
         };
+        this.obrisiAgenciju = (req, res) => {
+            let korisnickoIme = req.body.korisnickoIme;
+            agencija_1.default.deleteOne({ korisnickoIme: korisnickoIme }, (greska) => {
+                if (greska) {
+                    console.log(greska);
+                }
+                else {
+                    res.json({ poruka: 'ok' });
+                }
+            });
+        };
     }
 }
 exports.AgencijaController = AgencijaController;

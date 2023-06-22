@@ -27,5 +27,8 @@ klijentRouter.route('/dohvatiKlijentaPoMejlu').post((req, res) => {
 klijentRouter.route('/dohvatiKlijente').get((req, res) => {
     new klijent_controller_1.KlijentController().dohvatiSveKlijente(req, res);
 });
+klijentRouter.route('/obrisiKlijenta').post((req, res) => {
+    new klijent_controller_1.KlijentController().obrisiKlijenta(req, res);
+});
 exports.default = klijentRouter;
 //# sourceMappingURL=klijent.routes.js.map
