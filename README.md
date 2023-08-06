@@ -4,7 +4,7 @@
 
 This project is a web application that serves as a platform for negotiating jobs for real estate renovation. It's is a part of the subject called 'Programming Internet Applications' (6th semester of the School of Electrical Engineering, University of Belgrade) and it aims to connect three types of users: clients, agencies, and administrators. 
 
-Project is described in detail in the file ProjekatTekst.pdf .
+The project is described in detail in the file ProjekatTekst.pdf .
 
 ## Technologies
 
