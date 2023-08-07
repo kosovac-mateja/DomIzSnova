@@ -1,4 +1,4 @@
-# Web Application for Real Estate Renovation Job Negotiation
+# Web Application for Negotiating Real Estate Renovation Jobs
 
 ## About
 
